@@ -1,0 +1,32 @@
+@import '../../../css/theme';
+
+@mixin trans {
+	color: black;
+	transition: grey 500ms ease-out;
+}
+
+.sidebarOption {
+	max-width: 50vh;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	color: $text;
+	&:hover {
+		background-color: $hover;
+		border-radius: 30px;
+		@include trans();
+		h2 {
+			@include trans();
+		}
+	}
+
+	h2 {
+		font-weight: 800;
+		font-size: 20px;
+		margin-right: 20px;
+	}
+	.MuiSvgIcon-root {
+		padding: 20px;
+	}
+}
