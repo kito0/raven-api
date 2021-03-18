@@ -6,28 +6,30 @@
 	border-bottom: 2px solid $secondary;
 	padding-bottom: 10px;
 
-	.avatar {
+	.post__avatar {
 		padding: 10px;
 	}
 
-	.body {
+	.post__body {
 		flex: 1;
 		padding: 10px;
 
-		.header {
-			color: $text;
-			.header__text {
-				h3 {
-					font-size: 15px;
-					margin-bottom: 5px;
-					.header__handle {
-						font-weight: 600;
-						font-size: 10px;
-						color: $secondary;
-					}
+		.post__header {
+			.post__header__text {
+				display: flex;
+				color: $text;
+
+				.post__header__name {
+					margin-top: -8px;
+					font-weight: bold;
+				}
+
+				.post__header__handle {
+					margin: 0px 20px;
+					color: rgb(74, 74, 74);
 				}
 			}
-			.header__description {
+			.post__header__description {
 				margin-bottom: 10px;
 				font-size: 15px;
 			}
@@ -35,7 +37,7 @@
 		img {
 			border-radius: 20px;
 		}
-		.footer {
+		.post__footer {
 			display: flex;
 			justify-content: space-between;
 			margin-top: 10px;
