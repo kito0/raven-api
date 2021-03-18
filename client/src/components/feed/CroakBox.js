@@ -1,17 +1,23 @@
 import React from 'react';
 import './css/croakbox.css';
-import { Avatar, Button } from '@material-ui/core';
+import { Avatar, Button, TextField } from '@material-ui/core';
 
 export default function CroakBox() {
 	return (
 		<div className="croakbox">
 			<form>
 				<div className="croakbox__input">
-					<Avatar src={process.env.PUBLIC_URL + 'avatar.jpg'} />
-					<input placeholder="croak away" type="text" />
+					<Avatar
+						src={process.env.PUBLIC_URL + 'avatar.jpg'}
+						className="croakbox__avatar"
+					/>
+					<TextField
+						placeholder="croak away"
+						className="croakbox__input__text"
+					/>
 				</div>
-				<input
-					className="croakbox__inputimg"
+				<TextField
+					className="croakbox__input__img"
 					placeholder="optional: enter img url"
 					type="text"
 				/>
