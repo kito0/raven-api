@@ -1,1 +1,53 @@
-/* No CSS *//*# sourceMappingURL=Sidebar.css.map */
+.sidebar {
+  -webkit-box-flex: 0.3;
+      -ms-flex: 0.3;
+          flex: 0.3;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0 5px;
+  border-right: 1px solid #171717;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.sidebar .sidebar__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 10%;
+  padding-top: 10%;
+  height: 10vh;
+  color: #a2a2a2;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.sidebar .sidebar__title .logo {
+  max-width: 7vw;
+  height: auto;
+}
+
+.sidebar .sidebar__title .title {
+  font-size: 3vw;
+  font-family: 'Lucida Handwriting', cursive;
+  margin-left: 1.4vw;
+}
+
+.sidebar .sidebar__post {
+  background-color: #583b3b !important;
+  border: none !important;
+  font-weight: 900 !important;
+  text-transform: inherit !important;
+  border-radius: 30px !important;
+  height: 50px !important;
+}
+/*# sourceMappingURL=Sidebar.css.map */

@@ -2,18 +2,19 @@
 
 @mixin trans {
 	color: black;
-	transition: grey 500ms ease-out;
+	transition: color 300ms ease;
 }
 
 .sidebarOption {
 	max-width: 50vh;
-	height: 100%;
+	max-height: 8vh;
 	display: flex;
 	align-items: center;
 	cursor: pointer;
 	color: $text;
+
 	&:hover {
-		background-color: $hover;
+		background-color: $primary;
 		border-radius: 30px;
 		@include trans();
 		h2 {
@@ -26,7 +27,13 @@
 		font-size: 20px;
 		margin-right: 20px;
 	}
+
 	.MuiSvgIcon-root {
 		padding: 20px;
 	}
+}
+
+.sidebarOption--active {
+	color: $primary;
+	border-radius: 30px;
 }
