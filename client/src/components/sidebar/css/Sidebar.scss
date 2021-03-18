@@ -1,4 +1,46 @@
 @import '../../../css/theme';
 
-sidebar {
+.sidebar {
+	flex: 0.3;
+	//width: 18vw;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.2);
+	padding: 0 5px;
+	border-right: 1px solid $secondary;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	.sidebar__title {
+		display: flex;
+		padding-left: 10%;
+		padding-top: 10%;
+		height: 10vh;
+		color: $text;
+		align-items: center;
+
+		.logo {
+			max-width: 7vw;
+			height: auto;
+		}
+
+		.title {
+			font-size: 3vw;
+			font-family: 'Lucida Handwriting', cursive;
+			margin-left: 1.4vw;
+		}
+	}
+
+	.sidebar__options {
+		//margin: 10% 0px;
+	}
+
+	.sidebar__post {
+		background-color: $primary !important;
+		border: none !important;
+		font-weight: 900 !important;
+		text-transform: inherit !important;
+		border-radius: 30px !important;
+		height: 50px !important;
+	}
 }

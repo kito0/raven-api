@@ -1,0 +1,43 @@
+@import '../../../css/theme';
+
+.croakbox {
+	padding-bottom: 10px;
+	border-bottom: 8px solid $secondary;
+	padding-right: 10px;
+
+	form {
+		display: flex;
+		flex-direction: column;
+		color: $text;
+
+		.croakbox__input {
+			display: flex;
+			padding: 20px;
+
+			input {
+				flex: 1;
+				margin-left: 20px;
+				font-size: 20px;
+				border: none;
+				background: transparent;
+				color: $text;
+			}
+		}
+
+		.croakbox__inputimg {
+			border: none;
+			padding: 10px;
+			background: transparent;
+			color: $text;
+		}
+
+		.croakbox__button {
+			background-color: $primary !important;
+			border: none !important;
+			font-weight: 900 !important;
+			text-transform: inherit !important;
+			border-radius: 30px !important;
+			height: 50px !important;
+		}
+	}
+}

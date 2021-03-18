@@ -1,0 +1,18 @@
+@import '../../../css/theme';
+
+.feed {
+	flex: 0.4;
+	min-width: fit-content;
+	overflow-y: scroll;
+	border-right: 3px solid $secondary;
+	color: $text;
+
+	.feed__header {
+		position: sticky;
+		top: 0;
+		background-color: transparent;
+		z-index: 100;
+		border-bottom: 1px solid black;
+		padding: 15px 20px;
+	}
+}

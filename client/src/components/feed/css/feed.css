@@ -1,0 +1,22 @@
+.feed {
+  -webkit-box-flex: 0.4;
+      -ms-flex: 0.4;
+          flex: 0.4;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  overflow-y: scroll;
+  border-right: 3px solid #171717;
+  color: #a2a2a2;
+}
+
+.feed .feed__header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: transparent;
+  z-index: 100;
+  border-bottom: 1px solid black;
+  padding: 15px 20px;
+}
+/*# sourceMappingURL=feed.css.map */
