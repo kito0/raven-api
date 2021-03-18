@@ -2,4 +2,23 @@
 
 .widgets {
 	flex: 0.3;
+
+	.widgets__input {
+		display: flex;
+		align-items: center;
+		background: transparent;
+		background-color: rgba(255, 255, 255, 0.1);
+		padding: 10px;
+		border-radius: 20px;
+		margin: 10px 20px;
+
+		.widgets__search {
+			color: $text;
+		}
+
+		input {
+			border: none;
+			background: transparent;
+		}
+	}
 }

@@ -3,4 +3,27 @@
       -ms-flex: 0.3;
           flex: 0.3;
 }
+
+.widgets .widgets__input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: transparent;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 20px;
+  margin: 10px 20px;
+}
+
+.widgets .widgets__input .widgets__search {
+  color: #a2a2a2;
+}
+
+.widgets .widgets__input input {
+  border: none;
+  background: transparent;
+}
 /*# sourceMappingURL=widgets.css.map */
