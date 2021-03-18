@@ -1,0 +1,44 @@
+@import '../../../css/theme';
+
+.post {
+	display: flex;
+	align-items: flex-start;
+	border-bottom: 2px solid $secondary;
+	padding-bottom: 10px;
+
+	.avatar {
+		padding: 10px;
+	}
+
+	.body {
+		flex: 1;
+		padding: 10px;
+
+		.header {
+			color: $text;
+			.header__text {
+				h3 {
+					font-size: 15px;
+					margin-bottom: 5px;
+					.header__handle {
+						font-weight: 600;
+						font-size: 10px;
+						color: $secondary;
+					}
+				}
+			}
+			.header__description {
+				margin-bottom: 10px;
+				font-size: 15px;
+			}
+		}
+		img {
+			border-radius: 20px;
+		}
+		.footer {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 10px;
+		}
+	}
+}

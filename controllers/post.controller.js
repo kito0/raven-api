@@ -1,4 +1,4 @@
-import imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+//import imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
 exports.getData = async (req, res) => {
 	res.send(req.user);
