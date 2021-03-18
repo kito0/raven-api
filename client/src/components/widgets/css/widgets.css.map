@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,QAAQ,CAAC;EACR,IAAI,EAAE,GAAG;CACT",
+    "sources": [
+        "widgets.scss",
+        "../../../css/_theme.scss"
+    ],
+    "names": [],
+    "file": "widgets.css"
+}
