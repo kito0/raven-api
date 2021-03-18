@@ -12,7 +12,7 @@ export default function Post({ name, handle, avatar, text, image, timestamp }) {
 	return (
 		<div className="post">
 			<div className="post__avatar">
-				<Avatar src={{ avatar }} />
+				<Avatar src={avatar} />
 			</div>
 			<div className="post__body">
 				<div className="post__header">
