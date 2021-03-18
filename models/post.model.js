@@ -1,28 +1,29 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-	title: {
+	name: {
 		type: String,
 		required: true,
-		max: 64,
 	},
-	body: {
+	handle: {
 		type: String,
 		required: true,
+	},
+	avatar: {
+		type: String,
+		required: true,
+	},
+	text: {
+		type: String,
+		required: true,
+		max: 256,
 	},
 	image: {
-		type: Buffer,
-	},
-	imageType: {
 		type: String,
 	},
-	date: {
+	timestamp: {
 		type: Date,
 		default: Date.now,
-		required: true,
-	},
-	email: {
-		type: String,
 		required: true,
 	},
 });
