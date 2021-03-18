@@ -1,4 +1,4 @@
-# Raven API
+# Raven
 
 This project is the backend designed for the Raven platform.
 
