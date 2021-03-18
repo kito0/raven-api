@@ -2,6 +2,7 @@
   -webkit-box-flex: 0.3;
       -ms-flex: 0.3;
           flex: 0.3;
+  min-width: 25vw;
 }
 
 .widgets .widgets__input {
@@ -25,5 +26,11 @@
 .widgets .widgets__input input {
   border: none;
   background: transparent;
+}
+
+@media only screen and (max-width: 768px) {
+  .widgets {
+    display: none;
+  }
 }
 /*# sourceMappingURL=widgets.css.map */

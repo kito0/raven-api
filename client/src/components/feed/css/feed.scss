@@ -1,10 +1,11 @@
 @import '../../../css/theme';
 
 .feed {
-	flex: 0.4;
-	min-width: fit-content;
+	flex: 1;
+	min-width: min-content;
+	width: 100%;
 	overflow-y: scroll;
-	border-right: 3px solid $secondary;
+	border-right: 7px solid $secondary;
 	color: $text;
 
 	.feed__header {
@@ -14,5 +15,11 @@
 		z-index: 100;
 		border-bottom: 1px solid black;
 		padding: 15px 20px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.feed {
+		flex: 1;
 	}
 }

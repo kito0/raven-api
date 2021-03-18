@@ -11,10 +11,33 @@
   display: flex;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container {
-  background: transparent;
+.app .MuiInput-root {
+  color: #a2a2a2;
+}
+
+.app .MuiInput-underline::after {
+  border-bottom-color: #583b3b;
+}
+
+.app .MuiDrawer-paper {
+  background-color: rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.app .MuiIconButton-root {
+  color: black;
 }
 
 ::-webkit-scrollbar {

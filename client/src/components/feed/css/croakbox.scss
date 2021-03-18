@@ -3,7 +3,8 @@
 .croakbox {
 	padding-bottom: 10px;
 	border-bottom: 8px solid $secondary;
-	padding-right: 10px;
+	padding: 2%;
+	flex: 1;
 
 	form {
 		display: flex;
@@ -12,23 +13,23 @@
 
 		.croakbox__input {
 			display: flex;
-			padding: 20px;
 
-			input {
+			.croakbox__avatar {
+				width: 6%;
+				height: 5%;
+			}
+
+			.croakbox__input__text {
 				flex: 1;
-				margin-left: 20px;
-				font-size: 20px;
-				border: none;
+				margin-top: 1%;
+				margin-left: 5%;
 				background: transparent;
-				color: $text;
 			}
 		}
 
-		.croakbox__inputimg {
-			border: none;
-			padding: 10px;
-			background: transparent;
-			color: $text;
+		.croakbox__input__img {
+			margin-left: 11%;
+			padding: 2% 0;
 		}
 
 		.croakbox__button {

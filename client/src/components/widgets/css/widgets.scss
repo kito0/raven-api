@@ -2,6 +2,7 @@
 
 .widgets {
 	flex: 0.3;
+	min-width: 25vw;
 
 	.widgets__input {
 		display: flex;
@@ -20,5 +21,11 @@
 			border: none;
 			background: transparent;
 		}
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.widgets {
+		display: none;
 	}
 }

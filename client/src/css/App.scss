@@ -12,9 +12,23 @@
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-}
-.container {
-	background: transparent;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+	.MuiInput-root {
+		color: $text;
+	}
+	.MuiInput-underline::after {
+		border-bottom-color: $primary;
+	}
+	.MuiDrawer-paper {
+		background-color: rgba(0, 0, 0, 0.2);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.MuiIconButton-root {
+		color: black;
+	}
 }
 
 ::-webkit-scrollbar {

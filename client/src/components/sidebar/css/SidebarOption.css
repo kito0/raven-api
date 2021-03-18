@@ -1,6 +1,6 @@
 .sidebarOption {
   max-width: 50vh;
-  max-height: 8vh;
+  height: 7.5vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,7 +32,7 @@
 }
 
 .sidebarOption .MuiSvgIcon-root {
-  padding: 20px;
+  padding: 17.5px;
 }
 
 .sidebarOption--active {
