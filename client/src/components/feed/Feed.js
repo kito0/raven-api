@@ -27,6 +27,7 @@ export default function Feed() {
 						<Post
 							name={post.name}
 							handle={post.handle}
+							avatar={post.avatar}
 							text={post.text}
 							image={post.image}
 						/>

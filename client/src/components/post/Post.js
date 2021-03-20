@@ -28,7 +28,7 @@ export default function Post({ name, handle, avatar, text, image, timestamp }) {
 						<Typography variant="body2">{text}</Typography>
 					</div>
 				</div>
-				<img src={image} alt="" className="post__img" />
+				{image && <img src={image} alt="" className="post__img" />}
 				<div className="post__footer">
 					<IconButton>
 						<ChatBubbleOutline fontSize="small" />
