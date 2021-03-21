@@ -12,7 +12,7 @@ export default function CroakBox() {
 		handle: 'Drew',
 		avatar: 'http://cdn.onlinewebfonts.com/svg/img_258083.png',
 	};
-	const api = 'http://localhost:5000/api/posts';
+	const api = 'http://raven-x.herokuapp.com/api/posts';
 	let config = {
 		headers: {
 			'auth-token':

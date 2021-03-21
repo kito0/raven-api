@@ -6,7 +6,7 @@ import Post from '../post/Post';
 
 export default function Feed() {
 	const [posts, setPosts] = useState([]);
-	const api = 'http://localhost:5000/api/posts';
+	const api = 'http://raven-x.herokuapp.com/api/posts';
 
 	useEffect(() => {
 		axios
