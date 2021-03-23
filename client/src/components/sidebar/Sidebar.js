@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './css/Sidebar.css';
 import { Button, Drawer, IconButton, makeStyles } from '@material-ui/core';
 import {
@@ -46,7 +46,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sidebar() {
 	const classes = useStyles();
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState();
+
+	useEffect(() => {
+		window.screen.width >= 768 ? setOpen(true) : setOpen(false);
+	}, []);
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
