@@ -101,7 +101,7 @@ export default function Sidebar() {
 						Croak
 					</Button>
 				) : (
-					<IconButton className="sidebar__post" fullWidth>
+					<IconButton className="sidebar__post">
 						<PostAdd />
 					</IconButton>
 				)}
