@@ -21,7 +21,8 @@ export const userSlice = createSlice({
 		signupUser: (state, action) => {
 			return {
 				...state,
-				user: [action.payload, ...state.deadline],
+				user: action.payload.user,
+				token: action.payload.token,
 				authenticated: true,
 				loading: false,
 			};
