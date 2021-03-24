@@ -15,7 +15,7 @@ export const LoginUser = async (dispatch, user) => {
 export const SignupUser = async (dispatch, user) => {
 	dispatch(loadingUser);
 	await axios
-		.post(`${api}/signup`, user)
+		.post(`${api}/register`, user)
 		.then((res) => dispatch(signupUser(res.data)))
 		.catch((err) => console.error(err));
 };
