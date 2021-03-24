@@ -21,6 +21,9 @@ const userSchema = new mongoose.Schema({
 	},
 	avatar: {
 		type: String,
+		required: true,
+		min: 4,
+		max: 1024,
 	},
 	password: {
 		type: String,
