@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import './css/Sidebar.css';
 import { Button, Drawer, IconButton, makeStyles } from '@material-ui/core';
 import {
@@ -13,9 +14,12 @@ import {
 	MoreHoriz,
 	ChevronLeft,
 	PostAdd,
+	ExitToApp,
 } from '@material-ui/icons';
 import SidebarOption from './SidebarOption';
+import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
+import { animateScroll as scroll } from 'react-scroll';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +50,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sidebar() {
 	const classes = useStyles();
+
 	const [open, setOpen] = useState();
+
+	const authenticated = useSelector((state) => state.userSlice.authenticated);
 
 	useEffect(() => {
 		window.screen.width >= 768 ? setOpen(true) : setOpen(false);
@@ -55,9 +62,12 @@ export default function Sidebar() {
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
-
 	const handleDrawerClose = () => {
 		setOpen(false);
+	};
+
+	const scrollToTop = () => {
+		scroll.scrollToTop();
 	};
 
 	return (
@@ -96,15 +106,52 @@ export default function Sidebar() {
 					<SidebarOption Icon={PermIdentity} text="Profile" />
 					<SidebarOption Icon={MoreHoriz} text="More" />
 				</div>
-				{open ? (
-					<Button variant="outlined" className="sidebar__post" fullWidth>
-						Croak
-					</Button>
-				) : (
-					<IconButton className="sidebar__post">
-						<PostAdd />
-					</IconButton>
-				)}
+				<Router>
+					{open ? (
+						authenticated ? (
+							<Button
+								variant="outlined"
+								className="sidebar__button"
+								fullWidth
+								onClick={scrollToTop()}
+							>
+								Post
+							</Button>
+						) : (
+							<div className="sidebar__buttons">
+								<Button
+									variant="outlined"
+									className="sidebar__button"
+									href="/login"
+									fullWidth
+								>
+									Login
+								</Button>
+								<Button
+									variant="outlined"
+									className="sidebar__button"
+									href="/signup"
+									fullWidth
+								>
+									Signup
+								</Button>
+							</div>
+						)
+					) : authenticated ? (
+						<IconButton className="sidebar__button">
+							<PostAdd />
+						</IconButton>
+					) : (
+						<div className="sidebar__buttons">
+							<IconButton className="sidebar__button" href="/login">
+								<ExitToApp />
+							</IconButton>
+							<IconButton className="sidebar__button" href="/signup">
+								<ExitToApp />
+							</IconButton>
+						</div>
+					)}
+				</Router>
 			</Drawer>
 		</div>
 	);

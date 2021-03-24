@@ -1,9 +1,8 @@
 @import '../../../css/theme';
 
 .sidebar {
-	flex: 0.3;
+	flex: 0.01;
 	height: 100%;
-	border-right: 1px solid $secondary;
 
 	.sidebar__drawer {
 		margin-left: 5px;
@@ -12,22 +11,19 @@
 		}
 	}
 
-	.sidebar__options {
+	.sidebar__buttons {
+		display: flex;
+		flex-direction: column;
 	}
 
-	.sidebar__post {
-		background-color: $primary !important;
-		border: none;
-		font-weight: 900;
-		text-transform: inherit;
-		border-radius: 30px;
-		height: 50px;
-		margin-bottom: 10px;
-	}
-}
-
-@media only screen and (max-width: 768px) {
-	.sidebar {
-		flex: 0.2;
+	.sidebar__button {
+		color: $text !important;
+		border: none !important;
+		font-weight: 900 !important;
+		text-transform: inherit !important;
+		height: 50px !important;
+		&:hover {
+			background-color: black !important;
+		}
 	}
 }
