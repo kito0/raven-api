@@ -2,26 +2,28 @@ import React, { useState } from 'react';
 import './css/croakbox.css';
 import { Avatar, Button, TextField } from '@material-ui/core';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function CroakBox() {
 	const [text, setText] = useState('');
 	const [image, setImage] = useState('');
+	const [post, setPost] = useState({});
 
-	const user = {
-		name: 'Andrew Shah',
-		handle: 'Drew',
-		avatar: 'http://cdn.onlinewebfonts.com/svg/img_258083.png',
-	};
+	const user = useSelector((state) => state.userSlice.user);
+	const token = useSelector((state) => state.userSlice.token);
+
 	const api = 'https://raven-x.herokuapp.com/api/posts';
-	let config = {
-		headers: {
-			'auth-token':
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDUyZmFlYWViNjlkNjNhNjgzZGNjYmQiLCJpYXQiOjE2MTYyNDQ3OTd9.5_hjapawi2G2t3TICDGVPNPZFSLS6LDIq0buhFVv1Sc',
-		},
-	};
+	//const api = 'http://localhost:5000/api/posts';
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+		let config = {
+			headers: {
+				'content-type': 'application/json',
+				'auth-token': token,
+			},
+		};
+		console.log(user.name, user.handle, user.avatar);
 		axios
 			.post(
 				api,
@@ -31,27 +33,29 @@ export default function CroakBox() {
 					avatar: user.avatar,
 					text,
 					image,
+					timestamp: Date.now(),
 				},
 				config
 			)
-			.then()
+			.then((res) => setPost(res.data))
 			.catch((err) => console.error(err));
+		console.log(post);
 	};
 
 	return (
 		<div className="croakbox">
+			<div className="croakbox__avatar">
+				<Avatar src={user.avatar} />
+			</div>
 			<form onSubmit={onSubmit}>
-				<div className="croakbox__input">
-					<Avatar src={user.avatar} className="croakbox__avatar" />
-					<TextField
-						placeholder="croak away"
-						className="croakbox__input__text"
-						onChange={(e) => setText(e.target.value)}
-						required
-					/>
-				</div>
 				<TextField
-					className="croakbox__input__img"
+					placeholder="croak away"
+					className="croakbox__input__text"
+					onChange={(e) => setText(e.target.value)}
+					required
+				/>
+				<TextField
+					className="croakbox__input__img croakbox__input__text"
 					placeholder="optional: enter img url"
 					onChange={(e) => setImage(e.target.value)}
 				/>

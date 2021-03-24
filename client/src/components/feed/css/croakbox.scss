@@ -1,34 +1,31 @@
 @import '../../../css/theme';
 
 .croakbox {
+	background-color: $background;
 	padding-bottom: 10px;
-	border-bottom: 8px solid $secondary;
-	padding: 2%;
+	margin-bottom: 8px;
+	padding: 1.5%;
 	flex: 1;
+	display: flex;
+
+	.croakbox__avatar {
+		padding: 10px;
+	}
 
 	form {
 		display: flex;
 		flex-direction: column;
 		color: $text;
+		flex: 1;
+		padding: 10px;
 
-		.croakbox__input {
-			display: flex;
-
-			.croakbox__avatar {
-				width: 6%;
-				height: 5%;
-			}
-
-			.croakbox__input__text {
-				flex: 1;
-				margin-top: 1%;
-				margin-left: 5%;
-				background: transparent;
-			}
+		.croakbox__input__text {
+			flex: 1;
+			margin-top: 1%;
+			background: transparent;
 		}
 
 		.croakbox__input__img {
-			margin-left: 11%;
 			padding: 2% 0;
 		}
 
@@ -38,7 +35,8 @@
 			font-weight: 900 !important;
 			text-transform: inherit !important;
 			border-radius: 30px !important;
-			height: 50px !important;
+			height: 40px !important;
+			margin-top: 1%;
 		}
 	}
 }
