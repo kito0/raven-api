@@ -1,6 +1,7 @@
 @import '../../../css/theme';
 
 .post {
+	background-color: $background;
 	display: flex;
 	align-items: flex-start;
 	border-bottom: 2px solid $secondary;

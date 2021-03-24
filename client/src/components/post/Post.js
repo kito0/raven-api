@@ -21,7 +21,7 @@ export default function Post({ name, handle, avatar, text, image, timestamp }) {
 							{name}
 						</Typography>
 						<Typography variant="caption" className="post__header__handle">
-							{handle}
+							@{handle}
 						</Typography>
 					</div>
 					<div className="post__header__description">
