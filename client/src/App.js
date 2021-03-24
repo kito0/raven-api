@@ -9,7 +9,8 @@ import './css/App.css';
 import Sidebar from './components/sidebar/Sidebar';
 import Feed from './components/feed/Feed';
 import Widgets from './components/widgets/Widgets';
-import Login from './components/login/Login';
+import Login from './components/access/Login';
+import Signup from './components/access/Signup';
 
 function App() {
 	const user = useSelector((state) => state.userSlice.user);
@@ -25,6 +26,9 @@ function App() {
 					</Route>
 					<Route exact path="/login">
 						{authenticated ? <Redirect to="/" /> : <Login />}
+					</Route>
+					<Route exact path="/signup">
+						{authenticated ? <Redirect to="/" /> : <Signup />}
 					</Route>
 				</Switch>
 				<Widgets />
