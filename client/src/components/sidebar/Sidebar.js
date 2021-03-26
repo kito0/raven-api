@@ -20,6 +20,7 @@ import SidebarOption from './SidebarOption';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { animateScroll as scroll } from 'react-scroll';
+import { LogoutUser } from '../../redux/user';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -43,16 +44,15 @@ const useStyles = makeStyles((theme) => ({
 		overflowX: 'hidden',
 		width: theme.spacing(7) + 1,
 		[theme.breakpoints.up('sm')]: {
-			width: theme.spacing(7) + 1,
+			width: theme.spacing(8) + 1,
 		},
 	},
 }));
 
 export default function Sidebar() {
 	const classes = useStyles();
-
+	const dispatch = useDispatch();
 	const [open, setOpen] = useState();
-
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
 
 	useEffect(() => {
@@ -138,8 +138,11 @@ export default function Sidebar() {
 							</div>
 						)
 					) : authenticated ? (
-						<IconButton className="sidebar__button">
-							<PostAdd />
+						<IconButton
+							className="sidebar__button"
+							onClick={LogoutUser(dispatch)}
+						>
+							<ExitToApp />
 						</IconButton>
 					) : (
 						<div className="sidebar__buttons">
