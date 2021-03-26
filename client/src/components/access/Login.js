@@ -15,7 +15,6 @@ export default function Login() {
 	const [password, setPassword] = useState('');
 	const dispatch = useDispatch();
 	const loading = useSelector((state) => state.userSlice.loading);
-	const authenticated = useSelector((state) => state.userSlice.authenticated);
 
 	async function onSubmit(e) {
 		e.preventDefault();

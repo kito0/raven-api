@@ -18,7 +18,6 @@ export default function Signup() {
 
 	const dispatch = useDispatch();
 	const loading = useSelector((state) => state.userSlice.loading);
-	const authenticated = useSelector((state) => state.userSlice.authenticated);
 
 	async function onSubmit(e) {
 		e.preventDefault();
@@ -33,8 +32,8 @@ export default function Signup() {
 				password,
 			});
 			return <Redirect to="/" />;
-		} catch (e) {
-			alert(e.message);
+		} catch (err) {
+			console.log(err);
 		}
 	}
 
@@ -46,7 +45,7 @@ export default function Signup() {
 				width="150"
 			/>
 			<Typography variant="h2" className="login__title">
-				Login
+				Signup
 			</Typography>
 			<form onSubmit={onSubmit} className="login__form">
 				<TextField
@@ -83,7 +82,7 @@ export default function Signup() {
 					className="login__button"
 					disabled={loading}
 				>
-					Login
+					Signup
 					{loading && (
 						<CircularProgress size={30} className="login__progress" />
 					)}
