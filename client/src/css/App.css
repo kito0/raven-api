@@ -76,7 +76,10 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus,
 select:-webkit-autofill:active {
-  -webkit-text-fill-color: #a2a2a2;
-  -webkit-box-shadow: 0 0 0 30px #1b1b1b inset !important;
+  -webkit-text-fill-color: #a2a2a2 !important;
+  -webkit-box-shadow: 0 0 0 1000px #171717 inset !important;
+  border: none !important;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
 }
 /*# sourceMappingURL=App.css.map */

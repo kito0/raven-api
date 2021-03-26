@@ -6,11 +6,21 @@
 }
 
 .sidebar .sidebar__drawer {
-  margin-left: 5px;
+  margin-left: 6.5px;
 }
 
 .sidebar .sidebar__drawer .MuiIconButton-root {
   color: grey !important;
+}
+
+.sidebar .sidebar__options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .sidebar .sidebar__buttons {
@@ -21,9 +31,13 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 
 .sidebar .sidebar__button {
+  padding: 2px 7.5px;
   color: #a2a2a2 !important;
   border: none !important;
   font-weight: 900 !important;

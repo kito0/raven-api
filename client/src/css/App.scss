@@ -63,7 +63,9 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus,
 select:-webkit-autofill:active {
-	-webkit-text-fill-color: $text;
-	-webkit-box-shadow: 0 0 0 30px $background inset !important;
+	-webkit-text-fill-color: $text !important;
+	-webkit-box-shadow: 0 0 0 1000px $secondary inset !important;
+	border: none !important;
+	transition: background-color 5000s ease-in-out 0s;
 	//transition: background-color 500ms ease-in-out;
 }

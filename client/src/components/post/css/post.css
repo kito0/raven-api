@@ -62,7 +62,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-top: 2%;
+  margin-bottom: -3%;
 }
 
 .post .post__body .post__footer .MuiIconButton-root {

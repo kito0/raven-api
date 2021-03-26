@@ -5,18 +5,25 @@
 	height: 100%;
 
 	.sidebar__drawer {
-		margin-left: 5px;
+		margin-left: 6.5px;
 		.MuiIconButton-root {
 			color: grey !important;
 		}
 	}
 
-	.sidebar__buttons {
+	.sidebar__options {
 		display: flex;
 		flex-direction: column;
 	}
 
+	.sidebar__buttons {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
 	.sidebar__button {
+		padding: 2px 7.5px;
 		color: $text !important;
 		border: none !important;
 		font-weight: 900 !important;
