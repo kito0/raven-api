@@ -27,14 +27,46 @@ export const userSlice = createSlice({
 				loading: false,
 			};
 		},
-		loadingUser: (state, action) => {
+		loadingUser: () => {
 			return {
 				loading: true,
+			};
+		},
+		logoutUser: () => {
+			return {
+				authenticated: false,
+			};
+		},
+		getUser: (state, action) => {
+			return {
+				...state,
+				user: action.payload,
+				loading: false,
+			};
+		},
+		setErrors: (state, action) => {
+			return {
+				...state,
+				errors: action.payload,
+			};
+		},
+		clearErrors: (state) => {
+			return {
+				...state,
+				errors: null,
 			};
 		},
 	},
 });
 
-export const { loginUser, signupUser, loadingUser } = userSlice.actions;
+export const {
+	loginUser,
+	signupUser,
+	loadingUser,
+	logoutUser,
+	getUser,
+	setErrors,
+	clearErrors,
+} = userSlice.actions;
 
 export default userSlice.reducer;
