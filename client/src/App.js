@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -11,10 +12,18 @@ import Feed from './components/feed/Feed';
 import Widgets from './components/widgets/Widgets';
 import Login from './components/access/Login';
 import Signup from './components/access/Signup';
+import { GetUser } from './redux/user';
 
 function App() {
 	const user = useSelector((state) => state.userSlice.user);
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		GetUser(dispatch, localStorage.getItem('handle')).catch((err) => {
+			console.error(err);
+		});
+	}, []);
 
 	return (
 		<Router>
