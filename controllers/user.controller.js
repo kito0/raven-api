@@ -45,3 +45,12 @@ exports.login = async (req, res) => {
 	const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 	return res.status(200).json({ user, token });
 };
+
+// GET http://localhost:5000/api/user/:handle
+exports.getUser = async (req, res) => {
+	await User.findOne({ handle: req.params.handle })
+		.then((user) => {
+			res.status(200).json(user);
+		})
+		.catch((err) => res.status(404).send(err.code));
+};
