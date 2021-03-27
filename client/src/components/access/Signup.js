@@ -21,6 +21,7 @@ export default function Signup() {
 
 	async function onSubmit(e) {
 		e.preventDefault();
+		setHandle(handle.toLowerCase());
 
 		try {
 			SignupUser(dispatch, {
@@ -33,7 +34,7 @@ export default function Signup() {
 			});
 			return <Redirect to="/" />;
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 		}
 	}
 
