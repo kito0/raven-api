@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './css/Sidebar.css';
 import { Button, Drawer, IconButton, makeStyles } from '@material-ui/core';
 import {
@@ -13,7 +13,6 @@ import {
 	PermIdentity,
 	MoreHoriz,
 	ChevronLeft,
-	PostAdd,
 	ExitToApp,
 } from '@material-ui/icons';
 import SidebarOption from './SidebarOption';
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 		overflowX: 'hidden',
 		width: theme.spacing(7) + 1,
 		[theme.breakpoints.up('sm')]: {
-			width: theme.spacing(8) + 1,
+			width: theme.spacing(7) + 1,
 		},
 	},
 }));
@@ -68,6 +67,10 @@ export default function Sidebar() {
 
 	const scrollToTop = () => {
 		scroll.scrollToTop();
+	};
+
+	const handleLogout = () => {
+		if (authenticated) LogoutUser(dispatch);
 	};
 
 	return (
@@ -113,9 +116,9 @@ export default function Sidebar() {
 								variant="outlined"
 								className="sidebar__button"
 								fullWidth
-								onClick={scrollToTop()}
+								onClick={handleLogout}
 							>
-								Post
+								Logout
 							</Button>
 						) : (
 							<div className="sidebar__buttons">
@@ -138,10 +141,7 @@ export default function Sidebar() {
 							</div>
 						)
 					) : authenticated ? (
-						<IconButton
-							className="sidebar__button"
-							onClick={LogoutUser(dispatch)}
-						>
+						<IconButton className="sidebar__button" onClick={handleLogout}>
 							<ExitToApp />
 						</IconButton>
 					) : (
