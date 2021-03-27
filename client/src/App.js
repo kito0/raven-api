@@ -15,15 +15,14 @@ import Signup from './components/access/Signup';
 import { GetUser } from './redux/user';
 
 function App() {
-	const user = useSelector((state) => state.userSlice.user);
-	const authenticated = useSelector((state) => state.userSlice.authenticated);
 	const dispatch = useDispatch();
+	const authenticated = useSelector((state) => state.userSlice.authenticated);
 
 	useEffect(() => {
 		GetUser(dispatch, localStorage.getItem('handle')).catch((err) => {
 			console.error(err);
 		});
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<Router>
