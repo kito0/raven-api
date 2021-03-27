@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const postsSlice = createSlice({
 	name: 'posts',
 	initialState: {
-		posts: [],
 		loading: true,
+		posts: [],
 	},
 	reducers: {
 		setPosts: (state, action) => {
@@ -17,23 +17,26 @@ export const postsSlice = createSlice({
 		newPost: (state, action) => {
 			return {
 				...state,
-				posts: [action.payload, state.posts],
+				posts: [action.payload, ...state.posts],
+				loading: false,
 			};
 		},
 		editPost: (state, action) => {
 			return {
 				...state,
-				posts: action.payload,
+				posts: state.posts.filter((post) => post._id !== action.payload),
 			};
 		},
 		deletePost: (state, action) => {
 			return {
 				...state,
 				posts: state.posts.filter((post) => post._id !== action.payload),
+				loading: false,
 			};
 		},
-		loadingPosts: () => {
+		loadingPosts: (state) => {
 			return {
+				...state,
 				loading: true,
 			};
 		},

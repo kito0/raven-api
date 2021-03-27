@@ -17,14 +17,20 @@ export const GetPosts = async (dispatch) => {
 };
 
 export const NewPost = async (dispatch, post) => {
-	loadingPosts();
+	dispatch(loadingPosts());
 	await axios
-		.post(api, post, { headers: { 'content-type': 'application/json' } })
+		.post(api, post, {
+			headers: {
+				'content-type': 'application/json',
+				'auth-token': localStorage.getItem('auth-token'),
+			},
+		})
 		.then((res) => dispatch(newPost(res.data)))
 		.catch((err) => console.error(err));
 };
 
 export const EditPost = async (dispatch, id) => {
+	dispatch(loadingPosts());
 	await axios
 		.put(`${api}/${id}`)
 		.then(() => dispatch(editPost(id)))
@@ -32,6 +38,7 @@ export const EditPost = async (dispatch, id) => {
 };
 
 export const DeletePost = async (dispatch, id) => {
+	dispatch(loadingPosts());
 	await axios
 		.delete(`${api}/${id}`)
 		.then(() => dispatch(deletePost(id)))
