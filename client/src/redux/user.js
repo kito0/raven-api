@@ -17,7 +17,7 @@ export const LoginUser = async (dispatch, user) => {
 	await axios
 		.post(`${api}/login`, user)
 		.then((res) => {
-			setAuthorizationHeader(res.data.token, res.data.handle);
+			setAuthorizationHeader(res.data.token, res.data.user.handle);
 			dispatch(loginUser(res.data));
 			dispatch(clearErrors());
 		})
@@ -31,7 +31,7 @@ export const SignupUser = async (dispatch, user) => {
 	await axios
 		.post(`${api}/register`, user)
 		.then((res) => {
-			setAuthorizationHeader(res.data.token, res.data.handle);
+			setAuthorizationHeader(res.data.token, res.data.user.handle);
 			dispatch(signupUser(res.data));
 			dispatch(clearErrors());
 		})
@@ -52,7 +52,7 @@ export const GetUser = async (dispatch, handle) => {
 	await axios
 		.get(`${api}/${handle}`)
 		.then((res) => {
-			dispatch(getUser(handle));
+			dispatch(getUser(res.data));
 			dispatch(clearErrors());
 		})
 		.catch((err) => {

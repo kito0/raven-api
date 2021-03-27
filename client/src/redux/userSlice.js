@@ -4,8 +4,8 @@ export const userSlice = createSlice({
 	name: 'user',
 	initialState: {
 		user: {},
-		token: '',
-		authenticated: false,
+		token: localStorage.getItem('auth-token'),
+		authenticated: localStorage.getItem('auth-token') ? true : false,
 		loading: false,
 	},
 	reducers: {
@@ -27,13 +27,17 @@ export const userSlice = createSlice({
 				loading: false,
 			};
 		},
-		loadingUser: () => {
+		loadingUser: (state) => {
 			return {
+				...state,
 				loading: true,
 			};
 		},
-		logoutUser: () => {
+		logoutUser: (state) => {
 			return {
+				...state,
+				user: {},
+				token: '',
 				authenticated: false,
 			};
 		},
