@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import './css/Sidebar.css';
 import { Button, Drawer, IconButton, makeStyles } from '@material-ui/core';
 import {
@@ -50,7 +49,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Sidebar() {
 	const classes = useStyles();
 	const dispatch = useDispatch();
-	const [open, setOpen] = useState();
+
+	const [open, setOpen] = useState(window.screen.width >= 768 ? true : false);
+
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
 
 	useEffect(() => {
@@ -95,61 +96,68 @@ export default function Sidebar() {
 					)}
 				</div>
 				<div className="sidebar__options">
-					<SidebarOption active Icon={Home} text="Home" />
-					<SidebarOption Icon={Search} text="Explore" />
-					<SidebarOption Icon={NotificationsNone} text="Notifications" />
-					<SidebarOption Icon={MailOutline} text="Messages" />
-					<SidebarOption Icon={BookmarkBorder} text="Bookmarks" />
-					<SidebarOption Icon={ListAlt} text="Lists" />
-					<SidebarOption Icon={PermIdentity} text="Profile" />
-					<SidebarOption Icon={MoreHoriz} text="More" />
+					<SidebarOption Icon={Home} text="Home" refTo="/" />
+					<SidebarOption Icon={Search} text="Explore" refTo="/explore" />
+					<SidebarOption
+						Icon={NotificationsNone}
+						text="Notifications"
+						refTo="/notifications"
+					/>
+					<SidebarOption Icon={MailOutline} text="Messages" refTo="/messages" />
+					<SidebarOption
+						Icon={BookmarkBorder}
+						text="Bookmarks"
+						refTo="/bookmarks"
+					/>
+					<SidebarOption Icon={ListAlt} text="Lists" refTo="/lists" />
+					<SidebarOption Icon={PermIdentity} text="Profile" refTo="/profile" />
+					<SidebarOption Icon={MoreHoriz} text="More" refTo="/more" />
 				</div>
-				<Router>
-					{open ? (
-						authenticated ? (
+
+				{open ? (
+					authenticated ? (
+						<Button
+							variant="outlined"
+							className="sidebar__button"
+							fullWidth
+							onClick={handleLogout}
+						>
+							Logout
+						</Button>
+					) : (
+						<div className="sidebar__buttons">
 							<Button
 								variant="outlined"
 								className="sidebar__button"
+								href="/login"
 								fullWidth
-								onClick={handleLogout}
 							>
-								Logout
+								Login
 							</Button>
-						) : (
-							<div className="sidebar__buttons">
-								<Button
-									variant="outlined"
-									className="sidebar__button"
-									href="/login"
-									fullWidth
-								>
-									Login
-								</Button>
-								<Button
-									variant="outlined"
-									className="sidebar__button"
-									href="/signup"
-									fullWidth
-								>
-									Signup
-								</Button>
-							</div>
-						)
-					) : authenticated ? (
-						<IconButton className="sidebar__button" onClick={handleLogout}>
+							<Button
+								variant="outlined"
+								className="sidebar__button"
+								href="/signup"
+								fullWidth
+							>
+								Signup
+							</Button>
+						</div>
+					)
+				) : authenticated ? (
+					<IconButton className="sidebar__button" onClick={handleLogout}>
+						<ExitToApp />
+					</IconButton>
+				) : (
+					<div className="sidebar__buttons">
+						<IconButton className="sidebar__button" href="/login">
 							<ExitToApp />
 						</IconButton>
-					) : (
-						<div className="sidebar__buttons">
-							<IconButton className="sidebar__button" href="/login">
-								<ExitToApp />
-							</IconButton>
-							<IconButton className="sidebar__button" href="/signup">
-								<ExitToApp />
-							</IconButton>
-						</div>
-					)}
-				</Router>
+						<IconButton className="sidebar__button" href="/signup">
+							<ExitToApp />
+						</IconButton>
+					</div>
+				)}
 			</Drawer>
 		</div>
 	);

@@ -1,11 +1,18 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './css/SidebarOption.css';
 
-export default function SidebarOption({ active, text, Icon }) {
+export default function SidebarOption({ text, Icon, refTo }) {
 	return (
-		<div className={`sidebarOption ${active && 'sidebarOption--active'}`}>
+		<NavLink
+			exact
+			to={refTo}
+			href={refTo}
+			className="sidebarOption"
+			activeClassName="sidebarOption--active"
+		>
 			<Icon />
 			<h2>{text}</h2>
-		</div>
+		</NavLink>
 	);
 }
