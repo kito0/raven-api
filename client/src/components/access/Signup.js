@@ -18,6 +18,7 @@ export default function Signup() {
 
 	const dispatch = useDispatch();
 	const loading = useSelector((state) => state.userSlice.loading);
+	const errors = useSelector((state) => state.userSlice.errors);
 
 	async function onSubmit(e) {
 		e.preventDefault();
@@ -54,29 +55,34 @@ export default function Signup() {
 					placeholder="name"
 					className="login__input"
 					onChange={(e) => setName(e.target.value)}
-					required
+					autoComplete="off"
 				/>
 				<TextField
 					type="handle"
 					placeholder="handle"
 					className="login__input"
 					onChange={(e) => setHandle(e.target.value)}
-					required
+					autoComplete="off"
 				/>
 				<TextField
 					type="email"
 					placeholder="email"
 					className="login__input"
 					onChange={(e) => setEmail(e.target.value)}
-					required
+					autoComplete="off"
 				/>
 				<TextField
 					type="password"
 					placeholder="password"
 					className="login__input"
 					onChange={(e) => setPassword(e.target.value)}
-					required
+					autoComplete="off"
 				/>
+				{errors && (
+					<Typography variant="body2" className="login__errors">
+						{errors}
+					</Typography>
+				)}
 				<Button
 					type="submit"
 					variant="contained"

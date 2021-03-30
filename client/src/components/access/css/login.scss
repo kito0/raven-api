@@ -12,7 +12,7 @@
 	padding: 40px;
 
 	.login__title {
-		margin: 20px auto;
+		margin: 15px auto;
 	}
 
 	.login__form {
@@ -27,11 +27,16 @@
 			min-width: 40vw;
 			max-width: 80vw;
 			width: 100%;
-			margin: 15px auto;
+			margin: 12.5px auto;
+		}
+
+		.login__errors {
+			color: $primary;
+			font-size: 0.8rem;
 		}
 
 		.login__button {
-			margin: 20px auto;
+			margin: 15px auto;
 			width: 100%;
 			background-color: $primary !important;
 			border: none !important;

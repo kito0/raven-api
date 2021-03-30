@@ -20,7 +20,7 @@
 }
 
 .login .login__title {
-  margin: 20px auto;
+  margin: 15px auto;
 }
 
 .login .login__form {
@@ -45,11 +45,16 @@
   min-width: 40vw;
   max-width: 80vw;
   width: 100%;
-  margin: 15px auto;
+  margin: 12.5px auto;
+}
+
+.login .login__form .login__errors {
+  color: #583b3b;
+  font-size: 0.8rem;
 }
 
 .login .login__form .login__button {
-  margin: 20px auto;
+  margin: 15px auto;
   width: 100%;
   background-color: #583b3b !important;
   border: none !important;

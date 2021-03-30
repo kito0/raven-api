@@ -15,6 +15,7 @@ export default function Login() {
 	const [password, setPassword] = useState('');
 	const dispatch = useDispatch();
 	const loading = useSelector((state) => state.userSlice.loading);
+	const errors = useSelector((state) => state.userSlice.errors);
 
 	async function onSubmit(e) {
 		e.preventDefault();
@@ -63,7 +64,13 @@ export default function Login() {
 						<CircularProgress size={30} className="login__progress" />
 					)}
 				</Button>
-				<br />
+				{errors ? (
+					<Typography variant="body2" className="login__errors">
+						{errors}
+					</Typography>
+				) : (
+					<br />
+				)}
 				<Router>
 					<small>
 						Don't have an account? Sign up <Link to="/signup">here</Link>
