@@ -18,7 +18,6 @@ import {
 import SidebarOption from './SidebarOption';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
-import { animateScroll as scroll } from 'react-scroll';
 import { LogoutUser } from '../../redux/user';
 
 const drawerWidth = 240;
@@ -63,10 +62,6 @@ export default function Sidebar() {
 	};
 	const handleDrawerClose = () => {
 		setOpen(false);
-	};
-
-	const scrollToTop = () => {
-		scroll.scrollToTop();
 	};
 
 	const handleLogout = () => {

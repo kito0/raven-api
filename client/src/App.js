@@ -8,7 +8,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import './css/App.css';
 import Sidebar from './components/sidebar/Sidebar';
-import Feed from './components/feed/Feed';
+import Feed from './components/home/feed/Feed';
 import Widgets from './components/widgets/Widgets';
 import Login from './components/access/Login';
 import Signup from './components/access/Signup';

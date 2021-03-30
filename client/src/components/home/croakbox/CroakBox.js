@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './css/croakbox.css';
 import { Avatar, Button, TextField } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { NewPost } from '../../redux/posts';
+import { NewPost } from '../../../redux/posts';
 
 export default function CroakBox() {
 	const dispatch = useDispatch();

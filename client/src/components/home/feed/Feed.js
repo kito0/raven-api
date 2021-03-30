@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import './css/feed.css';
 import { useDispatch, useSelector } from 'react-redux';
-import CroakBox from './CroakBox';
+import CroakBox from '../croakbox/CroakBox';
 import Post from '../post/Post';
-import { GetPosts } from '../../redux/posts';
+import { GetPosts } from '../../../redux/posts';
 
 export default function Feed() {
 	const dispatch = useDispatch();
