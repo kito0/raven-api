@@ -1,17 +1,22 @@
 import { useEffect } from 'react';
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	Redirect,
-} from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import './css/App.css';
+
 import Sidebar from './components/sidebar/Sidebar';
-import Feed from './components/home/feed/Feed';
 import Widgets from './components/widgets/Widgets';
 import Login from './components/access/Login';
 import Signup from './components/access/Signup';
+
+import Feed from './components/home/feed/Feed';
+import Explore from './components/explore/Explore';
+import Notifications from './components/notifications/Notifications';
+import Messages from './components/messages/Messages';
+import Bookmarks from './components/bookmarks/Bookmarks';
+import Lists from './components/lists/Lists';
+import Profile from './components/profile/Profile';
+import More from './components/more/More';
+
+import { useDispatch, useSelector } from 'react-redux';
 import { GetUser } from './redux/user';
 
 function App() {
@@ -25,23 +30,26 @@ function App() {
 	}, [dispatch]);
 
 	return (
-		<Router>
-			<div className="app">
-				<Sidebar />
-				<Switch>
-					<Route exact path="/">
-						<Feed />
-					</Route>
-					<Route exact path="/login">
-						{authenticated ? <Redirect to="/" /> : <Login />}
-					</Route>
-					<Route exact path="/signup">
-						{authenticated ? <Redirect to="/" /> : <Signup />}
-					</Route>
-				</Switch>
-				<Widgets />
-			</div>
-		</Router>
+		<div className="app">
+			<Sidebar />
+			<Switch>
+				<Route exact path="/" component={Feed} />
+				<Route exact path="/explore" component={Explore} />
+				<Route exact path="/notifications" component={Notifications} />
+				<Route exact path="/messages" component={Messages} />
+				<Route exact path="/bookmarks" component={Bookmarks} />
+				<Route exact path="/lists" component={Lists} />
+				<Route exact path="/profile" component={Profile} />
+				<Route exact path="/more" component={More} />
+				<Route exact path="/login">
+					{authenticated ? <Redirect to="/" /> : <Login />}
+				</Route>
+				<Route exact path="/signup">
+					{authenticated ? <Redirect to="/" /> : <Signup />}
+				</Route>
+			</Switch>
+			<Widgets />
+		</div>
 	);
 }
 

@@ -44,14 +44,12 @@ export default function Login() {
 					placeholder="email"
 					className="login__input"
 					onChange={(e) => setEmail(e.target.value)}
-					required
 				/>
 				<TextField
 					type="password"
 					placeholder="password"
 					className="login__input"
 					onChange={(e) => setPassword(e.target.value)}
-					required
 				/>
 				<Button
 					type="submit"
