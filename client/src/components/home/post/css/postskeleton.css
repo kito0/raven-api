@@ -1,0 +1,57 @@
+.postskeleton {
+  background-color: #1b1b1b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  border-bottom: 2px solid #171717;
+  padding: 1.5%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.postskeleton .postskeleton__avatar {
+  padding: 10px;
+}
+
+.postskeleton .postskeleton__body {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 10px;
+}
+
+.postskeleton .postskeleton__body .postskeleton__header .postskeleton__header__text {
+  background-color: #583b3b;
+  height: 18px;
+  width: 100%;
+}
+
+.postskeleton .postskeleton__body .postskeleton__header .postskeleton__header__description {
+  margin: 10px 0;
+  background-color: #583b3b;
+  height: 16px;
+  width: 100%;
+}
+
+.postskeleton .postskeleton__body img {
+  border-radius: 20px;
+}
+
+.postskeleton .postskeleton__body .postskeleton__footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: -3%;
+}
+
+.postskeleton .postskeleton__body .postskeleton__footer .MuiIconButton-root {
+  color: #583b3b !important;
+}
+/*# sourceMappingURL=postskeleton.css.map */

@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import './css/feed.css';
-import { useDispatch, useSelector } from 'react-redux';
+
 import CroakBox from '../croakbox/CroakBox';
 import Post from '../post/Post';
+import PostSkeleton from '../post/PostSkeleton';
+
+import { useDispatch, useSelector } from 'react-redux';
 import { GetPosts } from '../../../redux/posts';
 
 export default function Feed() {
@@ -21,7 +24,7 @@ export default function Feed() {
 			<div className="feed__header">Raven</div>
 			{authenticated && <CroakBox />}
 
-			{posts ? (
+			{!loading ? (
 				posts
 					.slice(0)
 					.reverse()
@@ -35,7 +38,18 @@ export default function Feed() {
 						/>
 					))
 			) : (
-				<p>no posts available</p>
+				<div>
+					<PostSkeleton />
+					<PostSkeleton />
+					<PostSkeleton />
+					<PostSkeleton />
+					<PostSkeleton />
+					<PostSkeleton />
+					<PostSkeleton />
+					<PostSkeleton />
+					<PostSkeleton />
+					<PostSkeleton />
+				</div>
 			)}
 		</div>
 	);

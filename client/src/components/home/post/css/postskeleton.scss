@@ -1,0 +1,46 @@
+@import '../../../../css/theme';
+
+.postskeleton {
+	background-color: $background;
+	display: flex;
+	align-items: flex-start;
+	border-bottom: 2px solid $secondary;
+	padding: 1.5%;
+	flex: 1;
+
+	.postskeleton__avatar {
+		padding: 10px;
+	}
+
+	.postskeleton__body {
+		flex: 1;
+		padding: 10px;
+
+		.postskeleton__header {
+			.postskeleton__header__text {
+				background-color: $primary;
+				height: 18px;
+				width: 100%;
+			}
+			.postskeleton__header__description {
+				margin: 10px 0;
+				background-color: $primary;
+				height: 16px;
+				width: 100%;
+			}
+		}
+		img {
+			border-radius: 20px;
+		}
+
+		.postskeleton__footer {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: -3%;
+
+			.MuiIconButton-root {
+				color: $primary !important;
+			}
+		}
+	}
+}

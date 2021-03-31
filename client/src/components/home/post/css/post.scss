@@ -1,4 +1,4 @@
-@import '../../../css/theme';
+@import '../../../../css/theme';
 
 .post {
 	background-color: $background;
@@ -32,7 +32,7 @@
 				}
 			}
 			.post__header__description {
-				margin-bottom: 10px;
+				margin: 0 0 10px 1px;
 				font-size: 15px;
 			}
 		}
