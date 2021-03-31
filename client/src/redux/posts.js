@@ -17,7 +17,6 @@ export const GetPosts = async (dispatch) => {
 };
 
 export const NewPost = async (dispatch, post) => {
-	dispatch(loadingPosts());
 	await axios
 		.post(api, post, {
 			headers: {
@@ -38,9 +37,12 @@ export const EditPost = async (dispatch, id) => {
 };
 
 export const DeletePost = async (dispatch, id) => {
-	dispatch(loadingPosts());
 	await axios
-		.delete(`${api}/${id}`)
+		.delete(`${api}/${id}`, {
+			headers: {
+				'auth-token': localStorage.getItem('auth-token'),
+			},
+		})
 		.then(() => dispatch(deletePost(id)))
 		.catch((err) => console.error(err));
 };

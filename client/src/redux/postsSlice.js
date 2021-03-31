@@ -17,8 +17,7 @@ export const postsSlice = createSlice({
 		newPost: (state, action) => {
 			return {
 				...state,
-				posts: [action.payload, ...state.posts],
-				loading: false,
+				posts: [...state.posts, action.payload],
 			};
 		},
 		editPost: (state, action) => {
@@ -31,7 +30,6 @@ export const postsSlice = createSlice({
 			return {
 				...state,
 				posts: state.posts.filter((post) => post._id !== action.payload),
-				loading: false,
 			};
 		},
 		loadingPosts: (state) => {

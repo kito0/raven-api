@@ -17,7 +17,7 @@ export default function Feed() {
 
 	useEffect(() => {
 		GetPosts(dispatch);
-	}, [dispatch, loading]);
+	}, [dispatch]);
 
 	return (
 		<div className="feed">
