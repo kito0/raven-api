@@ -5,30 +5,50 @@ import {
 	FavoriteBorder,
 	Publish,
 	Repeat,
+	Delete,
 } from '@material-ui/icons';
 import './css/post.css';
 
-export default function Post({ name, handle, avatar, text, image, timestamp }) {
+import { useDispatch, useSelector } from 'react-redux';
+import { DeletePost } from '../../../redux/posts';
+
+export default function Post({ post }) {
+	const dispatch = useDispatch();
+	const user = useSelector((state) => state.userSlice.user);
+
 	return (
 		<div className="post">
 			<div className="post__avatar">
-				<Avatar src={avatar} />
+				<Avatar src={post.avatar} />
 			</div>
 			<div className="post__body">
 				<div className="post__header">
 					<div className="post__header__text">
-						<Typography variant="h6" className="post__header__name">
-							{name}
-						</Typography>
-						<Typography variant="caption" className="post__header__handle">
-							@{handle}
-						</Typography>
+						<div className="post__header__user">
+							<Typography variant="h6" className="post__header__name">
+								{post.name}
+							</Typography>
+							<Typography variant="h6" className="post__header__handle">
+								@{post.handle}
+							</Typography>
+						</div>
+						{user.handle === post.handle && (
+							<IconButton
+								className="post__header__delete"
+								onClick={() => DeletePost(dispatch, post._id)}
+							>
+								<Delete fontSize="small" />
+							</IconButton>
+						)}
 					</div>
-					<div className="post__header__description">
-						<Typography variant="body2">{text}</Typography>
-					</div>
+					<Typography variant="caption" className="post__header__timestamp">
+						{post.timestamp.substring(0, 10)}
+					</Typography>
+					<Typography variant="body2" className="post__header__description">
+						{post.text}
+					</Typography>
 				</div>
-				{image && <img src={image} alt="" className="post__img" />}
+				{post.image && <img src={post.image} alt="" className="post__img" />}
 				<div className="post__footer">
 					<IconButton>
 						<ChatBubbleOutline fontSize="small" />

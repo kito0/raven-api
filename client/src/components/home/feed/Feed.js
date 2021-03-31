@@ -28,15 +28,7 @@ export default function Feed() {
 				posts
 					.slice(0)
 					.reverse()
-					.map((post) => (
-						<Post
-							name={post.name}
-							handle={post.handle}
-							avatar={post.avatar}
-							text={post.text}
-							image={post.image}
-						/>
-					))
+					.map((post) => <Post post={post} />)
 			) : (
 				<div>
 					<PostSkeleton />

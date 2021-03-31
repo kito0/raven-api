@@ -11,29 +11,50 @@
 	.post__avatar {
 		padding: 10px;
 	}
+	.MuiIconButton-root {
+		color: $primary !important;
+	}
 
 	.post__body {
 		flex: 1;
 		padding: 10px;
 
 		.post__header {
+			display: flex;
+			flex-direction: column;
+
 			.post__header__text {
 				display: flex;
+				justify-content: space-between;
 				color: $text;
+				height: 24px;
 
-				.post__header__name {
-					margin-top: -8px;
-					font-weight: bold;
+				.post__header__user {
+					display: flex;
+
+					.post__header__name {
+						font-weight: bold;
+						font-size: 16px;
+					}
+
+					.post__header__handle {
+						color: rgb(74, 74, 74);
+						font-size: 10px;
+						margin: 5.5px 0 0 10px;
+					}
 				}
-
-				.post__header__handle {
-					margin: 0px 3%;
-					color: rgb(74, 74, 74);
+				.post__header__delete {
+					right: 0;
 				}
 			}
-			.post__header__description {
+
+			.post__header__timestamp {
+				font-size: 8px;
 				margin: 0 0 10px 1px;
+			}
+			.post__header__description {
 				font-size: 15px;
+				margin: 0 0 10px 1px;
 			}
 		}
 		img {
@@ -49,10 +70,6 @@
 			display: flex;
 			justify-content: space-between;
 			margin-bottom: -3%;
-
-			.MuiIconButton-root {
-				color: $primary !important;
-			}
 		}
 	}
 }

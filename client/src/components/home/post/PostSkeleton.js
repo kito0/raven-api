@@ -16,8 +16,9 @@ export default function PostSkeleton() {
 			</div>
 			<div className="postskeleton__body">
 				<div className="postskeleton__header">
-					<div className="postskeleton__header__text"></div>
-					<div className="postskeleton__header__description"></div>
+					<div className="postskeleton__header__text" />
+					<div className="postskeleton__header__timestamp" />
+					<div className="postskeleton__header__description" />
 				</div>
 				<div className="postskeleton__footer">
 					<IconButton>
