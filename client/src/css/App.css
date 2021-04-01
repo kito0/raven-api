@@ -1,5 +1,5 @@
 .app {
-  background-color: #171717;
+  background-color: #000000;
   position: absolute;
   top: 0;
   left: 0;
@@ -20,7 +20,7 @@
 }
 
 .app .MuiInput-underline::after {
-  border-bottom-color: #583b3b;
+  border-bottom-color: #583333;
 }
 
 .app .MuiDrawer-paper {
@@ -46,7 +46,7 @@ a {
 }
 
 a:hover {
-  color: #583b3b;
+  color: #583333;
 }
 
 ::-webkit-scrollbar {
@@ -77,7 +77,7 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus,
 select:-webkit-autofill:active {
   -webkit-text-fill-color: #a2a2a2 !important;
-  -webkit-box-shadow: 0 0 0 1000px #171717 inset !important;
+  -webkit-box-shadow: 0 0 0 1000px #000000 inset !important;
   border: none !important;
   -webkit-transition: background-color 5000s ease-in-out 0s;
   transition: background-color 5000s ease-in-out 0s;

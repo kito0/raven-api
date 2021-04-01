@@ -6,7 +6,7 @@
   min-width: -moz-min-content;
   min-width: min-content;
   width: 100%;
-  border-right: 7px solid #171717;
+  border-right: 7px solid #000000;
   color: #a2a2a2;
 }
 
@@ -29,10 +29,10 @@
 }
 
 .feed .MuiLinearProgress-indeterminate {
-  background-color: #1b1b1b;
+  background-color: #101011;
 }
 
 .feed .MuiLinearProgress-bar {
-  background-color: #583b3b;
+  background-color: #583333;
 }
 /*# sourceMappingURL=feed.css.map */

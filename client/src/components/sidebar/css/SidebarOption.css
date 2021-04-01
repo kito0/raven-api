@@ -13,7 +13,7 @@
 }
 
 .sidebarOption:hover {
-  background-color: #583b3b;
+  background-color: #583333;
   border-radius: 30px;
   color: black;
   -webkit-transition: color 300ms ease;
@@ -37,7 +37,7 @@
 }
 
 .sidebarOption--active {
-  color: #583b3b;
+  color: #583333;
   border-radius: 30px;
 }
 /*# sourceMappingURL=SidebarOption.css.map */

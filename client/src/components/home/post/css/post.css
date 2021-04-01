@@ -1,12 +1,12 @@
 .post {
-  background-color: #1b1b1b;
+  background-color: #101011;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  border-bottom: 2px solid #171717;
+  border-bottom: 2px solid #000000;
   padding: 1.5%;
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -18,7 +18,7 @@
 }
 
 .post .MuiIconButton-root {
-  color: #583b3b !important;
+  color: #583333 !important;
 }
 
 .post .post__body {

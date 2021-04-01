@@ -1,12 +1,12 @@
 .postskeleton {
-  background-color: #1b1b1b;
+  background-color: #101011;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  border-bottom: 2px solid #171717;
+  border-bottom: 2px solid #000000;
   padding: 1.5%;
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -29,21 +29,21 @@
 }
 
 .postskeleton .postskeleton__body .postskeleton__header .postskeleton__header__text {
-  background-color: #583b3b;
+  background-color: #583333;
   height: 16px;
   width: 50%;
   margin: 2px 0;
 }
 
 .postskeleton .postskeleton__body .postskeleton__header .postskeleton__header__timestamp {
-  background-color: #583b3b;
+  background-color: #583333;
   height: 8px;
   width: 25%;
   margin: 4px 0;
 }
 
 .postskeleton .postskeleton__body .postskeleton__header .postskeleton__header__description {
-  background-color: #583b3b;
+  background-color: #583333;
   height: 16px;
   width: 75%;
   margin: 16px 0 12px 0;
@@ -64,6 +64,6 @@
 }
 
 .postskeleton .postskeleton__body .postskeleton__footer .MuiIconButton-root {
-  color: #583b3b !important;
+  color: #583333 !important;
 }
 /*# sourceMappingURL=postskeleton.css.map */
