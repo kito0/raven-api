@@ -1,11 +1,12 @@
 # Raven API
 
-This project contains all code for the Raven platform.
+This repo contains all code for the Raven platform.
 
 # Languages
 
 - JavaScript
 - HTML
+- SCSS
 - CSS
 
 # Technologies
@@ -18,7 +19,8 @@ This project contains all code for the Raven platform.
 - joi
 - bcrypt
 - axios
-- ...check package.json for all dependencies
+- sass
+- ...see package.json for more
 
 # Databases
 
