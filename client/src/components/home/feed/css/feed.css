@@ -19,4 +19,20 @@
   border-bottom: 1px solid black;
   padding: 15px 20px;
 }
+
+.feed .feed__loading {
+  padding: 20px;
+}
+
+.feed .feed__loading .feed__end {
+  text-align: center;
+}
+
+.feed .MuiLinearProgress-indeterminate {
+  background-color: #1b1b1b;
+}
+
+.feed .MuiLinearProgress-bar {
+  background-color: #583b3b;
+}
 /*# sourceMappingURL=feed.css.map */

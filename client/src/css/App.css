@@ -50,7 +50,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {

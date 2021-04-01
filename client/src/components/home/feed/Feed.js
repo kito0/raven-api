@@ -1,35 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/feed.css';
-
 import CroakBox from '../croakbox/CroakBox';
 import Post from '../post/Post';
 import PostSkeleton from '../post/PostSkeleton';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { GetPosts } from '../../../redux/posts';
+import useInView from 'react-cool-inview';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 export default function Feed() {
 	const dispatch = useDispatch();
-
 	const posts = useSelector((state) => state.postsSlice.posts);
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
 	const loading = useSelector((state) => state.postsSlice.loading);
 
+	const [numPosts, setNumPosts] = useState(0);
+	const [hasMore, setHasMore] = useState(true);
+
 	useEffect(() => {
 		GetPosts(dispatch);
+		loadMore();
 	}, [dispatch]);
+
+	const { ref } = useInView({
+		onEnter: ({ unobserve, observe }) => {
+			unobserve();
+			setTimeout(() => {
+				loadMore();
+			}, 2000);
+			observe();
+		},
+	});
+
+	function loadMore() {
+		if (numPosts > posts.length) setHasMore(false);
+		else setNumPosts(numPosts + 10);
+	}
 
 	return (
 		<div className="feed">
 			<div className="feed__header">Raven</div>
 			{authenticated && <CroakBox />}
-
-			{!loading ? (
-				posts
-					.slice(0)
-					.reverse()
-					.map((post) => <Post post={post} />)
-			) : (
+			{loading && (
 				<div>
 					<PostSkeleton />
 					<PostSkeleton />
@@ -43,6 +55,20 @@ export default function Feed() {
 					<PostSkeleton />
 				</div>
 			)}
+			{posts
+				.slice()
+				.reverse()
+				.slice(0, numPosts)
+				.map((post) => (
+					<Post post={post} />
+				))}
+			<div ref={ref} className="feed__loading">
+				{hasMore ? (
+					<LinearProgress />
+				) : (
+					<div className="feed__end">No more posts to see :/</div>
+				)}
+			</div>
 		</div>
 	);
 }
