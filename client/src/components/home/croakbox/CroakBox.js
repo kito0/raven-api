@@ -21,7 +21,7 @@ export default function CroakBox() {
 			avatar: user.avatar,
 			text,
 			image,
-			timestamp: Date.now(),
+			timestamp: Date(),
 		});
 
 		setText('');

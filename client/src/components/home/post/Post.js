@@ -1,4 +1,7 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { DeletePost } from '../../../redux/posts';
+import './css/post.css';
 import { Avatar, IconButton, Typography } from '@material-ui/core';
 import {
 	ChatBubbleOutline,
@@ -7,10 +10,7 @@ import {
 	Repeat,
 	Delete,
 } from '@material-ui/icons';
-import './css/post.css';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { DeletePost } from '../../../redux/posts';
+import moment from 'moment';
 
 export default function Post({ post }) {
 	const dispatch = useDispatch();
@@ -42,7 +42,7 @@ export default function Post({ post }) {
 						)}
 					</div>
 					<Typography variant="caption" className="post__header__timestamp">
-						{post.timestamp.substring(0, 10)}
+						{moment(post.timestamp).fromNow()}
 					</Typography>
 					<Typography variant="body2" className="post__header__description">
 						{post.text}
