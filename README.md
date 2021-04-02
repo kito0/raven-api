@@ -1,20 +1,26 @@
 # Raven API
 
-This project is the backend designed for the Raven platform.
+This repo contains all code for the Raven platform.
 
 # Languages
 
 - JavaScript
+- HTML
+- SCSS
+- CSS
 
 # Technologies
 
+- react
 - express
+- react-redux
 - mongoose
 - jwt
 - joi
 - bcrypt
-- cors
-- dotenv
+- axios
+- sass
+- ...see package.json for more
 
 # Databases
 
@@ -35,11 +41,13 @@ $ npm -v && node -v
 
 To clone this repo on your local machine:
 ```sh
-git clone https://github.com/kito0/raven-api.git
+git clone https://github.com/kito0/raven.git
 ```
 
 Install dependencies
 ```sh
+npm install
+cd client
 npm install
 ```
 
@@ -48,6 +56,12 @@ npm install
 To run the server:
 ```sh
 node index.js
+```
+
+To run the client:
+```sh
+cd client
+npm start
 ```
 
 # License
