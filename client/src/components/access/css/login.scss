@@ -4,12 +4,16 @@
 	flex: 1;
 	min-width: 50vw;
 	width: 100%;
-	border-right: 7px solid $secondary;
 	color: $text;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 40px;
+	background-color: $secondary;
+
+	.login__logo {
+		filter: invert(80%);
+	}
 
 	.login__title {
 		margin: 15px auto;

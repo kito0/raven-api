@@ -4,7 +4,6 @@
           flex: 1;
   min-width: 50vw;
   width: 100%;
-  border-right: 7px solid #000000;
   color: #a2a2a2;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -17,6 +16,12 @@
       -ms-flex-align: center;
           align-items: center;
   padding: 40px;
+  background-color: #000000;
+}
+
+.login .login__logo {
+  -webkit-filter: invert(80%);
+          filter: invert(80%);
 }
 
 .login .login__title {
