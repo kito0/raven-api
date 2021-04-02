@@ -1,6 +1,111 @@
 .profile {
   width: 100%;
-  padding: 20px;
   color: #a2a2a2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 20px;
+}
+
+.profile .profile__user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.profile .profile__user .profile__left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px;
+}
+
+.profile .profile__user .profile__left .profile__avatar {
+  width: 200px;
+  height: auto;
+  margin: 20px;
+}
+
+.profile .profile__user .profile__left .profile__name {
+  font-size: 28px;
+}
+
+.profile .profile__user .profile__left .profile__handle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile .profile__user .profile__left .profile__handle .MuiIconButton-root {
+  color: #583333 !important;
+}
+
+.profile .profile__user .profile__right {
+  width: auto;
+}
+
+.profile .profile__user .profile__right form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 210px;
+}
+
+.profile .profile__user .profile__right form .profile__input {
+  margin-bottom: 10px;
+}
+
+.profile .profile__user .profile__right form .profile__button {
+  background-color: #583333 !important;
+  border: none !important;
+  font-weight: 900 !important;
+  text-transform: inherit !important;
+  border-radius: 30px !important;
+  height: 40px !important;
+  margin-top: 1%;
+}
+
+.profile .profile__posts {
+  width: 100%;
+}
+
+.profile .profile__posts .profile__posts__loading {
+  padding: 20px;
+}
+
+.profile .profile__posts .profile__posts__loading .feed__end {
+  text-align: center;
+}
+
+.profile .profile__posts .MuiLinearProgress-indeterminate {
+  background-color: #101011;
+}
+
+.profile .profile__posts .MuiLinearProgress-bar {
+  background-color: #583333;
 }
 /*# sourceMappingURL=profile.css.map */
