@@ -46,11 +46,23 @@ exports.login = async (req, res) => {
 	return res.status(200).json({ user, token });
 };
 
-// GET http://localhost:5000/api/user/:handle
+// GET http://localhost:5000/api/user/:id
 exports.getUser = async (req, res) => {
-	await User.findOne({ handle: req.params.handle })
+	User.findById(req.params.id)
 		.then((user) => {
 			res.status(200).json(user);
 		})
 		.catch((err) => res.status(404).send(err.code));
+};
+
+// PUT http://localhost:5000/api/user/:handle
+exports.updateUser = async (req, res) => {
+	const { error } = registerValidation(req.body);
+	if (error) return res.status(400).send(error.details[0].message);
+
+	User.findByIdAndUpdate(req.params.id, req.body)
+		.then((user) => {
+			res.status(200).json(user);
+		})
+		.catch((err) => res.status(400).send(err));
 };
