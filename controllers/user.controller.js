@@ -55,6 +55,15 @@ exports.getUser = async (req, res) => {
 		.catch((err) => res.status(404).send(err.code));
 };
 
+// GET http://localhost:5000/api/user/:handle
+exports.getUserByHandle = async (req, res) => {
+	User.find({ handle: req.params.handle })
+		.then((user) => {
+			res.status(200).json(user);
+		})
+		.catch((err) => res.status(404).send(err.code));
+};
+
 // PUT http://localhost:5000/api/user/:handle
 exports.updateUser = async (req, res) => {
 	const { error } = registerValidation(req.body);

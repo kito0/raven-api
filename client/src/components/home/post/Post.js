@@ -20,7 +20,7 @@ export default function Post({ post }) {
 	const [creatorAvatar, setCreatorAvatar] = useState('');
 
 	axios
-		.get(`https://raven-x.herokuapp.com/api/user/${localStorage.getItem('id')}`)
+		.get(`https://raven-x.herokuapp.com/api/user/${post.handle}`)
 		.then((res) => {
 			setCreatorName(res.data.name);
 			setCreatorAvatar(res.data.avatar);
