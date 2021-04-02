@@ -9,6 +9,15 @@ exports.getPosts = async (req, res) => {
 		.catch((err) => res.status(500).send(err));
 };
 
+// GET http://localhost:5000/api/post/:handle
+exports.getPostsByUser = async (req, res) => {
+	Post.find({ handle: req.params.handle })
+		.then((posts) => {
+			res.status(200).json(posts);
+		})
+		.catch((err) => res.status(500).send(err));
+};
+
 // POST http://localhost:5000/api/post
 exports.createPost = async (req, res) => {
 	Post.create(req.body)

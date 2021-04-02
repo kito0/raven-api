@@ -7,11 +7,19 @@ import {
 } from './postsSlice.js';
 import axios from 'axios';
 
-const api = 'https://raven-x.herokuapp.com/api/posts';
+//const api = 'https://raven-x.herokuapp.com/api/posts';
+const api = 'http://localhost:5000/api/posts';
 
 export const GetPosts = async (dispatch) => {
 	await axios
 		.get(api)
+		.then((res) => dispatch(setPosts(res.data)))
+		.catch((err) => console.error(err));
+};
+
+export const GetPostsByUser = async (dispatch, handle) => {
+	await axios
+		.get(`${api}/${handle}`)
 		.then((res) => dispatch(setPosts(res.data)))
 		.catch((err) => console.error(err));
 };
