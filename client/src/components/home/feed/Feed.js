@@ -20,6 +20,7 @@ export default function Feed() {
 	useEffect(() => {
 		GetPosts(dispatch);
 		loadMore();
+		// eslint-disable-next-line
 	}, [dispatch]);
 
 	const { ref } = useInView({
@@ -60,7 +61,7 @@ export default function Feed() {
 				.reverse()
 				.slice(0, numPosts)
 				.map((post) => (
-					<Post post={post} />
+					<Post post={post} key={post._id} />
 				))}
 			<div ref={ref} className="feed__loading">
 				{hasMore ? (
