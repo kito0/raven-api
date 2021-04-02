@@ -24,9 +24,7 @@ function App() {
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
 
 	useEffect(() => {
-		GetUser(dispatch, localStorage.getItem('handle')).catch((err) => {
-			console.error(err);
-		});
+		GetUser(dispatch, localStorage.getItem('id'));
 	}, [dispatch]);
 
 	return (
@@ -39,7 +37,9 @@ function App() {
 				<Route exact path="/messages" component={Messages} />
 				<Route exact path="/bookmarks" component={Bookmarks} />
 				<Route exact path="/lists" component={Lists} />
-				<Route exact path="/profile" component={Profile} />
+				<Route exact path="/profile">
+					{!authenticated ? <Redirect to="/" /> : <Profile />}
+				</Route>
 				<Route exact path="/more" component={More} />
 				<Route exact path="/login">
 					{authenticated ? <Redirect to="/" /> : <Login />}
