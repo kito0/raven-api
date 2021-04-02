@@ -30,7 +30,7 @@
 		text-transform: inherit !important;
 		height: 50px !important;
 		&:hover {
-			background-color: black !important;
+			box-shadow: 0px -4px 5px $primary !important;
 		}
 	}
 }

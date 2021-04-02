@@ -46,6 +46,7 @@
 }
 
 .sidebar .sidebar__button:hover {
-  background-color: black !important;
+  -webkit-box-shadow: 0px -4px 5px #583333 !important;
+          box-shadow: 0px -4px 5px #583333 !important;
 }
 /*# sourceMappingURL=Sidebar.css.map */
