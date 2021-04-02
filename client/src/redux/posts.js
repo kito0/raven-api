@@ -7,8 +7,8 @@ import {
 } from './postsSlice.js';
 import axios from 'axios';
 
-//const api = 'https://raven-x.herokuapp.com/api/posts';
-const api = 'http://localhost:5000/api/posts';
+const api = 'https://raven-x.herokuapp.com/api/posts';
+//const api = 'http://localhost:5000/api/posts';
 
 export const GetPosts = async (dispatch) => {
 	await axios
