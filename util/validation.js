@@ -19,5 +19,14 @@ const loginValidation = (data) => {
 	return schema.validate(data);
 };
 
+const updateValidation = (data) => {
+	const schema = Joi.object({
+		name: Joi.string().max(32).required(),
+		avatar: Joi.string().max(1024).required().uri(),
+	});
+	return schema.validate(data);
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
+module.exports.updateValidation = updateValidation;
