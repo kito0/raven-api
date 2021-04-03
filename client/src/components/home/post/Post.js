@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeletePost } from '../../../redux/posts';
 import './css/post.css';
@@ -18,14 +18,19 @@ export default function Post({ post }) {
 	const user = useSelector((state) => state.userSlice.user);
 	const [creatorName, setCreatorName] = useState('');
 	const [creatorAvatar, setCreatorAvatar] = useState('');
+	const api = 'https://raven-x.herokuapp.com/api/user/handle';
+	//const api = 'http://localhost:5000/api/user/handle';
 
-	axios
-		.get(`https://raven-x.herokuapp.com/api/user/${post.handle}`)
-		.then((res) => {
-			setCreatorName(res.data.name);
-			setCreatorAvatar(res.data.avatar);
-		})
-		.catch((err) => console.error(err));
+	useEffect(() => {
+		axios
+			.get(`${api}/${post.handle}`)
+			.then((res) => {
+				setCreatorName(res.data.name);
+				setCreatorAvatar(res.data.avatar);
+			})
+			.catch((err) => console.error(err));
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<div className="post">

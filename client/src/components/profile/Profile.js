@@ -26,16 +26,14 @@ export default function Profile() {
 	const [numPosts, setNumPosts] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
 	const [showForm, setShowForm] = useState(false);
+	const [loader, setLoader] = useState(false);
 	const [name, setName] = useState(user.name);
 	const [avatar, setAvatar] = useState(user.avatar);
 
 	useEffect(() => {
-		GetPostsByUser(dispatch, user.handle);
-	}, [dispatch, showForm]);
-
-	useEffect(() => {
 		GetUser(dispatch, localStorage.getItem('id'));
-	}, [showForm]);
+		GetPostsByUser(dispatch, user.handle);
+	}, [loader, dispatch, user.handle]);
 
 	const { ref } = useInView({
 		onEnter: ({ unobserve, observe }) => {
@@ -57,25 +55,22 @@ export default function Profile() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(name, avatar);
-		if (name !== '') {
-			if (name !== undefined) setName(name.trim());
-			if (name === '' || name === undefined) setName(user.name);
-		}
-		if (name === '' || name === undefined) setName(user.name);
-		if (avatar !== '') {
-			if (avatar !== undefined) setAvatar(avatar.trim());
-			if (avatar === '' || avatar === undefined) setAvatar(user.avatar);
-		}
-		if (avatar === '' || avatar === undefined) setAvatar(user.avatar);
+
+		let nameSubmit, avatarSubmit;
+		if (name === undefined || name === '') nameSubmit = user.name;
+		else nameSubmit = name;
+		if (avatar === undefined || avatar === '') avatarSubmit = user.avatar;
+		else avatarSubmit = avatar;
 
 		UpdateUser(dispatch, user._id, {
-			name,
+			name: nameSubmit,
 			handle: user.handle,
 			email: user.email,
-			avatar,
+			avatar: avatarSubmit,
 			password: user.password,
 		});
+
+		setLoader(!loader);
 		setShowForm(false);
 	};
 
@@ -98,13 +93,13 @@ export default function Profile() {
 							<TextField
 								placeholder="name"
 								className="profile__input"
-								value={name}
+								value={name || ''}
 								onChange={(e) => setName(e.target.value)}
 							/>
 							<TextField
 								placeholder="avatar"
 								className="profile__input"
-								value={avatar}
+								value={avatar || ''}
 								onChange={(e) => setAvatar(e.target.value)}
 							/>
 							<Button className="profile__button" type="submit">
