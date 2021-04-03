@@ -7,6 +7,8 @@ import {
 	editUser,
 	setErrors,
 	clearErrors,
+	setUpdateErrors,
+	clearUpdateErrors,
 } from './userSlice';
 import axios from 'axios';
 
@@ -66,10 +68,10 @@ export const UpdateUser = async (dispatch, id, user) => {
 		.put(`${api}/${id}`, user)
 		.then((res) => {
 			dispatch(editUser(res.data));
-			dispatch(clearErrors());
+			dispatch(clearUpdateErrors());
 		})
 		.catch((err) => {
-			dispatch(setErrors(err.response.data));
+			dispatch(setUpdateErrors(err.response.data));
 		});
 };
 
