@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeletePost } from '../../../redux/posts';
 import './css/post.css';
@@ -11,38 +11,22 @@ import {
 	Delete,
 } from '@material-ui/icons';
 import moment from 'moment';
-import axios from 'axios';
 
 export default function Post({ post }) {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userSlice.user);
-	const [creatorName, setCreatorName] = useState('');
-	const [creatorAvatar, setCreatorAvatar] = useState('');
-	const api = 'https://raven-x.herokuapp.com/api/user/handle';
-	//const api = 'http://localhost:5000/api/user/handle';
-
-	useEffect(() => {
-		axios
-			.get(`${api}/${post.handle}`)
-			.then((res) => {
-				setCreatorName(res.data.name);
-				setCreatorAvatar(res.data.avatar);
-			})
-			.catch((err) => console.error(err));
-		// eslint-disable-next-line
-	}, []);
 
 	return (
 		<div className="post">
 			<div className="post__avatar">
-				<Avatar src={creatorAvatar} />
+				<Avatar src={post.avatar} />
 			</div>
 			<div className="post__body">
 				<div className="post__header">
 					<div className="post__header__text">
 						<div className="post__header__user">
 							<Typography variant="h6" className="post__header__name">
-								{creatorName}
+								{post.name}
 							</Typography>
 							<Typography variant="h6" className="post__header__handle">
 								@{post.handle}

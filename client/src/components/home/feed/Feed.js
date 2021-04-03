@@ -28,7 +28,7 @@ export default function Feed() {
 			unobserve();
 			setTimeout(() => {
 				loadMore();
-			}, 2000);
+			}, 1000);
 			observe();
 		},
 	});
