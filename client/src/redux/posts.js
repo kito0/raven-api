@@ -11,6 +11,7 @@ const api = 'https://raven-x.herokuapp.com/api/posts';
 //const api = 'http://localhost:5000/api/posts';
 
 export const GetPosts = async (dispatch) => {
+	dispatch(loadingPosts());
 	await axios
 		.get(api)
 		.then((res) => dispatch(setPosts(res.data)))
@@ -18,6 +19,7 @@ export const GetPosts = async (dispatch) => {
 };
 
 export const GetPostsByUser = async (dispatch, handle) => {
+	dispatch(loadingPosts());
 	await axios
 		.get(`${api}/${handle}`)
 		.then((res) => dispatch(setPosts(res.data)))
@@ -37,7 +39,6 @@ export const NewPost = async (dispatch, post) => {
 };
 
 export const EditPost = async (dispatch, id) => {
-	dispatch(loadingPosts());
 	await axios
 		.put(`${api}/${id}`)
 		.then(() => dispatch(editPost(id)))
@@ -52,5 +53,23 @@ export const DeletePost = async (dispatch, id) => {
 			},
 		})
 		.then(() => dispatch(deletePost(id)))
+		.catch((err) => console.error(err));
+};
+
+export const UpdatePosts = async (handle, name, avatar) => {
+	await axios
+		.put(
+			`${api}/update/${handle}`,
+			{
+				name: name,
+				avatar: avatar,
+			},
+			{
+				headers: {
+					'auth-token': localStorage.getItem('auth-token'),
+				},
+			}
+		)
+		.then()
 		.catch((err) => console.error(err));
 };
