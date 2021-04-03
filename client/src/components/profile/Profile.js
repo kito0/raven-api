@@ -4,7 +4,7 @@ import Post from '../home/post/Post';
 import PostSkeleton from '../home/post/PostSkeleton';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetUser, UpdateUser } from '../../redux/user';
-import { GetPostsByUser } from '../../redux/posts';
+import { GetPostsByUser, UpdatePosts } from '../../redux/posts';
 import {
 	Avatar,
 	IconButton,
@@ -22,10 +22,11 @@ export default function Profile() {
 	const user = useSelector((state) => state.userSlice.user);
 	const posts = useSelector((state) => state.postsSlice.posts);
 	const loading = useSelector((state) => state.postsSlice.loading);
+	const updateErrors = useSelector((state) => state.userSlice.updateErrors);
 
 	const [numPosts, setNumPosts] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
-	const [showForm, setShowForm] = useState(false);
+	const [open, setOpen] = useState(false);
 	const [loader, setLoader] = useState(false);
 	const [name, setName] = useState(user.name);
 	const [avatar, setAvatar] = useState(user.avatar);
@@ -40,17 +41,17 @@ export default function Profile() {
 			unobserve();
 			setTimeout(() => {
 				loadMore();
-			}, 2000);
+			}, 1000);
 			observe();
 		},
 	});
-
 	const loadMore = () => {
 		if (numPosts > posts.length) setHasMore(false);
 		else setNumPosts(numPosts + 10);
 	};
-	const handleShow = () => {
-		setShowForm(!showForm);
+
+	const handleOpen = () => {
+		setOpen(!open);
 	};
 
 	const handleSubmit = (e) => {
@@ -70,10 +71,9 @@ export default function Profile() {
 			password: user.password,
 		});
 
+		UpdatePosts(user.handle, nameSubmit, avatarSubmit);
 		setLoader(!loader);
-		setShowForm(false);
 	};
-
 	return (
 		<div className="profile">
 			<div className="profile__user">
@@ -82,12 +82,12 @@ export default function Profile() {
 					<Typography className="profile__name">{user.name}</Typography>
 					<div className="profile__handle">
 						<Typography>@{user.handle}</Typography>
-						<IconButton onClick={() => handleShow()}>
+						<IconButton onClick={handleOpen}>
 							<Edit />
 						</IconButton>
 					</div>
 				</div>
-				{showForm && (
+				{open && (
 					<div className="profile__right">
 						<form onSubmit={handleSubmit}>
 							<TextField
@@ -105,6 +105,13 @@ export default function Profile() {
 							<Button className="profile__button" type="submit">
 								Update
 							</Button>
+							{updateErrors ? (
+								<Typography variant="body2" className="profile__errors">
+									{updateErrors}
+								</Typography>
+							) : (
+								<br />
+							)}
 						</form>
 					</div>
 				)}
