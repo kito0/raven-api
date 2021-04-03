@@ -69,7 +69,7 @@ exports.updateUser = async (req, res) => {
 	const { error } = registerValidation(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
-	User.findByIdAndUpdate(req.params.id, req.body)
+	User.findByIdAndUpdate(req.params.id, req.body, { new: true })
 		.then((user) => {
 			res.status(200).json(user);
 		})
