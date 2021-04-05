@@ -57,11 +57,9 @@ export default function Profile() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		let nameSubmit, avatarSubmit;
-		if (name === undefined || name === '') nameSubmit = user.name;
-		else nameSubmit = name;
-		if (avatar === undefined || avatar === '') avatarSubmit = user.avatar;
-		else avatarSubmit = avatar;
+		let nameSubmit = name === undefined || name === '' ? user.name : name;
+		let avatarSubmit =
+			avatar === undefined || avatar === '' ? user.avatar : avatar;
 
 		UpdateUser(dispatch, user._id, {
 			name: nameSubmit,
