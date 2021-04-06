@@ -21,7 +21,6 @@ export default function CroakBox() {
 			avatar: user.avatar,
 			text,
 			image,
-			timestamp: Date(),
 		});
 
 		setText('');
@@ -35,7 +34,7 @@ export default function CroakBox() {
 			</div>
 			<form onSubmit={onSubmit}>
 				<TextField
-					placeholder="croak away"
+					placeholder="*something interesting*"
 					className="croakbox__input__text"
 					value={text}
 					onChange={(e) => setText(e.target.value)}
@@ -47,8 +46,12 @@ export default function CroakBox() {
 					value={image}
 					onChange={(e) => setImage(e.target.value)}
 				/>
-				<Button className="croakbox__button" type="submit">
-					Croak
+				<Button
+					className="croakbox__button"
+					type="submit"
+					disabled={text === ''}
+				>
+					Post
 				</Button>
 			</form>
 		</div>
