@@ -4,6 +4,7 @@
 	padding: 1.5%;
 	flex: 1;
 	display: flex;
+	border-top: 1px solid black;
 
 	.commentform__avatar {
 		padding: 10px;
@@ -16,7 +17,7 @@
 
 		.commentform__input {
 			flex: 1;
-			padding: 10px 10px 0px 10px;
+			padding: 18px 10px 0px 10px;
 		}
 	}
 }

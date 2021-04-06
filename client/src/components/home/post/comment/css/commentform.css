@@ -6,6 +6,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  border-top: 1px solid black;
 }
 
 .commentform .commentform__avatar {
@@ -29,6 +30,6 @@
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  padding: 10px 10px 0px 10px;
+  padding: 18px 10px 0px 10px;
 }
 /*# sourceMappingURL=commentform.css.map */
