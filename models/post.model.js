@@ -28,11 +28,15 @@ const postSchema = new mongoose.Schema({
 	},
 	comments: [
 		{
-			creatorName: {
+			name: {
 				type: String,
 				required: true,
 			},
-			creatorHandle: {
+			handle: {
+				type: String,
+				required: true,
+			},
+			avatar: {
 				type: String,
 				required: true,
 			},

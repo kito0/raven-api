@@ -30,9 +30,9 @@ exports.createPost = async (req, res) => {
 
 // PUT http://localhost:5000/api/posts/:id
 exports.editPost = async (req, res) => {
-	Post.findByIdAndUpdate(req.params.id, req.body)
-		.then(() => {
-			res.status(200).send(`post ${req.params.id} edited'`);
+	Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
+		.then((post) => {
+			res.status(200).json(post);
 		})
 		.catch((err) => res.status(404).send(err));
 };
@@ -40,8 +40,10 @@ exports.editPost = async (req, res) => {
 // DELETE http://localhost:5000/api/posts/:id
 exports.deletePost = async (req, res) => {
 	Post.findByIdAndDelete(req.params.id)
-		.then(() => {
-			res.status(200).send(`post ${req.params.id} deleted`);
+		.then((post) => {
+			post
+				? res.status(200).json(post)
+				: res.status(404).send('post does not exist');
 		})
 		.catch((err) => res.status(404).send(err));
 };
@@ -63,9 +65,13 @@ exports.updatePosts = async (req, res) => {
 
 // PUT http://localhost:5000/api/posts/comment/:id
 exports.createComment = async (req, res) => {
-	Post.findByIdAndUpdate(req.params.id, { $push: { comments: req.body } })
-		.then(() => {
-			res.status(201).send(`commented: ${req.body}`);
+	Post.findByIdAndUpdate(
+		req.params.id,
+		{ $push: { comments: req.body } },
+		{ new: true }
+	)
+		.then((post) => {
+			res.status(201).json(post);
 		})
 		.catch((err) => res.status(400).send(err));
 };

@@ -15,15 +15,19 @@ export const postsSlice = createSlice({
 			};
 		},
 		newPost: (state, action) => {
-			return {
-				...state,
-				posts: [...state.posts, action.payload],
-			};
+			state.posts.push(action.payload);
 		},
 		editPost: (state, action) => {
+			const index = state.posts.findIndex(
+				(post) => post._id === action.payload._id
+			);
+			const newArr = [...state.posts];
+			newArr[index] = action.payload;
+			console.log(action.payload._id);
+			console.log(index);
 			return {
 				...state,
-				posts: state.posts.filter((post) => post._id !== action.payload),
+				posts: [...newArr],
 			};
 		},
 		deletePost: (state, action) => {
