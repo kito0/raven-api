@@ -26,14 +26,27 @@ const postSchema = new mongoose.Schema({
 		default: Date.now,
 		required: true,
 	},
-});
-
-postSchema.virtual('imagePath').get(function () {
-	if (this.image != null && this.imageType != null) {
-		return `data:${this.imageType};charset=utf-8;base64,${this.image.toString(
-			'base64'
-		)}`;
-	}
+	comments: [
+		{
+			creatorName: {
+				type: String,
+				required: true,
+			},
+			creatorHandle: {
+				type: String,
+				required: true,
+			},
+			text: {
+				type: String,
+				required: true,
+			},
+			timestamp: {
+				type: Date,
+				default: Date.now,
+				required: true,
+			},
+		},
+	],
 });
 
 module.exports = mongoose.model('Post', postSchema);

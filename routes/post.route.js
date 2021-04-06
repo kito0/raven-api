@@ -6,6 +6,7 @@ const {
 	deletePost,
 	getPostsByUser,
 	updatePosts,
+	createComment,
 } = require('../controllers/post.controller');
 const verify = require('../util/verify.token');
 
@@ -16,6 +17,7 @@ router.post('/', verify, createPost);
 
 router.put('/:id', verify, editPost);
 router.put('/update/:handle', verify, updatePosts);
+router.put('/comment/:id', verify, createComment);
 
 router.delete('/:id', verify, deletePost);
 

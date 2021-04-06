@@ -60,3 +60,12 @@ exports.updatePosts = async (req, res) => {
 		})
 		.catch((err) => res.status(400).send(err));
 };
+
+// PUT http://localhost:5000/api/posts/comment/:id
+exports.createComment = async (req, res) => {
+	Post.findByIdAndUpdate(req.params.id, { $push: { comments: req.body } })
+		.then(() => {
+			res.status(201).send(`commented: ${req.body}`);
+		})
+		.catch((err) => res.status(400).send(err));
+};
