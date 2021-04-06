@@ -23,8 +23,6 @@ export const postsSlice = createSlice({
 			);
 			const newArr = [...state.posts];
 			newArr[index] = action.payload;
-			console.log(action.payload._id);
-			console.log(index);
 			return {
 				...state,
 				posts: [...newArr],
