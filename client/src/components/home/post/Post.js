@@ -17,6 +17,7 @@ import CommentForm from './comment/CommentForm';
 export default function Post({ post }) {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userSlice.user);
+	const authenticated = useSelector((state) => state.userSlice.authenticated);
 
 	const [expanded, setExpanded] = useState(false);
 
@@ -80,7 +81,7 @@ export default function Post({ post }) {
 									<Comment comment={comment} key={comment._id} />
 								))
 						: 'no comments yet'}
-					<CommentForm post={post} />
+					{authenticated && <CommentForm post={post} />}
 				</Collapse>
 			</div>
 		</div>
