@@ -3,7 +3,7 @@ import './css/profile.css';
 import Post from '../home/post/Post';
 import PostSkeleton from '../home/post/PostSkeleton';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetUser, UpdateUser } from '../../redux/user';
+import { UpdateUser } from '../../redux/user';
 import { GetPostsByUser, UpdatePosts } from '../../redux/posts';
 import {
 	Avatar,
@@ -32,7 +32,6 @@ export default function Profile() {
 	const [avatar, setAvatar] = useState(user.avatar);
 
 	useEffect(() => {
-		GetUser(dispatch, localStorage.getItem('id'));
 		GetPostsByUser(dispatch, user.handle);
 	}, [loader, dispatch, user.handle]);
 
@@ -46,6 +45,7 @@ export default function Profile() {
 		},
 	});
 	const loadMore = () => {
+		if (posts.length < 10) setHasMore(false);
 		if (numPosts > posts.length) setHasMore(false);
 		else setNumPosts(numPosts + 10);
 	};
