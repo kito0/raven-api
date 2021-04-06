@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeletePost } from '../../../redux/posts';
 import './css/post.css';
-import { Avatar, IconButton, Typography } from '@material-ui/core';
+import { Avatar, Collapse, IconButton, Typography } from '@material-ui/core';
 import {
 	ChatBubbleOutline,
 	FavoriteBorder,
@@ -11,10 +11,18 @@ import {
 	Delete,
 } from '@material-ui/icons';
 import moment from 'moment';
+import Comment from './comment/Comment';
+import CommentForm from './comment/CommentForm';
 
 export default function Post({ post }) {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userSlice.user);
+
+	const [expanded, setExpanded] = useState(false);
+
+	const handleExpandClick = () => {
+		setExpanded(!expanded);
+	};
 
 	return (
 		<div className="post">
@@ -50,7 +58,7 @@ export default function Post({ post }) {
 				</div>
 				{post.image && <img src={post.image} alt="" className="post__img" />}
 				<div className="post__footer">
-					<IconButton>
+					<IconButton onClick={handleExpandClick}>
 						<ChatBubbleOutline fontSize="small" />
 					</IconButton>
 					<IconButton>
@@ -63,6 +71,17 @@ export default function Post({ post }) {
 						<Publish fontSize="small" />
 					</IconButton>
 				</div>
+				<Collapse in={expanded} timeout="auto" unmountOnExit>
+					<br />
+					{post.comments
+						? post.comments
+								.slice()
+								.map((comment) => (
+									<Comment comment={comment} key={comment._id} />
+								))
+						: 'no comments yet'}
+					<CommentForm post={post} />
+				</Collapse>
 			</div>
 		</div>
 	);

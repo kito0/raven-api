@@ -68,6 +68,8 @@
 
 .post .post__body .post__header .post__header__text .post__header__delete {
   right: 0;
+  width: 30px;
+  height: 30px;
 }
 
 .post .post__body .post__header .post__header__timestamp {
