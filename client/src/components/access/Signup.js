@@ -22,15 +22,12 @@ export default function Signup() {
 
 	async function onSubmit(e) {
 		e.preventDefault();
-		setHandle(handle.toLowerCase());
-
+		handle.toLowerCase().replace(/\s+/g, '');
 		try {
 			SignupUser(dispatch, {
 				name,
 				handle,
 				email,
-				avatar:
-					'https://oes.semel.ucla.edu/wp-content/themes/collective/images/default-profile.jpg',
 				password,
 			});
 			return <Redirect to="/" />;
