@@ -75,6 +75,29 @@ export const UpdateUser = async (dispatch, id, user) => {
 		});
 };
 
+export const Follow = async (dispatch, handle, followHandle) => {
+	await axios
+		.put(
+			`${api}/follow/${followHandle}`,
+			{ handle: handle },
+			{ headers: { 'auth-token': localStorage.getItem('auth-token') } }
+		)
+		.then()
+		.catch((err) => {
+			console.error(err);
+		});
+	await axios
+		.put(
+			`${api}/following/${handle}`,
+			{ handle: followHandle },
+			{ headers: { 'auth-token': localStorage.getItem('auth-token') } }
+		)
+		.then((res) => dispatch(editUser(res.data)))
+		.catch((err) => {
+			console.error(err);
+		});
+};
+
 const setAuthorizationHeader = (token, id) => {
 	localStorage.setItem('auth-token', token);
 	localStorage.setItem('id', id);

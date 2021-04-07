@@ -75,3 +75,37 @@ exports.updateUser = async (req, res) => {
 		})
 		.catch((err) => res.status(400).send(err));
 };
+
+// PUT http://localhost:5000/api/user/follow/:handle
+exports.addFollower = async (req, res) => {
+	const user = await User.findOne({ handle: req.params.handle });
+	if (user.followers.find(({ handle }) => handle === req.body.handle))
+		return res.status(400).send('already following');
+
+	User.findOneAndUpdate(
+		{ handle: req.params.handle },
+		{ $push: { followers: req.body } },
+		{ new: true }
+	)
+		.then((user) => {
+			res.status(201).json(user);
+		})
+		.catch((err) => res.status(400).send(err));
+};
+
+// PUT http://localhost:5000/api/user/following/:handle
+exports.addFollowing = async (req, res) => {
+	const user = await User.findOne({ handle: req.params.handle });
+	if (user.following.find(({ handle }) => handle === req.body.handle))
+		return res.status(400).send('already following');
+
+	User.findOneAndUpdate(
+		{ handle: req.params.handle },
+		{ $push: { following: req.body } },
+		{ new: true }
+	)
+		.then((user) => {
+			res.status(201).json(user);
+		})
+		.catch((err) => res.status(400).send(err));
+};
