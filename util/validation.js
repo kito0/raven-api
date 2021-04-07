@@ -2,10 +2,10 @@ const Joi = require('joi');
 
 const registerValidation = (data) => {
 	const schema = Joi.object({
-		name: Joi.string().max(32).required(),
-		handle: Joi.string().max(16).required(),
+		name: Joi.string().max(16).required(),
+		handle: Joi.string().max(8).required(),
 		email: Joi.string().max(64).required().email(),
-		avatar: Joi.string().max(1024).required().uri(),
+		avatar: Joi.string().max(1024).uri(),
 		password: Joi.string().min(6).required(),
 	});
 	return schema.validate(data);
