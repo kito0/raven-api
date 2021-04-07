@@ -11,6 +11,7 @@ import {
 	Typography,
 	TextField,
 	Button,
+	Collapse,
 } from '@material-ui/core';
 
 import useInView from 'react-cool-inview';
@@ -26,8 +27,10 @@ export default function Profile() {
 
 	const [numPosts, setNumPosts] = useState(0);
 	const [hasMore, setHasMore] = useState(true);
+	const [showFollows, setShowFollows] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [loader, setLoader] = useState(false);
+
 	const [name, setName] = useState(user.name);
 	const [avatar, setAvatar] = useState(user.avatar);
 
@@ -52,6 +55,9 @@ export default function Profile() {
 
 	const handleOpen = () => {
 		setOpen(!open);
+	};
+	const handleShowFollows = () => {
+		setShowFollows(!showFollows);
 	};
 
 	const handleSubmit = (e) => {
@@ -85,7 +91,40 @@ export default function Profile() {
 						</IconButton>
 					</div>
 				</div>
-				{open && (
+				<div className="profile__follows" onClick={() => handleShowFollows()}>
+					<div className="profile__follows__text">
+						<Typography
+							variant="caption"
+							className="profile__follows__text__number"
+						>
+							{user.followers.length}{' '}
+							{user.followers.length !== 1 ? 'followers' : 'follower'}
+						</Typography>
+						<Typography variant="caption">{' · '}</Typography>
+						<Typography
+							variant="caption"
+							className="profile__follows__text__number"
+						>
+							{user.following.length} {'following'}
+						</Typography>
+					</div>
+					<Collapse in={showFollows} timeout="auto" unmountOnExit>
+						<div className="profile__follows__list">
+							<div className="profile__list_followers">
+								{user.followers.map((follower) => (
+									<Typography variant="caption">{follower.handle}</Typography>
+								))}
+							</div>
+							<div className="profile__list_following">
+								{user.following.map((following) => (
+									<Typography variant="caption">{following.handle}</Typography>
+								))}
+							</div>
+						</div>
+					</Collapse>
+				</div>
+
+				<Collapse in={open} timeout="auto" unmountOnExit>
 					<div className="profile__right">
 						<form onSubmit={handleSubmit}>
 							<TextField
@@ -112,7 +151,7 @@ export default function Profile() {
 							)}
 						</form>
 					</div>
-				)}
+				</Collapse>
 			</div>
 			<div className="profile__posts">
 				{loading && (
