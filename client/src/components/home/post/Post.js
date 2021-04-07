@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeletePost } from '../../../redux/posts';
+import { Follow } from '../../../redux/user';
 import './css/post.css';
-import { Avatar, Collapse, IconButton, Typography } from '@material-ui/core';
+import {
+	Avatar,
+	Button,
+	Collapse,
+	IconButton,
+	Typography,
+} from '@material-ui/core';
 import {
 	ChatBubbleOutline,
 	FavoriteBorder,
@@ -41,13 +48,23 @@ export default function Post({ post }) {
 								@{post.handle}
 							</Typography>
 						</div>
-						{user.handle === post.handle && (
+						{user.handle === post.handle ? (
 							<IconButton
 								className="post__header__delete"
 								onClick={() => DeletePost(dispatch, post._id)}
 							>
 								<Delete fontSize="small" />
 							</IconButton>
+						) : (
+							<Button
+								className="post__follow"
+								onClick={() => Follow(dispatch, user.handle, post.handle)}
+							>
+								{authenticated &&
+								user.following.find(({ handle }) => handle === post.handle)
+									? 'Following'
+									: 'Follow'}
+							</Button>
 						)}
 					</div>
 					<Typography variant="caption" className="post__header__timestamp">
