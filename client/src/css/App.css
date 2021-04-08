@@ -41,6 +41,12 @@
   color: black;
 }
 
+.app .view {
+  -webkit-box-flex: 0.7;
+      -ms-flex: 0.7;
+          flex: 0.7;
+}
+
 a {
   color: #a2a2a2;
 }

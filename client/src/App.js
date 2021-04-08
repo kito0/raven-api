@@ -31,22 +31,24 @@ function App() {
 		<div className="app">
 			<Sidebar />
 			<Switch>
-				<Route exact path="/" component={Feed} />
-				<Route exact path="/explore" component={Explore} />
-				<Route exact path="/notifications" component={Notifications} />
-				<Route exact path="/messages" component={Messages} />
-				<Route exact path="/bookmarks" component={Bookmarks} />
-				<Route exact path="/lists" component={Lists} />
-				<Route exact path="/profile">
-					{!authenticated ? <Redirect to="/" /> : <Profile />}
-				</Route>
-				<Route exact path="/more" component={More} />
-				<Route exact path="/login">
-					{authenticated ? <Redirect to="/" /> : <Login />}
-				</Route>
-				<Route exact path="/signup">
-					{authenticated ? <Redirect to="/" /> : <Signup />}
-				</Route>
+				<div className="view">
+					<Route exact path="/" component={Feed} />
+					<Route exact path="/explore" component={Explore} />
+					<Route exact path="/notifications" component={Notifications} />
+					<Route exact path="/messages" component={Messages} />
+					<Route exact path="/bookmarks" component={Bookmarks} />
+					<Route exact path="/lists" component={Lists} />
+					<Route exact path="/profile">
+						{!authenticated ? <Redirect to="/" /> : <Profile />}
+					</Route>
+					<Route exact path="/more" component={More} />
+					<Route exact path="/login">
+						{authenticated ? <Redirect to="/" /> : <Login />}
+					</Route>
+					<Route exact path="/signup">
+						{authenticated ? <Redirect to="/" /> : <Signup />}
+					</Route>
+				</div>
 			</Switch>
 			<Widgets />
 		</div>
