@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { LogoutUser } from '../../redux/user';
 
-const drawerWidth = 240;
+const drawerWidth = '20vw';
 const useStyles = makeStyles((theme) => ({
 	drawer: {
 		width: drawerWidth,
@@ -39,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
 			duration: theme.transitions.duration.leavingScreen,
 		}),
 		overflowX: 'hidden',
-		width: theme.spacing(7) + 1,
+		width: '4.5vw',
 		[theme.breakpoints.up('sm')]: {
-			width: theme.spacing(7) + 1,
+			width: '4.5vw',
 		},
 	},
 }));

@@ -1,16 +1,19 @@
 .sidebar {
-  -webkit-box-flex: 0.01;
-      -ms-flex: 0.01;
-          flex: 0.01;
   height: 100%;
 }
 
 .sidebar .sidebar__drawer {
-  margin-left: 6.5px;
-}
-
-.sidebar .sidebar__drawer .MuiIconButton-root {
-  color: grey !important;
+  width: 4.5vw;
+  height: 10vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .sidebar .sidebar__options {
@@ -41,12 +44,20 @@
   color: #a2a2a2 !important;
   border: none !important;
   font-weight: 900 !important;
+  font-size: 1.5vw !important;
   text-transform: inherit !important;
-  height: 50px !important;
+  height: 8vh !important;
+  width: 100%;
 }
 
 .sidebar .sidebar__button:hover {
   -webkit-box-shadow: 0px -4px 5px #583333 !important;
           box-shadow: 0px -4px 5px #583333 !important;
+}
+
+.sidebar .MuiSvgIcon-root {
+  color: grey !important;
+  width: 1.5vw;
+  height: 1.5vw;
 }
 /*# sourceMappingURL=Sidebar.css.map */

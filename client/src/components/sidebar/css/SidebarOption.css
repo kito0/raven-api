@@ -1,5 +1,5 @@
 .sidebarOption {
-  max-width: 50vh;
+  width: 100%;
   height: 7.5vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -28,12 +28,14 @@
 
 .sidebarOption h2 {
   font-weight: 800;
-  font-size: 20px;
+  font-size: 1.5vw;
   margin-right: 20px;
 }
 
 .sidebarOption .MuiSvgIcon-root {
-  padding: 15px 24px 15px 17.5px;
+  padding: 1.2vw 2vw 1.2vw 1.5vw;
+  width: 1.5vw;
+  height: 1.5vw;
 }
 
 .sidebarOption--active {
