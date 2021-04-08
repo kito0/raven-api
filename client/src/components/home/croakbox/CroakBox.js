@@ -6,6 +6,7 @@ import { NewPost } from '../../../redux/posts';
 
 export default function CroakBox() {
 	const dispatch = useDispatch();
+	const loadingUser = useSelector((state) => state.userSlice.loadingUser);
 
 	const [text, setText] = useState('');
 	const [image, setImage] = useState('');
@@ -30,7 +31,11 @@ export default function CroakBox() {
 	return (
 		<div className="croakbox">
 			<div className="croakbox__avatar">
-				<Avatar src={user.avatar} />
+				{loadingUser ? (
+					<Avatar src="https://oes.semel.ucla.edu/wp-content/themes/collective/images/default-profile.jpg" />
+				) : (
+					<Avatar src={user.avatar} />
+				)}
 			</div>
 			<form onSubmit={onSubmit}>
 				<TextField
