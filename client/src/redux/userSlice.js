@@ -6,7 +6,7 @@ export const userSlice = createSlice({
 		user: {},
 		token: localStorage.getItem('auth-token'),
 		authenticated: localStorage.getItem('auth-token') ? true : false,
-		loading: false,
+		loadingUser: true,
 		errors: null,
 		updateErrors: null,
 	},
@@ -17,7 +17,7 @@ export const userSlice = createSlice({
 				user: action.payload.user,
 				token: action.payload.token,
 				authenticated: true,
-				loading: false,
+				loadingUser: false,
 			};
 		},
 		signupUser: (state, action) => {
@@ -26,13 +26,13 @@ export const userSlice = createSlice({
 				user: action.payload.user,
 				token: action.payload.token,
 				authenticated: true,
-				loading: false,
+				loadingUser: false,
 			};
 		},
 		loadingUser: (state) => {
 			return {
 				...state,
-				loading: true,
+				loadingUser: true,
 			};
 		},
 		logoutUser: (state) => {
@@ -47,7 +47,7 @@ export const userSlice = createSlice({
 			return {
 				...state,
 				user: action.payload,
-				loading: false,
+				loadingUser: false,
 			};
 		},
 		editUser: (state, action) => {

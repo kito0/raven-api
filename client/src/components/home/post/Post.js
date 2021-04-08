@@ -61,6 +61,7 @@ export default function Post({ post }) {
 								onClick={() => Follow(dispatch, user.handle, post.handle)}
 							>
 								{authenticated &&
+								user.following &&
 								user.following.find(({ handle }) => handle === post.handle)
 									? 'Following'
 									: 'Follow'}

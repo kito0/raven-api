@@ -16,7 +16,7 @@ const api = 'https://raven-x.herokuapp.com/api/user';
 //const api = 'http://localhost:5000/api/user';
 
 export const LoginUser = async (dispatch, user) => {
-	dispatch(loadingUser);
+	dispatch(loadingUser());
 	await axios
 		.post(`${api}/login`, user)
 		.then((res) => {
@@ -30,7 +30,7 @@ export const LoginUser = async (dispatch, user) => {
 };
 
 export const SignupUser = async (dispatch, user) => {
-	dispatch(loadingUser);
+	dispatch(loadingUser());
 	await axios
 		.post(`${api}/register`, user)
 		.then((res) => {
@@ -51,7 +51,7 @@ export const LogoutUser = async (dispatch) => {
 };
 
 export const GetUser = async (dispatch, id) => {
-	dispatch(loadingUser);
+	dispatch(loadingUser());
 	await axios
 		.get(`${api}/${id}`)
 		.then((res) => {

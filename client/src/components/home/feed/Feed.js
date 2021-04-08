@@ -14,14 +14,13 @@ export default function Feed() {
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
 	const loading = useSelector((state) => state.postsSlice.loading);
 
-	const [numPosts, setNumPosts] = useState(0);
+	const [numPosts, setNumPosts] = useState(10);
 	const [hasMore, setHasMore] = useState(true);
 
 	useEffect(() => {
 		GetPosts(dispatch);
-		loadMore();
 		// eslint-disable-next-line
-	}, [dispatch]);
+	}, []);
 
 	const { ref } = useInView({
 		onEnter: ({ unobserve, observe }) => {

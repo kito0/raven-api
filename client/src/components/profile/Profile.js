@@ -3,7 +3,7 @@ import './css/profile.css';
 import Post from '../home/post/Post';
 import PostSkeleton from '../home/post/PostSkeleton';
 import { useDispatch, useSelector } from 'react-redux';
-import { UpdateUser } from '../../redux/user';
+import { GetUser, UpdateUser } from '../../redux/user';
 import { GetPostsByUser, UpdatePosts } from '../../redux/posts';
 import {
 	Avatar,
@@ -23,9 +23,10 @@ export default function Profile() {
 	const user = useSelector((state) => state.userSlice.user);
 	const posts = useSelector((state) => state.postsSlice.posts);
 	const loading = useSelector((state) => state.postsSlice.loading);
+	const loadingUser = useSelector((state) => state.userSlice.loadingUser);
 	const updateErrors = useSelector((state) => state.userSlice.updateErrors);
 
-	const [numPosts, setNumPosts] = useState(0);
+	const [numPosts, setNumPosts] = useState(10);
 	const [hasMore, setHasMore] = useState(true);
 	const [showFollows, setShowFollows] = useState(false);
 	const [open, setOpen] = useState(false);
@@ -35,8 +36,10 @@ export default function Profile() {
 	const [avatar, setAvatar] = useState(user.avatar);
 
 	useEffect(() => {
+		GetUser(dispatch, localStorage.getItem('id'));
 		GetPostsByUser(dispatch, user.handle);
-	}, [loader, dispatch, user.handle]);
+		// eslint-disable-next-line
+	}, [loader]);
 
 	const { ref } = useInView({
 		onEnter: ({ unobserve, observe }) => {
@@ -48,7 +51,6 @@ export default function Profile() {
 		},
 	});
 	const loadMore = () => {
-		if (posts.length < 10) setHasMore(false);
 		if (numPosts > posts.length) setHasMore(false);
 		else setNumPosts(numPosts + 10);
 	};
@@ -78,6 +80,7 @@ export default function Profile() {
 		UpdatePosts(user.handle, nameSubmit, avatarSubmit);
 		setLoader(!loader);
 	};
+
 	return (
 		<div className="profile">
 			<div className="profile__user">
@@ -93,32 +96,42 @@ export default function Profile() {
 				</div>
 				<div className="profile__follows" onClick={() => handleShowFollows()}>
 					<div className="profile__follows__text">
-						<Typography
-							variant="caption"
-							className="profile__follows__text__number"
-						>
-							{user.followers.length}{' '}
-							{user.followers.length !== 1 ? 'followers' : 'follower'}
-						</Typography>
-						<Typography variant="caption">{' · '}</Typography>
-						<Typography
-							variant="caption"
-							className="profile__follows__text__number"
-						>
-							{user.following.length} {'following'}
-						</Typography>
+						<div>
+							<Typography
+								variant="caption"
+								className="profile__follows__text__number"
+							>
+								{!loadingUser && user.followers.length}{' '}
+								{!loadingUser && user.followers.length !== 1
+									? 'followers'
+									: 'follower'}
+							</Typography>
+							<Typography variant="caption">{' · '}</Typography>
+							<Typography
+								variant="caption"
+								className="profile__follows__text__number"
+							>
+								{!loadingUser && user.following.length} {'following'}
+							</Typography>
+						</div>
 					</div>
 					<Collapse in={showFollows} timeout="auto" unmountOnExit>
 						<div className="profile__follows__list">
 							<div className="profile__list_followers">
-								{user.followers.map((follower) => (
-									<Typography variant="caption">{follower.handle}</Typography>
-								))}
+								{!loadingUser &&
+									user.followers.map((follower) => (
+										<Typography variant="caption" key={follower._id}>
+											{follower.handle}
+										</Typography>
+									))}
 							</div>
 							<div className="profile__list_following">
-								{user.following.map((following) => (
-									<Typography variant="caption">{following.handle}</Typography>
-								))}
+								{!loadingUser &&
+									user.following.map((following) => (
+										<Typography variant="caption" key={following._id}>
+											{following.handle}
+										</Typography>
+									))}
 							</div>
 						</div>
 					</Collapse>
@@ -156,9 +169,6 @@ export default function Profile() {
 			<div className="profile__posts">
 				{loading && (
 					<div>
-						<PostSkeleton />
-						<PostSkeleton />
-						<PostSkeleton />
 						<PostSkeleton />
 						<PostSkeleton />
 						<PostSkeleton />
