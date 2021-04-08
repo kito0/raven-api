@@ -42,12 +42,14 @@
 			align-items: center;
 			justify-content: center;
 			width: 100%;
+			margin-bottom: 8px;
 
 			.profile__follows__text {
 				display: flex;
+				margin-bottom: 8px;
 
 				.profile__follows__text__number {
-					padding: 0 10px 8px;
+					padding: 0 10px;
 				}
 			}
 

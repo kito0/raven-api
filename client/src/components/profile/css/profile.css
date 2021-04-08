@@ -76,16 +76,18 @@
       -ms-flex-pack: center;
           justify-content: center;
   width: 100%;
+  margin-bottom: 8px;
 }
 
 .profile .profile__user .profile__follows .profile__follows__text {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-bottom: 8px;
 }
 
 .profile .profile__user .profile__follows .profile__follows__text .profile__follows__text__number {
-  padding: 0 10px 8px;
+  padding: 0 10px;
 }
 
 .profile .profile__user .profile__follows .profile__follows__list {
