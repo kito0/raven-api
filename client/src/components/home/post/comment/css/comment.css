@@ -2,7 +2,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 1.5%;
+  padding: calc(var(--vh, 1vh) * 1.5);
   border-top: 1px solid black;
 }
 
@@ -29,9 +29,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   height: 20px;
 }
 
@@ -39,17 +36,43 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 18px;
 }
 
 .comment .comment__body .comment__header .comment__user .comment__name {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 1em;
+}
+
+@media only screen and (max-width: 768px) {
+  .comment .comment__body .comment__header .comment__user .comment__name {
+    font-size: 0.7em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 14vw;
+  }
 }
 
 .comment .comment__body .comment__header .comment__user .comment__handle {
   color: #4a4a4a;
-  font-size: 10px;
-  margin: 5.5px 0 0 10px;
+  font-size: 0.6em;
+  margin: 5.5px 8px 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 12vw;
+}
+
+@media only screen and (max-width: 768px) {
+  .comment .comment__body .comment__header .comment__user .comment__handle {
+    font-size: 0.5em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 24vw;
+    margin-top: 2.4px;
+  }
 }
 
 .comment .comment__body .comment__header .comment__delete {
@@ -59,12 +82,12 @@
 }
 
 .comment .comment__body .comment__timestamp {
-  font-size: 8px;
+  font-size: 0.5em;
   margin: 0 0 10px 1px;
 }
 
 .comment .comment__body .comment__text {
-  font-size: 15px;
-  margin: 0 0 10px 1px;
+  font-size: 1em;
+  margin: 12px 0 0 1px;
 }
 /*# sourceMappingURL=comment.css.map */

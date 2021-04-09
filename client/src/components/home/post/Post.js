@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { DeletePost } from '../../../redux/posts';
 import { Follow } from '../../../redux/user';
 import './css/post.css';
@@ -27,6 +28,8 @@ export default function Post({ post }) {
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
 
 	const [expanded, setExpanded] = useState(false);
+
+	const history = useHistory();
 
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
@@ -58,7 +61,11 @@ export default function Post({ post }) {
 						) : (
 							<Button
 								className="post__follow"
-								onClick={() => Follow(dispatch, user.handle, post.handle)}
+								onClick={() =>
+									authenticated
+										? Follow(dispatch, user.handle, post.handle)
+										: history.push('/login')
+								}
 							>
 								{authenticated &&
 								user.following &&

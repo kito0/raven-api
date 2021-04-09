@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './css/Sidebar.css';
+import './css/sidebar.css';
 import { Button, Drawer, IconButton, makeStyles } from '@material-ui/core';
 import {
 	Home,
@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { LogoutUser } from '../../redux/user';
 
-const drawerWidth = '20vw';
+const drawerWidth = 'calc(var(--vh, 1vh) * 40)';
 const useStyles = makeStyles((theme) => ({
 	drawer: {
 		width: drawerWidth,
@@ -39,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
 			duration: theme.transitions.duration.leavingScreen,
 		}),
 		overflowX: 'hidden',
-		width: '4.5vw',
+		width: 'calc(var(--vh, 1vh) * 10)',
 		[theme.breakpoints.up('sm')]: {
-			width: '4.5vw',
+			width: 'calc(var(--vh, 1vh) * 10)',
 		},
 	},
 }));
@@ -113,51 +113,52 @@ export default function Sidebar() {
 					<SidebarOption Icon={PermIdentity} text="Profile" refTo="/profile" />
 					<SidebarOption Icon={MoreHoriz} text="More" refTo="/more" />
 				</div>
-
-				{open ? (
-					authenticated ? (
-						<Button
-							variant="outlined"
-							className="sidebar__button"
-							fullWidth
-							onClick={handleLogout}
-						>
-							Logout
-						</Button>
+				<div className="sidebar__access">
+					{open ? (
+						authenticated ? (
+							<Button
+								variant="outlined"
+								className="sidebar__button sidebar__button__text"
+								fullWidth
+								onClick={handleLogout}
+							>
+								Logout
+							</Button>
+						) : (
+							<div className="sidebar__buttons">
+								<Button
+									variant="outlined"
+									className="sidebar__button sidebar__button__text"
+									href="/login"
+									fullWidth
+								>
+									Login
+								</Button>
+								<Button
+									variant="outlined"
+									className="sidebar__button sidebar__button__text"
+									href="/signup"
+									fullWidth
+								>
+									Signup
+								</Button>
+							</div>
+						)
+					) : authenticated ? (
+						<IconButton className="sidebar__button" onClick={handleLogout}>
+							<ExitToApp />
+						</IconButton>
 					) : (
 						<div className="sidebar__buttons">
-							<Button
-								variant="outlined"
-								className="sidebar__button"
-								href="/login"
-								fullWidth
-							>
-								Login
-							</Button>
-							<Button
-								variant="outlined"
-								className="sidebar__button"
-								href="/signup"
-								fullWidth
-							>
-								Signup
-							</Button>
+							<IconButton className="sidebar__button" href="/login">
+								<ExitToApp />
+							</IconButton>
+							<IconButton className="sidebar__button" href="/signup">
+								<ExitToApp />
+							</IconButton>
 						</div>
-					)
-				) : authenticated ? (
-					<IconButton className="sidebar__button" onClick={handleLogout}>
-						<ExitToApp />
-					</IconButton>
-				) : (
-					<div className="sidebar__buttons">
-						<IconButton className="sidebar__button" href="/login">
-							<ExitToApp />
-						</IconButton>
-						<IconButton className="sidebar__button" href="/signup">
-							<ExitToApp />
-						</IconButton>
-					</div>
-				)}
+					)}
+				</div>
 			</Drawer>
 		</div>
 	);

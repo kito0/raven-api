@@ -1,22 +1,23 @@
 @import '../../../css/theme';
 
 .login {
-	flex: 1;
-	min-width: 50vw;
-	width: 100%;
 	color: $text;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 40px;
-	background-color: $secondary;
+	padding: calc(var(--vh, 1vh) * 10) calc(var(--vh, 1vh) * 5) 0
+		calc(var(--vh, 1vh) * 5);
+	height: 100%;
+	box-shadow: inset calc(var(--vh, 1vh) * 1.2) 0 calc(var(--vh, 1vh) * 1.6)
+		calc(var(--vh, 1vh) * -1.2) rgba(255, 255, 255, 0.7);
 
 	.login__logo {
 		filter: invert(80%);
 	}
 
 	.login__title {
-		margin: 15px auto;
+		margin: calc(var(--vh, 1vh) * 2) 0;
+		font-family: 'Courier New', Courier, monospace;
 	}
 
 	.login__form {
@@ -24,29 +25,29 @@
 		flex-direction: column;
 		text-decoration: none;
 		align-items: center;
+		justify-content: center;
 
 		.login__input {
 			flex: 1;
 			background: transparent;
-			min-width: 40vw;
-			max-width: 80vw;
-			width: 100%;
-			margin: 12.5px auto;
+			max-width: 1080px;
+			width: calc(var(--vh, 1vh) * 80);
+			margin: calc(var(--vh, 1vh) * 1.5) 0;
 		}
 
 		.login__errors {
 			color: $primary;
-			font-size: 0.8rem;
+			font-size: calc(var(--vh, 1vh) * 1.5);
 		}
 
 		.login__button {
-			margin: 15px auto;
+			margin: calc(var(--vh, 1vh) * 1.5) 0;
 			width: 100%;
 			background-color: $primary !important;
 			border: none !important;
 			font-weight: 900 !important;
 			text-transform: inherit !important;
-			border-radius: 30px !important;
+			border-radius: calc(var(--vh, 1vh) * 4.8) !important;
 			height: 50px !important;
 		}
 	}

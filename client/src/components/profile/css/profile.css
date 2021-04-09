@@ -1,5 +1,4 @@
 .profile {
-  width: 100%;
   color: #a2a2a2;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -8,7 +7,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 20px;
 }
 
 .profile .profile__user {
@@ -173,7 +171,7 @@
 }
 
 .profile .profile__posts .MuiLinearProgress-indeterminate {
-  background-color: #101011;
+  background-color: #0a0a0c;
 }
 
 .profile .profile__posts .MuiLinearProgress-bar {

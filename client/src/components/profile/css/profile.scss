@@ -1,11 +1,9 @@
 @import '../../../css/theme';
 
 .profile {
-	width: 100%;
 	color: $text;
 	display: flex;
 	flex-direction: column;
-	padding: 20px;
 
 	.profile__user {
 		display: flex;

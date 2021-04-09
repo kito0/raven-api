@@ -7,7 +7,7 @@
 
 .sidebarOption {
 	width: 100%;
-	height: 7.5vh;
+	height: calc(var(--vh, 1vh) * 7.5);
 	display: flex;
 	align-items: center;
 	cursor: pointer;
@@ -16,27 +16,31 @@
 
 	&:hover {
 		background-color: $primary;
-		border-radius: 30px;
+		border-radius: calc(var(--vh, 1vh) * 4.8);
 		@include trans();
 		h2 {
 			@include trans();
+		}
+		.MuiSvgIcon-root {
+			color: black;
 		}
 	}
 
 	h2 {
 		font-weight: 800;
-		font-size: 1.5vw;
-		margin-right: 20px;
+		font-size: calc(var(--vh, 1vh) * 3);
 	}
 
 	.MuiSvgIcon-root {
-		padding: 1.2vw 2vw 1.2vw 1.5vw;
-		width: 1.5vw;
-		height: 1.5vw;
+		padding: calc(var(--vh, 1vh) * 1) calc(var(--vh, 1vh) * 3.5)
+			calc(var(--vh, 1vh) * 1) calc(var(--vh, 1vh) * 3.5);
 	}
 }
 
 .sidebarOption--active {
-	color: $primary;
-	border-radius: 30px;
+	color: $primary !important;
+	border-radius: calc(var(--vh, 1vh) * 4.8);
+	.MuiSvgIcon-root {
+		color: $primary;
+	}
 }

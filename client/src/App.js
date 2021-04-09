@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import './css/App.css';
+import './css/app.css';
 
 import Sidebar from './components/sidebar/Sidebar';
 import Widgets from './components/widgets/Widgets';
@@ -24,8 +24,17 @@ function App() {
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
 
 	useEffect(() => {
-		GetUser(dispatch, localStorage.getItem('id'));
+		if (localStorage.getItem('id'))
+			GetUser(dispatch, localStorage.getItem('id'));
 	}, [dispatch]);
+
+	let vh = window.innerHeight * 0.01;
+	document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+	window.addEventListener('resize', () => {
+		let vh = window.innerHeight * 0.01;
+		document.documentElement.style.setProperty('--vh', `${vh}px`);
+	});
 
 	return (
 		<div className="app">

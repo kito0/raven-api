@@ -41,13 +41,13 @@ export default function Signup() {
 			<img
 				src={process.env.PUBLIC_URL + '/login.png'}
 				alt="login"
-				width="150"
+				width="180"
 				className="login__logo"
 			/>
 			<Typography variant="h2" className="login__title">
 				Signup
 			</Typography>
-			<form onSubmit={onSubmit} className="login__form">
+			<form autocomplete="off" onSubmit={onSubmit} className="login__form">
 				<TextField
 					type="name"
 					placeholder="name"
@@ -67,14 +67,14 @@ export default function Signup() {
 					placeholder="email"
 					className="login__input"
 					onChange={(e) => setEmail(e.target.value)}
-					autoComplete="off"
+					autoComplete="new-email"
 				/>
 				<TextField
 					type="password"
 					placeholder="password"
 					className="login__input"
 					onChange={(e) => setPassword(e.target.value)}
-					autoComplete="off"
+					autoComplete="new-password"
 				/>
 				{errors && (
 					<Typography variant="body2" className="login__errors">

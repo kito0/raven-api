@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './css/SidebarOption.css';
+import './css/sidebaroption.css';
 
 export default function SidebarOption({ text, Icon, refTo }) {
 	return (

@@ -1,9 +1,4 @@
 .feed {
-  min-width: -webkit-min-content;
-  min-width: -moz-min-content;
-  min-width: min-content;
-  width: 100%;
-  border-right: 7px solid #000000;
   color: #a2a2a2;
 }
 
@@ -26,7 +21,7 @@
 }
 
 .feed .MuiLinearProgress-indeterminate {
-  background-color: #101011;
+  background-color: #0a0a0c;
 }
 
 .feed .MuiLinearProgress-bar {

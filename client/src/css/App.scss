@@ -27,12 +27,11 @@
 		flex-direction: column;
 		justify-content: space-between;
 	}
-	.MuiIconButton-root {
-		color: black;
-	}
 
 	.view {
-		flex: 0.7;
+		flex: 0.99;
+		width: 100%;
+		height: 100%;
 	}
 }
 

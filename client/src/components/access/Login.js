@@ -33,7 +33,7 @@ export default function Login() {
 			<img
 				src={process.env.PUBLIC_URL + '/login.png'}
 				alt="login"
-				width="150"
+				width="200"
 				className="login__logo"
 			/>
 			<Typography variant="h2" className="login__title">
