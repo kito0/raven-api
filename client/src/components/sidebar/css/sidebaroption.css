@@ -1,0 +1,50 @@
+.sidebarOption {
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 7.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  color: #a2a2a2;
+  text-decoration: none;
+}
+
+.sidebarOption:hover {
+  background-color: #583333;
+  border-radius: calc(var(--vh, 1vh) * 4.8);
+  color: black;
+  -webkit-transition: color 300ms ease;
+  transition: color 300ms ease;
+}
+
+.sidebarOption:hover h2 {
+  color: black;
+  -webkit-transition: color 300ms ease;
+  transition: color 300ms ease;
+}
+
+.sidebarOption:hover .MuiSvgIcon-root {
+  color: black;
+}
+
+.sidebarOption h2 {
+  font-weight: 800;
+  font-size: calc(var(--vh, 1vh) * 3);
+}
+
+.sidebarOption .MuiSvgIcon-root {
+  padding: calc(var(--vh, 1vh) * 1) calc(var(--vh, 1vh) * 3.5) calc(var(--vh, 1vh) * 1) calc(var(--vh, 1vh) * 3.5);
+}
+
+.sidebarOption--active {
+  color: #583333 !important;
+  border-radius: calc(var(--vh, 1vh) * 4.8);
+}
+
+.sidebarOption--active .MuiSvgIcon-root {
+  color: #583333;
+}
+/*# sourceMappingURL=sidebaroption.css.map */

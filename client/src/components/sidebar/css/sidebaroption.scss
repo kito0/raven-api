@@ -1,0 +1,46 @@
+@import '../../../css/theme';
+
+@mixin trans {
+	color: black;
+	transition: color 300ms ease;
+}
+
+.sidebarOption {
+	width: 100%;
+	height: calc(var(--vh, 1vh) * 7.5);
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	color: $text;
+	text-decoration: none;
+
+	&:hover {
+		background-color: $primary;
+		border-radius: calc(var(--vh, 1vh) * 4.8);
+		@include trans();
+		h2 {
+			@include trans();
+		}
+		.MuiSvgIcon-root {
+			color: black;
+		}
+	}
+
+	h2 {
+		font-weight: 800;
+		font-size: calc(var(--vh, 1vh) * 3);
+	}
+
+	.MuiSvgIcon-root {
+		padding: calc(var(--vh, 1vh) * 1) calc(var(--vh, 1vh) * 3.5)
+			calc(var(--vh, 1vh) * 1) calc(var(--vh, 1vh) * 3.5);
+	}
+}
+
+.sidebarOption--active {
+	color: $primary !important;
+	border-radius: calc(var(--vh, 1vh) * 4.8);
+	.MuiSvgIcon-root {
+		color: $primary;
+	}
+}
