@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './css/croakbox.css';
+import './css/postbox.css';
 import { Avatar, Button, TextField } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { NewPost } from '../../../redux/posts';
 
-export default function CroakBox() {
+export default function PostBox() {
 	const dispatch = useDispatch();
 	const loadingUser = useSelector((state) => state.userSlice.loadingUser);
 

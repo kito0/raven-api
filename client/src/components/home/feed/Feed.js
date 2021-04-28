@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './css/feed.css';
-import CroakBox from '../croakbox/CroakBox';
+import PostBox from '../postbox/PostBox';
 import Post from '../post/Post';
 import PostSkeleton from '../post/PostSkeleton';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,7 +40,7 @@ export default function Feed() {
 	return (
 		<div className="feed">
 			<div className="feed__header">Raven</div>
-			{authenticated && <CroakBox />}
+			{authenticated && <PostBox />}
 			{loading && (
 				<div>
 					<PostSkeleton />
