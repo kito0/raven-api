@@ -1,6 +1,8 @@
 .messages {
-  width: 100%;
-  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
   color: #a2a2a2;
 }
 /*# sourceMappingURL=messages.css.map */
