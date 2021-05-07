@@ -38,7 +38,7 @@ export default function Post({ post }) {
 	return (
 		<div className="post">
 			<div className="post__avatar">
-				<Avatar src={post.avatar} />
+				<Avatar src={post.avatar} alt={process.env.PUBLIC_URL + 'avatar.jpg'} />
 			</div>
 			<div className="post__body">
 				<div className="post__header">
