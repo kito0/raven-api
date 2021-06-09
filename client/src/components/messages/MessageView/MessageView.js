@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import './css/message.view.css';
+import Message from '../Message/Message';
 import { Avatar, IconButton } from '@material-ui/core';
 import {
 	AttachFile,
@@ -10,14 +12,26 @@ import {
 } from '@material-ui/icons';
 import moment from 'moment';
 
-export default function Chat() {
+export default function Chat({ conversation }) {
+	const user = useSelector((state) => state.userSlice.user);
+
 	return (
 		<div className="chat">
 			<div className="chat_header">
 				<Avatar />
 				<div className="chat_header_info">
-					<h3>room name</h3>
-					<p>last seen at...</p>
+					<h3>
+						{conversation
+							? conversation.handle1 === user.handle
+								? conversation.handle2
+								: conversation.handle1
+							: 'new chat'}
+					</h3>
+					<p>
+						last seen{' '}
+						{conversation &&
+							moment(conversation.messages.slice(-1)[0].timestamp).fromNow()}
+					</p>
 				</div>
 
 				<div className="chat_header_r">
@@ -33,26 +47,13 @@ export default function Chat() {
 				</div>
 			</div>
 			<div className="chat_body">
-				<div className="chat_message">
-					<span className="chat_name">person</span>henlo
-					<span className="chat_timestamp">
-						{moment(new Date().toUTCString()).fromNow()}
-					</span>
-				</div>
-				<p className="chat_message chat_receiver">
-					<span className="chat_name">person</span>
-					henlo
-					<span className="chat_timestamp">
-						{moment(new Date().toUTCString()).fromNow()}
-					</span>
-				</p>
-				<p className="chat_message">
-					<span className="chat_name">person</span>
-					henlo
-					<span className="chat_timestamp">
-						{moment(new Date().toUTCString()).fromNow()}
-					</span>
-				</p>
+				{conversation ? (
+					conversation.messages
+						.slice()
+						.map((message) => <Message message={message} key={message._id} />)
+				) : (
+					<p>no messages available</p>
+				)}
 			</div>
 			<div className="chat_footer">
 				<InsertEmoticon />

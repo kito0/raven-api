@@ -4,7 +4,7 @@ import MessageSidebarChat from './MessageSidebarChat';
 import { IconButton } from '@material-ui/core';
 import { DonutLarge, Chat, MoreVert, SearchOutlined } from '@material-ui/icons';
 
-export default function MessageSidebar() {
+export default function MessageSidebar({ messages, setCurrent }) {
 	return (
 		<div className="message_sidebar">
 			<div className="message_sidebar_header">
@@ -23,17 +23,17 @@ export default function MessageSidebar() {
 				<input placeholder="Search or start new chat" type="text" />
 			</div>
 			<div className="message_sidebar_chats">
-				<MessageSidebarChat />
-				<MessageSidebarChat />
-				<MessageSidebarChat />
-				<MessageSidebarChat />
-				<MessageSidebarChat />
-				<MessageSidebarChat />
-				<MessageSidebarChat />
-				<MessageSidebarChat />
-				<MessageSidebarChat />
-				<MessageSidebarChat />
-				<MessageSidebarChat />
+				{messages &&
+					messages
+						.slice()
+						.reverse()
+						.map((conversation) => (
+							<MessageSidebarChat
+								conversation={conversation}
+								setCurrent={setCurrent}
+								key={conversation._id}
+							/>
+						))}
 			</div>
 		</div>
 	);
