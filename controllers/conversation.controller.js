@@ -20,7 +20,7 @@ exports.getConversations = async (req, res) => {
 		.catch((err) => res.status(500).send(err));
 };
 
-// POST http://localhost:5000/api/conversation/:handle1/:handle2
+// POST http://localhost:5000/api/conversations/:handle1/:handle2
 exports.sendMessage = async (req, res) => {
 	Conversation.findOneAndUpdate(
 		{
