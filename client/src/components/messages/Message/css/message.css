@@ -28,4 +28,9 @@
   margin-left: auto;
   background-color: rgba(41, 23, 23, 0.8);
 }
+
+.chat_receiver .chat_timestamp {
+  display: block;
+  text-align: right;
+}
 /*# sourceMappingURL=message.css.map */
