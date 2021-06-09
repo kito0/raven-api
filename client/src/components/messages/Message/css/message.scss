@@ -1,0 +1,25 @@
+@import '../../../../css/theme';
+
+.chat_message {
+	position: relative;
+	font-size: 1em;
+	padding: 10px;
+	width: max-content;
+	border-radius: 10px;
+	margin-bottom: 30px;
+	background-color: rgb(32, 32, 32);
+}
+.chat_name {
+	position: absolute;
+	top: -15px;
+	font-weight: 800;
+	font-size: xx-small;
+}
+.chat_timestamp {
+	display: flex;
+	font-size: xx-small;
+}
+.chat_receiver {
+	margin-left: auto;
+	background-color: rgba(41, 23, 23, 0.8);
+}
