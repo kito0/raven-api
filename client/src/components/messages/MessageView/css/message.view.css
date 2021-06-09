@@ -49,37 +49,6 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.chat .chat_body .chat_message {
-  position: relative;
-  font-size: 1em;
-  padding: 10px;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  border-radius: 10px;
-  margin-bottom: 30px;
-  background-color: #202020;
-}
-
-.chat .chat_body .chat_name {
-  position: absolute;
-  top: -15px;
-  font-weight: 800;
-  font-size: xx-small;
-}
-
-.chat .chat_body .chat_timestamp {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-size: xx-small;
-}
-
-.chat .chat_body .chat_receiver {
-  margin-left: auto;
-  background-color: rgba(41, 23, 23, 0.8);
-}
-
 .chat_footer {
   display: -webkit-box;
   display: -ms-flexbox;
