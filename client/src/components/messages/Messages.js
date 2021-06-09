@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import './css/messages.css';
 import MessageSidebar from './MessageSidebar/MessageSidebar';
 import MessageView from './MessageView/MessageView';
+import axios from 'axios';
 //import Pusher from 'pusher-js';
 
 export default function Messages() {
-	// const [messages, setMessages] = useState([]);
+	const user = useSelector((state) => state.userSlice.user);
+	const [messages, setMessages] = useState([]);
+	const [current, setCurrent] = useState();
 
-	// useEffect(() => {
-	// 	axios.get('/messages/sync').then((res) => {
-	// 		setMessages(res.data);
-	// 	});
-	// }, []);
+	//const api = 'http://localhost:5000';
+	const api = 'https://raven-x.herokuapp.com';
+
+	useEffect(() => {
+		axios.get(`${api}/api/conversations/${user.handle}`).then((res) => {
+			setMessages(res.data);
+			setCurrent(res.data[0]);
+		});
+	}, [user.handle]);
 
 	// useEffect(() => {
 	// 	const pusher = new Pusher('9a411b2a0ee16e4825af', {
@@ -32,8 +40,8 @@ export default function Messages() {
 
 	return (
 		<div className="messages">
-			<MessageSidebar />
-			<MessageView />
+			<MessageSidebar messages={messages} setCurrent={setCurrent} />
+			<MessageView conversation={current} />
 		</div>
 	);
 }
