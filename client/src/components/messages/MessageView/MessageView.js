@@ -18,8 +18,9 @@ export default function Chat({ conversation }) {
 	const [text, setText] = useState('');
 	const [user2, setUser2] = useState({});
 	const bottomRef = useRef(null);
-	const api = 'http://localhost:5000/api';
-	//const api = 'https://raven-x.herokuapp.com/api';
+
+	//const api = 'http://localhost:5000/api';
+	const api = 'https://raven-x.herokuapp.com/api';
 
 	useEffect(() => {
 		conversation &&
