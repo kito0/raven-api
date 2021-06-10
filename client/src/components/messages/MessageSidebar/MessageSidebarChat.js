@@ -12,13 +12,13 @@ export default function MessageSidebarChat({
 }) {
 	const user = useSelector((state) => state.userSlice.user);
 	const [user2, setUser2] = useState({});
-	//const api = "http://localhost:5000";
-	const api = 'https://raven-x.herokuapp.com';
+	//const api = "http://localhost:5000/api";
+	const api = 'https://raven-x.herokuapp.com/api';
 
 	useEffect(() => {
 		axios
 			.get(
-				`${api}/api/user/handle/${
+				`${api}/user/handle/${
 					conversation.handle1 === user.handle
 						? conversation.handle2
 						: conversation.handle1
