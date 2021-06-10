@@ -9,7 +9,7 @@ import axios from 'axios';
 export default function Messages() {
 	const user = useSelector((state) => state.userSlice.user);
 	const [messages, setMessages] = useState([]);
-	const [current, setCurrent] = useState();
+	const [current, setCurrent] = useState(0);
 
 	//const api = 'http://localhost:5000';
 	const api = 'https://raven-x.herokuapp.com';
@@ -17,9 +17,8 @@ export default function Messages() {
 	useEffect(() => {
 		axios.get(`${api}/api/conversations/${user.handle}`).then((res) => {
 			setMessages(res.data);
-			setCurrent(res.data[0]);
 		});
-	}, [user.handle]);
+	}, [user.handle, messages]);
 
 	// useEffect(() => {
 	// 	const pusher = new Pusher('9a411b2a0ee16e4825af', {
@@ -40,8 +39,12 @@ export default function Messages() {
 
 	return (
 		<div className="messages">
-			<MessageSidebar messages={messages} setCurrent={setCurrent} />
-			<MessageView conversation={current} />
+			<MessageSidebar
+				messages={messages}
+				current={current}
+				setCurrent={setCurrent}
+			/>
+			<MessageView conversation={messages[current]} />
 		</div>
 	);
 }
