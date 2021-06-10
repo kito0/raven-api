@@ -33,3 +33,8 @@
 		}
 	}
 }
+
+.active {
+	box-shadow: calc(var(--vh, 1vh) * 0) calc(var(--vh, 1vh) * -0.6)
+		calc(var(--vh, 1vh) * 1) $primary !important;
+}

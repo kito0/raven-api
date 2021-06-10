@@ -34,4 +34,9 @@
   font-size: 12px;
   margin-top: -4px;
 }
+
+.active {
+  -webkit-box-shadow: calc(var(--vh, 1vh) * 0) calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 1) #583333 !important;
+          box-shadow: calc(var(--vh, 1vh) * 0) calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 1) #583333 !important;
+}
 /*# sourceMappingURL=message.sidebar.chat.css.map */

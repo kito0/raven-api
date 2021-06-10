@@ -4,7 +4,12 @@ import './css/message.sidebar.chat.css';
 import { Avatar } from '@material-ui/core';
 import axios from 'axios';
 
-export default function MessageSidebarChat({ conversation, setCurrent }) {
+export default function MessageSidebarChat({
+	messages,
+	conversation,
+	current,
+	setCurrent,
+}) {
 	const user = useSelector((state) => state.userSlice.user);
 	const [user2, setUser2] = useState({});
 	//const api = "http://localhost:5000";
@@ -22,12 +27,18 @@ export default function MessageSidebarChat({ conversation, setCurrent }) {
 			.then((res) => {
 				setUser2(res.data);
 			});
-	}, [conversation, user.handle]);
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<div
-			className="message__sidebar__chat"
-			onClick={() => setCurrent(conversation)}
+			className={`message__sidebar__chat ${
+				messages.findIndex((x) => x._id === conversation._id) === current &&
+				'active'
+			}`}
+			onClick={() =>
+				setCurrent(messages.findIndex((x) => x._id === conversation._id))
+			}
 		>
 			<Avatar className="avatar" src={user2.avatar} />
 			<div className="message__sidebar__chat__info">
