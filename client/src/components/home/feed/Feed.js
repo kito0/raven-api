@@ -55,13 +55,12 @@ export default function Feed() {
 					<PostSkeleton />
 				</div>
 			)}
-			{posts
-				.slice()
-				.reverse()
-				.slice(0, numPosts)
-				.map((post) => (
-					<Post post={post} key={post._id} />
-				))}
+			{posts &&
+				posts
+					.slice()
+					.reverse()
+					.slice(0, numPosts)
+					.map((post) => <Post post={post} key={post._id} />)}
 			<div ref={ref} className="feed__loading">
 				{hasMore ? (
 					<LinearProgress />
