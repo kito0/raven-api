@@ -2,12 +2,14 @@ const router = require('express').Router();
 const {
 	getAllConversations,
 	getConversations,
+	getConversation,
 	sendMessage,
 } = require('../controllers/conversation.controller');
 const verify = require('../util/verify.token');
 
 router.get('/', getAllConversations);
 router.get('/:handle', getConversations);
+router.get('/:handle1/:handle2', getConversation);
 
 router.post('/:handle1/:handle2', sendMessage);
 
