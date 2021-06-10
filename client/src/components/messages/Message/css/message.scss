@@ -22,7 +22,12 @@
 .chat_receiver {
 	margin-left: auto;
 	background-color: rgba(41, 23, 23, 0.8);
+	display: block;
+	text-align: right;
 
+	.chat_name {
+		right: 10px;
+	}
 	.chat_timestamp {
 		display: block;
 		text-align: right;
