@@ -1,5 +1,5 @@
 .croakbox {
-  background-color: #0a0a0c;
+  background-color: #121212e8;
   padding-bottom: 10px;
   margin-bottom: 8px;
   padding: 1.5%;
@@ -43,7 +43,7 @@
 }
 
 .croakbox form .croakbox__button {
-  background-color: #583333 !important;
+  background-color: #5c3030 !important;
   border: none !important;
   font-weight: 900 !important;
   text-transform: inherit !important;

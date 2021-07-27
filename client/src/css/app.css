@@ -20,7 +20,7 @@
 }
 
 .app .MuiInput-underline::after {
-  border-bottom-color: #583333;
+  border-bottom-color: #5c3030;
 }
 
 .app .MuiDrawer-paper {
@@ -50,7 +50,7 @@ a {
 }
 
 a:hover {
-  color: #583333;
+  color: #5c3030;
 }
 
 ::-webkit-scrollbar {

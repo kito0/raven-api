@@ -56,7 +56,7 @@
 }
 
 .profile .profile__user .profile__left .profile__handle .MuiIconButton-root {
-  color: #583333 !important;
+  color: #5c3030 !important;
 }
 
 .profile .profile__user .profile__follows {
@@ -144,7 +144,7 @@
 }
 
 .profile .profile__user .profile__right form .profile__button {
-  background-color: #583333 !important;
+  background-color: #5c3030 !important;
   border: none !important;
   font-weight: 900 !important;
   text-transform: inherit !important;
@@ -155,7 +155,7 @@
 
 .profile .profile__user .profile__right form .profile__errors {
   margin: 5px auto;
-  color: #583333;
+  color: #5c3030;
 }
 
 .profile .profile__posts {
@@ -171,10 +171,10 @@
 }
 
 .profile .profile__posts .MuiLinearProgress-indeterminate {
-  background-color: #0a0a0c;
+  background-color: #121212e8;
 }
 
 .profile .profile__posts .MuiLinearProgress-bar {
-  background-color: #583333;
+  background-color: #5c3030;
 }
 /*# sourceMappingURL=profile.css.map */

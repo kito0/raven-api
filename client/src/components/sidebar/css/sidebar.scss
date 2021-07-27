@@ -1,6 +1,12 @@
 @import '../../../css/theme';
 
 .sidebar {
+	img {
+		width: 45vh;
+		margin: 0 0 24vh 24vh;
+		filter: drop-shadow(1vh 1vh 4vh rgba($color: #fff, $alpha: .25));
+	}
+
 	.sidebar__drawer {
 		width: calc(var(--vh, 1vh) * 10);
 		height: calc(var(--vh, 1vh) * 10);
@@ -53,5 +59,10 @@
 		width: calc(var(--vh, 1vh) * 3);
 		height: calc(var(--vh, 1vh) * 3);
 		padding-bottom: calc(var(--vh, 1vh) * 0.6);
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.sidebar__drawer {
 	}
 }

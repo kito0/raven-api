@@ -1,6 +1,6 @@
 @import '../../../css/theme';
 
-@mixin trans {
+@mixin color_trans {
 	color: black;
 	transition: color 300ms ease;
 }
@@ -11,18 +11,21 @@
 	display: flex;
 	align-items: center;
 	cursor: pointer;
+	background-color: transparent;
 	color: $text;
+	border-radius: calc(var(--vh, 1vh) * 4.8);
 	text-decoration: none;
+	transition: color 300ms ease;
+	transition: background-color 300ms ease;
 
 	&:hover {
-		background-color: $primary;
-		border-radius: calc(var(--vh, 1vh) * 4.8);
-		@include trans();
-		h2 {
-			@include trans();
-		}
+		background-color: rgba($color: $primary, $alpha: 1);
+		transition: background-color 300ms ease;
+		@include color_trans();
+
+		h2,
 		.MuiSvgIcon-root {
-			color: black;
+			@include color_trans();
 		}
 	}
 
@@ -39,7 +42,6 @@
 
 .sidebarOption--active {
 	color: $primary !important;
-	border-radius: calc(var(--vh, 1vh) * 4.8);
 	.MuiSvgIcon-root {
 		color: $primary;
 	}

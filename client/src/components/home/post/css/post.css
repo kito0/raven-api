@@ -1,5 +1,5 @@
 .post {
-  background-color: #0a0a0c;
+  background-color: #121212e8;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -16,7 +16,7 @@
 }
 
 .post .MuiIconButton-root {
-  color: #583333 !important;
+  color: #5c3030 !important;
 }
 
 .post .post__body {
@@ -97,7 +97,7 @@
 }
 
 .post .post__body .post__header .post__header__text .post__follow {
-  background-color: #583333 !important;
+  background-color: #5c3030 !important;
   border: none !important;
   font-size: 0.6em;
   font-weight: 800 !important;

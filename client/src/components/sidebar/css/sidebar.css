@@ -1,3 +1,10 @@
+.sidebar img {
+  width: 45vh;
+  margin: 0 0 24vh 24vh;
+  -webkit-filter: drop-shadow(1vh 1vh 4vh rgba(255, 255, 255, 0.25));
+          filter: drop-shadow(1vh 1vh 4vh rgba(255, 255, 255, 0.25));
+}
+
 .sidebar .sidebar__drawer {
   width: calc(var(--vh, 1vh) * 10);
   height: calc(var(--vh, 1vh) * 10);
@@ -59,8 +66,8 @@
 }
 
 .sidebar .sidebar__access .sidebar__button:hover {
-  -webkit-box-shadow: 0 calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 0.8) #583333 !important;
-          box-shadow: 0 calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 0.8) #583333 !important;
+  -webkit-box-shadow: 0 calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 0.8) #5c3030 !important;
+          box-shadow: 0 calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 0.8) #5c3030 !important;
 }
 
 .sidebar .sidebar__access .sidebar__button__text {

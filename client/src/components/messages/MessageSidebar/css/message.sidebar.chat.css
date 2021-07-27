@@ -8,8 +8,8 @@
 }
 
 .message__sidebar__chat:hover {
-  -webkit-box-shadow: calc(var(--vh, 1vh) * 0) calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 1) #583333 !important;
-          box-shadow: calc(var(--vh, 1vh) * 0) calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 1) #583333 !important;
+  -webkit-box-shadow: calc(var(--vh, 1vh) * 0) calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 1) #5c3030 !important;
+          box-shadow: calc(var(--vh, 1vh) * 0) calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 1) #5c3030 !important;
 }
 
 .message__sidebar__chat .MuiSvgIcon-root {
@@ -36,7 +36,7 @@
 }
 
 .active {
-  -webkit-box-shadow: calc(var(--vh, 1vh) * 0) calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 1) #583333 !important;
-          box-shadow: calc(var(--vh, 1vh) * 0) calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 1) #583333 !important;
+  -webkit-box-shadow: calc(var(--vh, 1vh) * 0) calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 1) #5c3030 !important;
+          box-shadow: calc(var(--vh, 1vh) * 0) calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 1) #5c3030 !important;
 }
 /*# sourceMappingURL=message.sidebar.chat.css.map */

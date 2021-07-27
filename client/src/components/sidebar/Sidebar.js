@@ -85,7 +85,7 @@ export default function Sidebar() {
 				}}
 			>
 				<div className="sidebar__drawer">
-					{!open ? (
+					{window.screen.width <= 768 ? (!open ? (
 						<IconButton onClick={handleDrawerOpen}>
 							<Menu />
 						</IconButton>
@@ -93,6 +93,8 @@ export default function Sidebar() {
 						<IconButton onClick={handleDrawerClose}>
 							<ChevronLeft />
 						</IconButton>
+					)) : (
+						<img src={process.env.PUBLIC_URL + '/login.png'}/>
 					)}
 				</div>
 				<div className="sidebar__options">
