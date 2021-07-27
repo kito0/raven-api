@@ -17,6 +17,6 @@ workflows:
     jobs:
       - build-and-test
   
-  matrix-tests:
+  endpoint-tests:
     jobs:
       - node/test
