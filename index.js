@@ -28,3 +28,5 @@ app.use(cors());
 app.use('/api/user', userRoute);
 app.use('/api/posts', postRoute);
 app.use('/api/conversations', conversationRoute);
+
+module.exports = app;
