@@ -65,7 +65,9 @@ export const GetUser = async (dispatch, id) => {
 
 export const UpdateUser = async (dispatch, id, user) => {
 	await axios
-		.put(`${api}/${id}`, user)
+		.put(`${api}/${id}`, user, {
+			headers: { 'auth-token': localStorage.getItem('auth-token') },
+		})
 		.then((res) => {
 			dispatch(editUser(res.data));
 			dispatch(clearUpdateErrors());
