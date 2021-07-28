@@ -37,7 +37,7 @@ exports.login = async (req, res) => {
 	if (error) return res.status(400).send(error.details[0].message);
 
 	const user = await User.findOne({ email: req.body.email });
-	if (!user) return res.status(400).send('Email not found');
+	if (!user) return res.status(404).send('Email not found');
 
 	const validPass = await bcrypt.compare(req.body.password, user.password);
 	if (!validPass) return res.status(400).send('Invalid password');
@@ -50,18 +50,20 @@ exports.login = async (req, res) => {
 exports.getUser = async (req, res) => {
 	User.findById(req.params.id)
 		.then((user) => {
+			if (!user) throw 'Error: User ID does not exist';
 			res.status(200).json(user);
 		})
-		.catch((err) => res.status(404).send(err.code));
+		.catch((err) => res.status(404).send(err));
 };
 
 // GET http://localhost:5000/api/user/:handle
 exports.getUserByHandle = async (req, res) => {
 	User.findOne({ handle: req.params.handle })
 		.then((user) => {
+			if (!user) throw 'Error: User handle does not exist';
 			res.status(200).send(user);
 		})
-		.catch((err) => res.status(404).send(err.code));
+		.catch((err) => res.status(404).send(err));
 };
 
 // PUT http://localhost:5000/api/user/:handle
@@ -71,41 +73,70 @@ exports.updateUser = async (req, res) => {
 
 	User.findByIdAndUpdate(req.params.id, req.body, { new: true })
 		.then((user) => {
+			if (!user) throw 'Error: User ID does not exist';
 			res.status(200).json(user);
 		})
 		.catch((err) => res.status(400).send(err));
 };
 
 // PUT http://localhost:5000/api/user/follow/:handle
-exports.addFollower = async (req, res) => {
+exports.addRemoveFollower = async (req, res) => {
 	const user = await User.findOne({ handle: req.params.handle });
-	if (user.followers.find(({ handle }) => handle === req.body.handle))
-		return res.status(400).send('already following');
-
-	User.findOneAndUpdate(
-		{ handle: req.params.handle },
-		{ $push: { followers: req.body } },
-		{ new: true }
-	)
-		.then((user) => {
-			res.status(201).json(user);
-		})
-		.catch((err) => res.status(400).send(err));
+	if (user.followers.find(({ handle }) => handle === req.body.handle)) {
+		User.findOne({ handle: req.body.handle }).then((user) => {
+			if (!user)
+				return res
+					.status(404)
+					.send(`Error: No such user found: ${req.body.handle}`);
+		});
+		User.findOneAndUpdate(
+			{ handle: req.params.handle },
+			{ $pull: { followers: req.body } }
+		)
+			.then((user) => {
+				return res.status(200).send(`Removed follower: ${req.body.handle}`);
+			})
+			.catch((err) => res.status(400).send(err));
+	} else {
+		User.findOneAndUpdate(
+			{ handle: req.params.handle },
+			{ $push: { followers: req.body } },
+			{ new: true }
+		)
+			.then((user) => {
+				res.status(200).json(user);
+			})
+			.catch((err) => res.status(400).send(err));
+	}
 };
 
 // PUT http://localhost:5000/api/user/following/:handle
-exports.addFollowing = async (req, res) => {
+exports.toggleFollow = async (req, res) => {
 	const user = await User.findOne({ handle: req.params.handle });
-	if (user.following.find(({ handle }) => handle === req.body.handle))
-		return res.status(400).send('already following');
-
-	User.findOneAndUpdate(
-		{ handle: req.params.handle },
-		{ $push: { following: req.body } },
-		{ new: true }
-	)
-		.then((user) => {
-			res.status(201).json(user);
-		})
-		.catch((err) => res.status(400).send(err));
+	if (user.following.find(({ handle }) => handle === req.body.handle)) {
+		User.findOne({ handle: req.body.handle }).then((user) => {
+			if (!user)
+				return res
+					.status(404)
+					.send(`Error: No such user found: ${req.body.handle}`);
+		});
+		User.findOneAndUpdate(
+			{ handle: req.params.handle },
+			{ $pull: { following: req.body } }
+		)
+			.then((user) => {
+				res.status(200).send(`Unfollowed: ${req.body.handle}`);
+			})
+			.catch((err) => res.status(400).send(err));
+	} else {
+		User.findOneAndUpdate(
+			{ handle: req.params.handle },
+			{ $push: { following: req.body } },
+			{ new: true }
+		)
+			.then((user) => {
+				res.status(201).json(user);
+			})
+			.catch((err) => res.status(400).send(err));
+	}
 };

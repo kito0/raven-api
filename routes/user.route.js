@@ -5,8 +5,8 @@ const {
 	getUser,
 	getUserByHandle,
 	updateUser,
-	addFollower,
-	addFollowing,
+	addRemoveFollower,
+	toggleFollow,
 } = require('../controllers/user.controller');
 const verify = require('../util/verify.token');
 
@@ -16,8 +16,8 @@ router.get('/handle/:handle', getUserByHandle);
 router.post('/register', register);
 router.post('/login', login);
 
-router.put('/:id', updateUser);
-router.put('/follow/:handle', verify, addFollower);
-router.put('/following/:handle', verify, addFollowing);
+router.put('/:id', verify, updateUser);
+router.put('/follow/:handle', verify, addRemoveFollower);
+router.put('/following/:handle', verify, toggleFollow);
 
 module.exports = router;
