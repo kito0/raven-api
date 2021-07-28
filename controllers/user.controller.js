@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const escape = require('escape-html');
 const { registerValidation, loginValidation } = require('../util/validation');
 
 exports.register = async (req, res) => {
@@ -87,14 +88,16 @@ exports.addRemoveFollower = async (req, res) => {
 			if (!user)
 				return res
 					.status(404)
-					.send(`Error: No such user found: ${req.body.handle}`);
+					.send(`Error: No such user found: ${escape(req.body.handle)}`);
 		});
 		User.findOneAndUpdate(
 			{ handle: req.params.handle },
 			{ $pull: { followers: req.body } }
 		)
 			.then((user) => {
-				return res.status(200).send(`Removed follower: ${req.body.handle}`);
+				return res
+					.status(200)
+					.send(`Removed follower: ${escape(req.body.handle)}`);
 			})
 			.catch((err) => res.status(400).send(err));
 	} else {
@@ -118,14 +121,14 @@ exports.toggleFollow = async (req, res) => {
 			if (!user)
 				return res
 					.status(404)
-					.send(`Error: No such user found: ${req.body.handle}`);
+					.send(`Error: No such user found: ${escape(req.body.handle)}`);
 		});
 		User.findOneAndUpdate(
 			{ handle: req.params.handle },
 			{ $pull: { following: req.body } }
 		)
 			.then((user) => {
-				res.status(200).send(`Unfollowed: ${req.body.handle}`);
+				res.status(200).send(`Unfollowed: ${escape(req.body.handle)}`);
 			})
 			.catch((err) => res.status(400).send(err));
 	} else {
