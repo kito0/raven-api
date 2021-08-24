@@ -1,6 +1,6 @@
 # Raven
 
-This repo contains all code for the Raven platform.
+A social media web app inspired by existing social media platforms.
 
 # Languages & Frameworks
 
