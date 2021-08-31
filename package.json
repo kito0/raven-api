@@ -23,7 +23,8 @@
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.3",
-    "xss-clean": "^0.1.1"
+    "xss-clean": "^0.1.1",
+    "node-sass": "^6.0.1"
   },
   "devDependencies": {
     "chai": "^4.3.4",
