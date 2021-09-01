@@ -1,48 +1,20 @@
 # Raven
 
-This repo contains all code for the Raven platform.
+A social media web app inspired by existing social media platforms.
 
-# Languages
+# Languages & Frameworks
 
 - HTML
 - JavaScript
-- Sass
+- SCSS
 - CSS
+- [React](https://reactjs.org)
+- [Express](https://www.npmjs.com/package/express)
 
-# Frontend Dependencies
+# Testing
 
-- [react](https://reactjs.org)
-- [react-redux](https://www.npmjs.com/package/react-redux)
-- [react-scroll](https://www.npmjs.com/package/react-scroll)
-- [react-cool-inview](https://www.npmjs.com/package/react-cool-inview)
-- [web-vitals](https://www.npmjs.com/package/web-vitals)
-- [axios](https://www.npmjs.com/package/axios)
-- [sass](https://sass-lang.com/)
-- [clsx](https://www.npmjs.com/package/clsx)
-- [moment](https://www.npmjs.com/package/moment)
-- [pusher-js](https://www.npmjs.com/package/pusher-js)
-
-# Backend Dependencies
-
-- [express](https://www.npmjs.com/package/express)
-- [mongoose](https://www.npmjs.com/package/mongoose)
-- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-- [joi](https://www.npmjs.com/package/jsonwebtoken)
-- [bcrypt](https://www.npmjs.com/package/bcrypt)
-- [cors](https://www.npmjs.com/package/cors)
-- [dotenv](https://www.npmjs.com/package/dotenv)
-- [express-mongo-sanitize](https://npmjs.com/package/express-mongo-sanitize)
-- [helmet](https://www.npmjs.com/package/helmet)
-- [xss-clean](https://www.npmjs.com/package/xss-clean)
-- [express-rate-limit](https://www.npmjs.com/package/express-rate-limit)
-- [hpp](https://www.npmjs.com/package/hpp)
-
-# Dev Dependencies
-
-- [chai](https://www.npmjs.com/package/chai)
-- [chai-http](https://www.npmjs.com/package/chai)
-- [mocha](https://www.npmjs.com/package/mocha)
-- [nodemon](https://www.npmjs.com/package/nodemon)
+- [Chai](https://www.npmjs.com/package/chai)
+- [Mocha](https://www.npmjs.com/package/mocha)
 
 # Database
 
@@ -77,20 +49,14 @@ npm install
 
 # Usage
 
-To run the server:
+To run the server, run any of the following:
 
 ```sh
 npm start
 ```
-
-OR
-
 ```sh
 node index.js
 ```
-
-OR
-
 ```sh
 nodemon index
 ```
