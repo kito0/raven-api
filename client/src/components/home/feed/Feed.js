@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './css/feed.css';
 import PostBox from '../postbox/PostBox';
 import Post from '../post/Post';
 import PostSkeleton from '../post/PostSkeleton';
