@@ -1,0 +1,120 @@
+@use '../abstract/colors' as *;
+
+.profile {
+	color: $text;
+	display: flex;
+	flex-direction: column;
+
+	.profile__user {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		.profile__left {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 20px 20px 0 20px;
+
+			.profile__avatar {
+				width: 200px;
+				height: 200px;
+				margin: 20px;
+			}
+			.profile__name {
+				font-size: 28px;
+			}
+			.profile__handle {
+				display: flex;
+				align-items: center;
+
+				.MuiIconButton-root {
+					color: $primary !important;
+				}
+			}
+		}
+
+		.profile__follows {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			margin-bottom: 8px;
+
+			.profile__follows__text {
+				display: flex;
+				margin-bottom: 8px;
+
+				.profile__follows__text__number {
+					padding: 0 10px;
+				}
+			}
+
+			.profile__follows__list {
+				display: flex;
+				width: 100%;
+
+				.profile__list_followers {
+					display: flex;
+					flex-direction: column;
+					padding: 0 12px 10px;
+					align-items: flex-end;
+					width: 100%;
+				}
+				.profile__list_following {
+					display: flex;
+					flex-direction: column;
+					padding: 0 12px 10px;
+					width: 100%;
+				}
+			}
+		}
+
+		.profile__right {
+			width: auto;
+
+			form {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+
+				.profile__input {
+					margin-bottom: 10px;
+				}
+
+				.profile__button {
+					background-color: $primary !important;
+					border: none !important;
+					font-weight: 900 !important;
+					text-transform: inherit !important;
+					border-radius: 30px !important;
+					height: 40px !important;
+					margin-top: 1%;
+				}
+
+				.profile__errors {
+					margin: 5px auto;
+					color: $primary;
+				}
+			}
+		}
+	}
+
+	.profile__posts {
+		width: 100%;
+
+		.profile__posts__loading {
+			padding: 20px;
+			.feed__end {
+				text-align: center;
+			}
+		}
+		.MuiLinearProgress-indeterminate {
+			background-color: $background;
+		}
+		.MuiLinearProgress-bar {
+			background-color: $primary;
+		}
+	}
+}

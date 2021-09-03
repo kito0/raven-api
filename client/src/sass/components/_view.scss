@@ -1,0 +1,7 @@
+@use '../abstract/colors' as *;
+
+.view {
+	width: 100%;
+	padding: 20px;
+	color: $text;
+}

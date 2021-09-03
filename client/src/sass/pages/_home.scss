@@ -1,0 +1,28 @@
+@use '../abstract/colors' as *;
+
+.feed {
+	color: $text;
+
+	.feed__header {
+		position: sticky;
+		top: 0;
+		background-color: rgba(0, 0, 0, 0.2);
+		z-index: 1000;
+		border-bottom: 1px solid black;
+		padding: 15px 20px;
+	}
+
+	.feed__loading {
+		padding: 20px;
+		.feed__end {
+			text-align: center;
+		}
+	}
+
+	.MuiLinearProgress-indeterminate {
+		background-color: $background;
+	}
+	.MuiLinearProgress-bar {
+		background-color: $primary;
+	}
+}

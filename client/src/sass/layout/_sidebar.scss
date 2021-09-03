@@ -1,0 +1,68 @@
+@use '../abstract/colors' as *;
+
+.sidebar {
+	img {
+		width: 45vh;
+		margin: 0 0 24vh 24vh;
+		filter: drop-shadow(1vh 1vh 4vh rgba($color: #fff, $alpha: 0.25));
+	}
+
+	.sidebar__drawer {
+		width: calc(var(--vh, 1vh) * 10);
+		height: calc(var(--vh, 1vh) * 10);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.sidebar__options {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: calc(var(--vh, 1vh) * 2);
+	}
+
+	.sidebar__access {
+		max-height: calc(var(--vh, 1vh) * 16);
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+
+		.sidebar__buttons {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			flex: 1;
+		}
+
+		.sidebar__button {
+			width: 100%;
+			border-radius: calc(var(--vh, 1vh) * 1);
+			&:hover {
+				box-shadow: 0 calc(var(--vh, 1vh) * -0.6) calc(var(--vh, 1vh) * 0.8)
+					$primary !important;
+			}
+		}
+
+		.sidebar__button__text {
+			color: $text !important;
+			border: none !important;
+			font-weight: 900 !important;
+			font-size: calc(var(--vh, 1vh) * 1.8) !important;
+			text-transform: inherit !important;
+			height: calc(var(--vh, 1vh) * 7) !important;
+		}
+	}
+
+	.MuiSvgIcon-root {
+		color: grey;
+		width: calc(var(--vh, 1vh) * 3);
+		height: calc(var(--vh, 1vh) * 3);
+		padding-bottom: calc(var(--vh, 1vh) * 0.6);
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.sidebar__drawer {
+	}
+}
