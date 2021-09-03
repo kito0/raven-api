@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './css/profile.css';
 import Post from '../home/post/Post';
 import PostSkeleton from '../home/post/PostSkeleton';
 import { useDispatch, useSelector } from 'react-redux';

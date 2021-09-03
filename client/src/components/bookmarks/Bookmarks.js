@@ -1,9 +1,8 @@
 import React from 'react';
-import './css/bookmarks.css';
 
 export default function Bookmarks() {
 	return (
-		<div className="bookmarks">
+		<div className="bookmarks view">
 			<h2>Coming soon...</h2>
 		</div>
 	);

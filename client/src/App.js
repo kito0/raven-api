@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import './css/app.css';
 
 import Sidebar from './components/sidebar/Sidebar';
 import Widgets from './components/widgets/Widgets';
 import Login from './components/access/Login';
 import Signup from './components/access/Signup';
-
 import Feed from './components/home/feed/Feed';
 import Explore from './components/explore/Explore';
 import Notifications from './components/notifications/Notifications';

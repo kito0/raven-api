@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
-import './css/login.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginUser } from '../../redux/user';
 import {

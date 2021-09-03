@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './css/sidebar.css';
 import { Button, Drawer, IconButton, makeStyles } from '@material-ui/core';
 import {
 	Home,
@@ -85,16 +84,18 @@ export default function Sidebar() {
 				}}
 			>
 				<div className="sidebar__drawer">
-					{window.screen.width <= 768 ? (!open ? (
-						<IconButton onClick={handleDrawerOpen}>
-							<Menu />
-						</IconButton>
+					{window.screen.width <= 768 ? (
+						!open ? (
+							<IconButton onClick={handleDrawerOpen}>
+								<Menu />
+							</IconButton>
+						) : (
+							<IconButton onClick={handleDrawerClose}>
+								<ChevronLeft />
+							</IconButton>
+						)
 					) : (
-						<IconButton onClick={handleDrawerClose}>
-							<ChevronLeft />
-						</IconButton>
-					)) : (
-						<img src={process.env.PUBLIC_URL + '/login.png'}/>
+						<img src={process.env.PUBLIC_URL + '/login.png'} alt="" />
 					)}
 				</div>
 				<div className="sidebar__options">

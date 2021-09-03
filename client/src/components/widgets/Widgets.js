@@ -1,5 +1,4 @@
 import React from 'react';
-import './css/widgets.css';
 import { Search } from '@material-ui/icons';
 
 export default function widgets() {

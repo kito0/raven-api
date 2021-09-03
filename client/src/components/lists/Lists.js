@@ -1,9 +1,8 @@
 import React from 'react';
-import './css/lists.css';
 
 export default function Lists() {
 	return (
-		<div className="lists">
+		<div className="lists view">
 			<h2>Coming soon...</h2>
 		</div>
 	);
