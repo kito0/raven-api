@@ -6,7 +6,6 @@ import {
 	Publish,
 	Repeat,
 } from '@material-ui/icons';
-import './css/postskeleton.css';
 
 export default function PostSkeleton() {
 	return (

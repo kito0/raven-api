@@ -1,4 +1,4 @@
-@import '../../../../css/theme';
+@use '../abstract/colors' as *;
 
 .postskeleton {
 	background-color: $background;

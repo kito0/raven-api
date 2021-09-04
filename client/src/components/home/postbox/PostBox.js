@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './css/postbox.css';
 import { Avatar, Button, TextField } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { NewPost } from '../../../redux/posts';

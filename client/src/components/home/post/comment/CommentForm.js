@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './css/commentform.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddComment } from '../../../../redux/posts';
 import { Avatar, TextField } from '@material-ui/core';

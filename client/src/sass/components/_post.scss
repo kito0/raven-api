@@ -1,13 +1,11 @@
-@import '../../../../css/theme';
+@use '../abstract' as *;
 
 .post {
 	background-color: $background;
+	border-bottom: 2px solid $secondary;
 	display: flex;
 	align-items: flex-start;
-	border-bottom: 2px solid $secondary;
-	height: 100%;
-	padding: calc(var(--vh, 1vh) * 1.5) calc(var(--vh, 1vh) * 1.5) 0
-		calc(var(--vh, 1vh) * 1.5);
+	padding: 1.5vh 1.5vh 0 1.5vh;
 
 	.post__avatar {
 		padding: 10px;
@@ -52,8 +50,8 @@
 						text-overflow: ellipsis;
 						max-width: 12vw;
 						@media only screen and (max-width: 768px) {
-							font-size: 0.6em;
 							@include textOverflow();
+							font-size: 0.6em;
 							max-width: 24vw;
 							margin-top: 1.6px;
 						}
@@ -71,7 +69,7 @@
 					font-size: 0.6em;
 					font-weight: 800 !important;
 					text-transform: inherit !important;
-					border-radius: calc(var(--vh, 1vh) * 4.8) !important;
+					border-radius: 4.8vh;
 					height: 18px !important;
 					margin: 3px 0 0 0;
 					right: 0;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import './css/comment.css';
 import { Avatar, IconButton, Typography } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import moment from 'moment';

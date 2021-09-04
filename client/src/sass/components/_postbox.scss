@@ -1,4 +1,4 @@
-@import '../../../../css/theme';
+@use '../abstract/colors' as *;
 
 .croakbox {
 	background-color: $background;

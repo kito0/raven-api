@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { DeletePost } from '../../../redux/posts';
 import { Follow } from '../../../redux/user';
-import './css/post.css';
 import {
 	Avatar,
 	Button,
