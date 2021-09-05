@@ -1,9 +1,14 @@
 body {
 	font-size: var(--fs-400);
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Montserrat', sans-serif !important;
 	//font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color: var(--clr-neutral-900);
 	letter-spacing: -0.5px;
+}
+.MuiTypography-root,
+.MuiInput-root,
+.MuiButton-root {
+	font-family: 'Montserrat', sans-serif !important;
 }
 
 h1,
