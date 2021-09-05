@@ -1,0 +1,147 @@
+@use '../abstract' as *;
+
+.messages {
+	display: flex;
+	height: 100%;
+	color: $text;
+}
+
+.chat {
+	display: flex;
+	flex-direction: column;
+	flex: 0.65;
+
+	.chat_header {
+		padding: 20px;
+		display: flex;
+		align-items: center;
+		border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
+		height: 7.5vh;
+
+		.chat_header_info {
+			flex: 1;
+			padding-left: 20px;
+
+			h3 {
+				font-size: 1.2em;
+				font-weight: 500;
+				margin-top: 0.2em;
+				margin-bottom: 0;
+			}
+			p {
+				font-size: 0.9em;
+				margin-top: 0;
+			}
+		}
+	}
+
+	.chat_body {
+		padding: 30px;
+		overflow-y: scroll;
+		height: 80%;
+		background-color: rgba(0, 0, 0, 0.3);
+	}
+}
+
+.chat_footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 8vh;
+
+	form {
+		flex: 1;
+		display: flex;
+
+		input {
+			flex: 1;
+			border: none;
+			outline-width: 0;
+			padding: 10px;
+			background: transparent;
+			color: $text;
+		}
+		button {
+			display: none;
+		}
+	}
+
+	.MuiSvgIcon-root {
+		padding: 10px;
+		color: grey;
+	}
+}
+
+.message-sidebar {
+	display: flex;
+	flex-direction: column;
+	flex: 0.35;
+
+	.message-sidebar__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 20px;
+		height: 7.5vh;
+		border-bottom: 1.5px solid $text;
+
+		.MuiSvgIcon-root {
+			margin: 2vh;
+			font-size: 1em;
+			color: $text;
+		}
+	}
+
+	.message-sidebar__search {
+		display: flex;
+		align-items: center;
+		height: 40x;
+		padding: 10px;
+
+		.MuiSvgIcon-root {
+			padding: 10px;
+		}
+
+		input {
+			flex: 1;
+			border: none;
+			outline-width: 0;
+			margin-left: 1em;
+			background: transparent;
+			color: $text;
+		}
+	}
+
+	.message-sidebar__chats {
+		flex: 1;
+		overflow-y: scroll;
+		padding-top: 1vh;
+	}
+}
+
+.message-sidebar-chat {
+	display: flex;
+	padding: 1.8vh;
+	cursor: pointer;
+	transition: box-shadow 300ms ease;
+
+	&:hover {
+		box-shadow: 0 -0.6vh 1vh $primary !important;
+		transition: box-shadow 0ms ease;
+	}
+
+	.message-sidebar-chat__info {
+		margin-left: 1em;
+
+		h2 {
+			font-size: 1em;
+		}
+		p {
+			font-size: 0.8em;
+		}
+	}
+}
+
+.active {
+	box-shadow: 0 -0.6vh 1vh $primary !important;
+}

@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import './css/message.view.css';
-import Message from '../Message/Message';
 import { Avatar, IconButton } from '@material-ui/core';
 import {
 	AttachFile,
@@ -12,6 +10,7 @@ import {
 } from '@material-ui/icons';
 import axios from 'axios';
 import moment from 'moment';
+import Message from './Message';
 
 export default function Chat({ conversation }) {
 	const user = useSelector((state) => state.userSlice.user);

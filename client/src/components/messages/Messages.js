@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import './css/messages.css';
-import MessageSidebar from './MessageSidebar/MessageSidebar';
-import MessageView from './MessageView/MessageView';
 import axios from 'axios';
+import MessageSidebar from './MessageSidebar';
+import MessageView from './MessageView';
 //import Pusher from 'pusher-js';
 
 export default function Messages() {

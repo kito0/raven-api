@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import './css/message.css';
 import { useSelector } from 'react-redux';
 
 export default function Message({ message }) {
