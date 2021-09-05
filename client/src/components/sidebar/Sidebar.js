@@ -48,20 +48,15 @@ const useStyles = makeStyles((theme) => ({
 export default function Sidebar() {
 	const classes = useStyles();
 	const dispatch = useDispatch();
-
-	const [open, setOpen] = useState(window.screen.width >= 768 ? true : false);
-
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
+	const [open, setOpen] = useState(window.screen.width >= 768 ? true : false);
 
 	useEffect(() => {
 		window.screen.width >= 768 ? setOpen(true) : setOpen(false);
 	}, []);
 
-	const handleDrawerOpen = () => {
-		setOpen(true);
-	};
-	const handleDrawerClose = () => {
-		setOpen(false);
+	const toggleDrawer = () => {
+		open ? setOpen(false) : setOpen(true);
 	};
 
 	const handleLogout = () => {
@@ -86,11 +81,11 @@ export default function Sidebar() {
 				<div className="sidebar__drawer">
 					{window.screen.width <= 768 ? (
 						!open ? (
-							<IconButton onClick={handleDrawerOpen}>
+							<IconButton onClick={toggleDrawer}>
 								<Menu />
 							</IconButton>
 						) : (
-							<IconButton onClick={handleDrawerClose}>
+							<IconButton onClick={toggleDrawer}>
 								<ChevronLeft />
 							</IconButton>
 						)
