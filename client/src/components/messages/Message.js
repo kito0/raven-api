@@ -7,13 +7,13 @@ export default function Message({ message }) {
 
 	return (
 		<div
-			className={`chat_message ${
-				message.sender === user.handle && 'chat_receiver'
+			className={`message ${
+				message.sender === user.handle && 'message__receiver'
 			}`}
 		>
-			<span className="chat_name">{message.sender}</span>
+			<span className="message__name">{message.sender}</span>
 			{message.text}
-			<span className="chat_timestamp">
+			<span className="message__timestamp">
 				{moment(message.timestamp).fromNow()}
 			</span>
 		</div>

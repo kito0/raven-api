@@ -4,6 +4,79 @@
 	display: flex;
 	height: 100%;
 	color: $text;
+
+	.MuiSvgIcon-root {
+		color: $text;
+	}
+}
+
+.message-sidebar {
+	display: flex;
+	flex-direction: column;
+	flex: 0.35;
+
+	.message-sidebar__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1.2em;
+		height: 7.5vh;
+		border-bottom: 1.5px solid rgba($color: $text, $alpha: 0.5);
+
+		.MuiSvgIcon-root {
+			margin: 2vh;
+			color: $text;
+		}
+	}
+
+	.message-sidebar__search {
+		display: flex;
+		align-items: center;
+		height: 40x;
+		padding: 10px;
+
+		input {
+			flex: 1;
+			border: none;
+			outline-width: 0;
+			margin-left: 1em;
+			background: transparent;
+			color: $text;
+		}
+	}
+
+	.message-sidebar__chats {
+		flex: 1;
+		overflow-y: scroll;
+		padding-top: 1vh;
+
+		.message-sidebar-chat {
+			display: flex;
+			padding: 1.8vh;
+			cursor: pointer;
+			transition: box-shadow 300ms ease;
+
+			&:hover {
+				box-shadow: 0 -0.6vh 1vh $primary !important;
+				transition: box-shadow 0ms ease;
+			}
+
+			.message-sidebar-chat__info {
+				margin-left: 1em;
+
+				h2 {
+					font-size: 1em;
+				}
+				p {
+					font-size: 0.8em;
+				}
+			}
+		}
+
+		.active {
+			box-shadow: 0 -0.6vh 1vh $primary !important;
+		}
+	}
 }
 
 .chat {
@@ -11,14 +84,14 @@
 	flex-direction: column;
 	flex: 0.65;
 
-	.chat_header {
+	.chat-header {
 		padding: 20px;
 		display: flex;
 		align-items: center;
-		border-bottom: 1.5px solid rgba(0, 0, 0, 0.2);
+		border-bottom: 1.5px solid rgba($color: $text, $alpha: 0.2);
 		height: 7.5vh;
 
-		.chat_header_info {
+		.chat-header__info {
 			flex: 1;
 			padding-left: 20px;
 
@@ -35,113 +108,68 @@
 		}
 	}
 
-	.chat_body {
-		padding: 30px;
+	.chat-body {
+		padding: 1.5em 1em;
 		overflow-y: scroll;
-		height: 80%;
-		background-color: rgba(0, 0, 0, 0.3);
+		height: 100%;
 	}
-}
 
-.chat_footer {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 8vh;
-
-	form {
-		flex: 1;
+	.chat-footer {
 		display: flex;
-
-		input {
-			flex: 1;
-			border: none;
-			outline-width: 0;
-			padding: 10px;
-			background: transparent;
-			color: $text;
-		}
-		button {
-			display: none;
-		}
-	}
-
-	.MuiSvgIcon-root {
-		padding: 10px;
-		color: grey;
-	}
-}
-
-.message-sidebar {
-	display: flex;
-	flex-direction: column;
-	flex: 0.35;
-
-	.message-sidebar__header {
-		display: flex;
-		align-items: center;
 		justify-content: space-between;
-		padding: 20px;
-		height: 7.5vh;
-		border-bottom: 1.5px solid $text;
-
-		.MuiSvgIcon-root {
-			margin: 2vh;
-			font-size: 1em;
-			color: $text;
-		}
-	}
-
-	.message-sidebar__search {
-		display: flex;
 		align-items: center;
-		height: 40x;
-		padding: 10px;
+		height: 8vh;
 
-		.MuiSvgIcon-root {
-			padding: 10px;
-		}
-
-		input {
+		form {
 			flex: 1;
-			border: none;
-			outline-width: 0;
-			margin-left: 1em;
-			background: transparent;
-			color: $text;
-		}
-	}
+			display: flex;
 
-	.message-sidebar__chats {
-		flex: 1;
-		overflow-y: scroll;
-		padding-top: 1vh;
-	}
-}
-
-.message-sidebar-chat {
-	display: flex;
-	padding: 1.8vh;
-	cursor: pointer;
-	transition: box-shadow 300ms ease;
-
-	&:hover {
-		box-shadow: 0 -0.6vh 1vh $primary !important;
-		transition: box-shadow 0ms ease;
-	}
-
-	.message-sidebar-chat__info {
-		margin-left: 1em;
-
-		h2 {
-			font-size: 1em;
-		}
-		p {
-			font-size: 0.8em;
+			input {
+				flex: 1;
+				border: none;
+				outline-width: 0;
+				padding: 10px;
+				background: transparent;
+				color: $text;
+			}
+			button {
+				display: none;
+			}
 		}
 	}
 }
 
-.active {
-	box-shadow: 0 -0.6vh 1vh $primary !important;
+.message {
+	position: relative;
+	font-size: 1em;
+	padding: 10px;
+	width: max-content;
+	border-radius: 10px;
+	margin-bottom: 1.7em;
+	background-color: rgba($color: $text, $alpha: 0.2);
+
+	.message__name {
+		position: absolute;
+		top: -15px;
+		font-weight: 800;
+		font-size: 0.6em;
+	}
+	.message__timestamp {
+		display: flex;
+		font-size: 0.5em;
+	}
+}
+.message__receiver {
+	margin-left: auto;
+	background-color: rgba($color: $primary, $alpha: 0.5);
+	display: block;
+	text-align: right;
+
+	.message__name {
+		right: 10px;
+	}
+	.message__timestamp {
+		display: block;
+		text-align: right;
+	}
 }

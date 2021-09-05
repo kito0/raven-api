@@ -64,9 +64,9 @@ export default function Chat({ conversation }) {
 
 	return (
 		<div className="chat">
-			<div className="chat_header">
+			<div className="chat-header">
 				<Avatar src={user2.avatar} />
-				<div className="chat_header_info">
+				<div className="chat-header__info">
 					<h3>
 						{conversation
 							? conversation.handle1 === user.handle
@@ -81,7 +81,7 @@ export default function Chat({ conversation }) {
 					</p>
 				</div>
 
-				<div className="chat_header_r">
+				<div className="chat-header__r">
 					<IconButton>
 						<SearchOutlined />
 					</IconButton>
@@ -93,7 +93,7 @@ export default function Chat({ conversation }) {
 					</IconButton>
 				</div>
 			</div>
-			<div className="chat_body">
+			<div className="chat-body">
 				{conversation ? (
 					conversation.messages
 						.slice()
@@ -106,7 +106,7 @@ export default function Chat({ conversation }) {
 					style={{ float: 'left', clear: 'both', height: '20px' }}
 				/>
 			</div>
-			<div className="chat_footer">
+			<div className="chat-footer">
 				<InsertEmoticon />
 				<form onSubmit={onSubmit}>
 					<input
