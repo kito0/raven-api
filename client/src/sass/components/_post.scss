@@ -6,6 +6,7 @@
 	display: flex;
 	align-items: flex-start;
 	padding: 1.5vh 1.5vh 0 1.5vh;
+	overflow: hidden;
 
 	.post__avatar {
 		padding: 10px;
@@ -35,9 +36,9 @@
 						font-weight: bold;
 						font-size: 1em;
 
-						@media only screen and (max-width: 768px) {
-							font-size: 0.8em;
+						@include respond-to(tablet) {
 							@include textOverflow();
+							font-size: 0.8em;
 							max-width: 20vw;
 						}
 					}
@@ -49,7 +50,7 @@
 						overflow: hidden;
 						text-overflow: ellipsis;
 						max-width: 12vw;
-						@media only screen and (max-width: 768px) {
+						@include respond-to(tablet) {
 							@include textOverflow();
 							font-size: 0.6em;
 							max-width: 24vw;

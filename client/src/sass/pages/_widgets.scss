@@ -1,8 +1,7 @@
-@import '../abstract/colors';
+@use '../abstract' as *;
 
 .widgets {
 	flex: 0.3;
-	min-width: 25vw;
 
 	.widgets__input {
 		display: flex;
@@ -27,7 +26,7 @@
 	}
 }
 
-@media only screen and (max-width: 768px) {
+@include respond-to(tablet) {
 	.widgets {
 		display: none;
 	}
