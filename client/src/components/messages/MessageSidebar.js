@@ -63,8 +63,8 @@ export default function MessageSidebar({ messages, current, setCurrent }) {
 							(a, b) =>
 								b.messages.slice(-1)[0].timestamp &&
 								a.messages.slice(-1)[0].timestamp &&
-								moment(b.messages.slice(-1)[0].timestamp).get('millisecond') -
-									moment(a.messages.slice(-1)[0].timestamp).get('millisecond')
+								moment(b.messages.slice(-1)[0].timestamp).milliseconds() -
+									moment(a.messages.slice(-1)[0].timestamp).milliseconds()
 						)
 						.map((conversation) => (
 							<MessageSidebarChat
