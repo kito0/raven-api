@@ -42,7 +42,9 @@ function App() {
 					<Route exact path="/" component={Feed} />
 					<Route exact path="/explore" component={Explore} />
 					<Route exact path="/notifications" component={Notifications} />
-					<Route exact path="/messages" component={Messages} />
+					<Route exact path="/messages">
+						{!authenticated ? <Redirect to="/" /> : <Messages />}
+					</Route>
 					<Route exact path="/bookmarks" component={Bookmarks} />
 					<Route exact path="/lists" component={Lists} />
 					<Route exact path="/profile">
