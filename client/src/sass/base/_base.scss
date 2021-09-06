@@ -1,18 +1,27 @@
 @use '../abstract/colors' as *;
 
-.app {
+html,
+body,
+#root {
 	background-color: $secondary;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	overflow-x: hidden;
-	overflow-y: scroll;
 	display: flex;
+	justify-content: center;
+	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+	width: 100%;
+	height: 100vh;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
 
 	.MuiInput-root {
 		color: $text;

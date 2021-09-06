@@ -1,23 +1,19 @@
-@use '../abstract/colors' as *;
+@use '../abstract' as *;
 
 .login {
 	color: $text;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: calc(var(--vh, 1vh) * 10) calc(var(--vh, 1vh) * 5) 0
-		calc(var(--vh, 1vh) * 5);
+	padding: 10vh 5vh 0 5vh;
 	height: 100%;
-	box-shadow: inset calc(var(--vh, 1vh) * 1.2) 0 calc(var(--vh, 1vh) * 1.6)
-		calc(var(--vh, 1vh) * -1.2) rgba(255, 255, 255, 0.7);
 
 	.login__logo {
 		filter: invert(80%);
 	}
 
 	.login__title {
-		margin: calc(var(--vh, 1vh) * 2) 0;
-		font-family: 'Courier New', Courier, monospace;
+		margin: 2vh 0;
 	}
 
 	.login__form {
@@ -31,29 +27,29 @@
 			flex: 1;
 			background: transparent;
 			max-width: 1080px;
-			width: calc(var(--vh, 1vh) * 80);
-			margin: calc(var(--vh, 1vh) * 1.5) 0;
+			width: 80vh;
+			margin: 1.5vh 0;
 		}
 
 		.login__errors {
 			color: $primary;
-			font-size: calc(var(--vh, 1vh) * 1.5);
+			font-size: 1.5vh;
 		}
 
 		.login__button {
-			margin: calc(var(--vh, 1vh) * 1.5) 0;
+			margin: 1.5vh 0;
 			width: 100%;
 			background-color: $primary !important;
 			border: none !important;
 			font-weight: 900 !important;
 			text-transform: inherit !important;
-			border-radius: calc(var(--vh, 1vh) * 4.8) !important;
+			border-radius: 4.8vh !important;
 			height: 50px !important;
 		}
 	}
 }
 
-@media only screen and (max-width: 768px) {
+@include respond-to(tablet) {
 	.login__input {
 		width: 100% !important;
 	}

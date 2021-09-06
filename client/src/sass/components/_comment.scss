@@ -19,19 +19,19 @@
 
 		.comment__header {
 			display: flex;
-			height: 20px;
+			justify-content: space-between;
+			height: 1em;
 
 			.comment__user {
 				display: flex;
-				height: 18px;
+				height: 10em;
 
 				.comment__name {
-					font-weight: bold;
 					font-size: 1em;
 
-					@media only screen and (max-width: 768px) {
-						font-size: 0.7em;
+					@include respond-to(tablet) {
 						@include textOverflow();
+						font-size: 0.7em;
 						max-width: 14vw;
 					}
 				}
@@ -43,11 +43,10 @@
 					overflow: hidden;
 					text-overflow: ellipsis;
 					max-width: 12vw;
-					@media only screen and (max-width: 768px) {
-						font-size: 0.5em;
+					@include respond-to(tablet) {
 						@include textOverflow();
+						font-size: 0.5em;
 						max-width: 24vw;
-						margin-top: 2.4px;
 					}
 				}
 			}

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { React, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Sidebar from './components/sidebar/Sidebar';
@@ -26,38 +26,32 @@ function App() {
 			GetUser(dispatch, localStorage.getItem('id'));
 	}, [dispatch]);
 
-	let vh = window.innerHeight * 0.01;
-	document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-	window.addEventListener('resize', () => {
-		let vh = window.innerHeight * 0.01;
-		document.documentElement.style.setProperty('--vh', `${vh}px`);
-	});
-
 	return (
 		<div className="app">
 			<Sidebar />
 			<Switch>
-				<div className="view">
-					<Route exact path="/" component={Feed} />
-					<Route exact path="/explore" component={Explore} />
-					<Route exact path="/notifications" component={Notifications} />
-					<Route exact path="/messages">
-						{!authenticated ? <Redirect to="/" /> : <Messages />}
-					</Route>
-					<Route exact path="/bookmarks" component={Bookmarks} />
-					<Route exact path="/lists" component={Lists} />
-					<Route exact path="/profile">
-						{!authenticated ? <Redirect to="/" /> : <Profile />}
-					</Route>
-					<Route exact path="/more" component={More} />
-					<Route exact path="/login">
-						{authenticated ? <Redirect to="/" /> : <Login />}
-					</Route>
-					<Route exact path="/signup">
-						{authenticated ? <Redirect to="/" /> : <Signup />}
-					</Route>
-				</div>
+				<>
+					<div className="view">
+						<Route exact path="/" component={Feed} />
+						<Route exact path="/explore" component={Explore} />
+						<Route exact path="/notifications" component={Notifications} />
+						<Route exact path="/messages">
+							{!authenticated ? <Redirect to="/" /> : <Messages />}
+						</Route>
+						<Route exact path="/bookmarks" component={Bookmarks} />
+						<Route exact path="/lists" component={Lists} />
+						<Route exact path="/profile">
+							{!authenticated ? <Redirect to="/" /> : <Profile />}
+						</Route>
+						<Route exact path="/more" component={More} />
+						<Route exact path="/login">
+							{authenticated ? <Redirect to="/" /> : <Login />}
+						</Route>
+						<Route exact path="/signup">
+							{authenticated ? <Redirect to="/" /> : <Signup />}
+						</Route>
+					</div>
+				</>
 			</Switch>
 			<Widgets />
 		</div>
