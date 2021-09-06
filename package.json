@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
+		"dev": "nodemon index",
 		"test": "mocha --timeout 30000 --exit"
 	},
 	"keywords": [],
@@ -23,6 +24,7 @@
 		"joi": "^17.4.0",
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^5.13.3",
+		"pusher": "^5.0.0",
 		"xss-clean": "^0.1.1"
 	},
 	"devDependencies": {
