@@ -37,8 +37,7 @@ mongoose
 const db = mongoose.connection;
 
 db.once('open', () => {
-	const msgCollection = db.collection('Conversation');
-	console.log(msgCollection);
+	const msgCollection = db.collection('conversations');
 	const changeStream = msgCollection.watch();
 	changeStream.on('change', (change) => {
 		console.log('change');
@@ -56,8 +55,13 @@ db.once('open', () => {
 	});
 });
 
+var corsOptions = {
+	origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://ravenx.vercel.app',
+	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(sanitize());
 app.use(helmet());
 app.use(xss());
