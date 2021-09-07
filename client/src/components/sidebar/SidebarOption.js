@@ -8,7 +8,7 @@ export default function SidebarOption({ text, Icon, refTo }) {
 			to={refTo}
 			href={refTo}
 			className="sidebarOption"
-			activeClassName="sidebarOption--active"
+			activeClassName="sidebarOption__active"
 		>
 			<Icon />
 			<h2>{text}</h2>

@@ -19,7 +19,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 1.2em;
 		height: 7.5vh;
 		border-bottom: 1.5px solid rgba($color: $text, $alpha: 0.5);
 
@@ -90,6 +89,10 @@
 		align-items: center;
 		border-bottom: 1.5px solid rgba($color: $text, $alpha: 0.2);
 		height: 7.5vh;
+
+		.chat-header__back-btn {
+			margin: 0 10px 0 -15px;
+		}
 
 		.chat-header__info {
 			flex: 1;

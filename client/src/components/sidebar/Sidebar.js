@@ -64,7 +64,7 @@ export default function Sidebar() {
 	};
 
 	return (
-		<div className="sidebar">
+		<div className={`sidebar ${!open && 'closed'}`}>
 			<Drawer
 				variant="permanent"
 				className={clsx(classes.drawer, {

@@ -1,5 +1,5 @@
 import { React, useEffect } from 'react';
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetUser } from './redux/user';
 
@@ -20,7 +20,6 @@ import More from './components/more/More';
 function App() {
 	const dispatch = useDispatch();
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
-	const location = useLocation();
 
 	useEffect(() => {
 		if (localStorage.getItem('id'))

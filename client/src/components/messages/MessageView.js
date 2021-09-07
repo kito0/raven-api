@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Avatar, IconButton } from '@material-ui/core';
 import {
-	AttachFile,
 	InsertEmoticon,
 	MoreVert,
 	SearchOutlined,
 	MicOutlined,
+	ChevronLeft
 } from '@material-ui/icons';
 import axios from 'axios';
 import moment from 'moment';
@@ -65,6 +65,9 @@ export default function Chat({ conversation }) {
 	return (
 		<div className="chat">
 			<div className="chat-header">
+				{window.screen.width <= 768 && <IconButton className='chat-header__back-btn'>
+					<ChevronLeft />
+				</IconButton>}
 				<Avatar src={user2.avatar} />
 				<div className="chat-header__info">
 					<h3>
@@ -84,9 +87,6 @@ export default function Chat({ conversation }) {
 				<div className="chat-header__r">
 					<IconButton>
 						<SearchOutlined />
-					</IconButton>
-					<IconButton>
-						<AttachFile />
 					</IconButton>
 					<IconButton>
 						<MoreVert />
