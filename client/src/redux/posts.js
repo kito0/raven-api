@@ -6,9 +6,9 @@ import {
 	loadingPosts,
 } from './postsSlice.js';
 import axios from 'axios';
+import env from "react-dotenv";
 
-const api = 'https://raven-x.herokuapp.com/api/posts';
-//const api = 'http://localhost:5000/api/posts';
+const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api/posts' : 'https://raven-x.herokuapp.com/api/posts';
 
 export const GetPosts = async (dispatch) => {
 	dispatch(loadingPosts());

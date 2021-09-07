@@ -11,9 +11,9 @@ import {
 	clearUpdateErrors,
 } from './userSlice';
 import axios from 'axios';
+import env from "react-dotenv";
 
-const api = 'https://raven-x.herokuapp.com/api/user';
-//const api = 'http://localhost:5000/api/user';
+const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api/user' : 'https://raven-x.herokuapp.com/api/user';
 
 export const LoginUser = async (dispatch, user) => {
 	dispatch(loadingUser());
