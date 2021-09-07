@@ -1,12 +1,15 @@
 @use '../abstract' as *;
 
 .sidebar {
-	width: 16vw;
+	width: 40vh;
+	display: block;
 
 	img {
-		width: 100%;
-		margin: 0 0 24vh 24vh;
-		filter: drop-shadow(1vh 1vh 4vh rgba($color: #fff, $alpha: 0.25));
+		width: 40vh;
+		filter: drop-shadow(1vh 1vh 4vh rgba($color: #fff, $alpha: 0.1));
+		position: absolute;
+		top: -25%;
+		left: 0%;
 	}
 
 	.sidebar__drawer {
@@ -70,10 +73,5 @@
 			text-transform: inherit !important;
 			height: 7vh !important;
 		}
-	}
-}
-
-@include respond-to(tablet) {
-	.sidebar__drawer {
 	}
 }

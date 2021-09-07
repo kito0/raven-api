@@ -1,7 +1,8 @@
 @use '../abstract' as *;
 
 .widgets {
-	width: 16vw;
+	width: 40vh;
+	flex: 0.3;
 
 	.widgets__input {
 		display: flex;
@@ -14,6 +15,7 @@
 
 		.widgets__search {
 			color: $text;
+			flex: 1;
 		}
 
 		input {

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import clsx from 'clsx';
 import { Button, Drawer, IconButton, makeStyles } from '@material-ui/core';
 import {
 	Home,
@@ -14,8 +16,6 @@ import {
 	ExitToApp,
 } from '@material-ui/icons';
 import SidebarOption from './SidebarOption';
-import { useDispatch, useSelector } from 'react-redux';
-import clsx from 'clsx';
 import { LogoutUser } from '../../redux/user';
 
 const drawerWidth = '40vh';

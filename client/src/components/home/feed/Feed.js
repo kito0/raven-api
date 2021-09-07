@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import PostBox from '../postbox/PostBox';
-import Post from '../post/Post';
-import PostSkeleton from '../post/PostSkeleton';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetPosts } from '../../../redux/posts';
 import useInView from 'react-cool-inview';
+import { GetPosts } from '../../../redux/posts';
+
+import Post from '../post/Post';
+import PostBox from '../postbox/PostBox';
+import PostSkeleton from '../post/PostSkeleton';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 export default function Feed() {

@@ -1,8 +1,7 @@
 @use '../abstract/colors' as *;
 
 html,
-body,
-#root {
+body {
 	background-color: $secondary;
 	display: flex;
 	justify-content: center;
@@ -16,12 +15,15 @@ body,
 	-moz-osx-font-smoothing: grayscale;
 }
 
+// #root {
+// 	width: 1400px;
+// 	max-width: 100%;
+// }
+
 .app {
-	width: 100%;
+	width: 100vw;
 	height: 100vh;
-	margin: 0 auto;
 	display: flex;
-	justify-content: center;
 
 	.MuiInput-root {
 		color: $text;
@@ -37,10 +39,12 @@ body,
 	}
 
 	.view {
-		flex: 1;
 		width: 100%;
+		max-width: 1024px;
 		height: 100%;
 		padding: 0 1vw 0 0;
+	margin: 0 auto;
+
 	}
 }
 
