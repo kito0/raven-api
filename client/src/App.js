@@ -1,5 +1,7 @@
 import { React, useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { GetUser } from './redux/user';
 
 import Sidebar from './components/sidebar/Sidebar';
 import Widgets from './components/widgets/Widgets';
@@ -14,12 +16,11 @@ import Lists from './components/lists/Lists';
 import Profile from './components/profile/Profile';
 import More from './components/more/More';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { GetUser } from './redux/user';
 
 function App() {
 	const dispatch = useDispatch();
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
+	const location = useLocation();
 
 	useEffect(() => {
 		if (localStorage.getItem('id'))
@@ -53,7 +54,7 @@ function App() {
 					</div>
 				</>
 			</Switch>
-			<Widgets />
+			{location.pathname !== '/messages' && <Widgets />}
 		</div>
 	);
 }
