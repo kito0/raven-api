@@ -54,7 +54,7 @@ function App() {
 					</div>
 				</>
 			</Switch>
-			{location.pathname !== '/messages' && <Widgets />}
+			<Widgets />
 		</div>
 	);
 }
