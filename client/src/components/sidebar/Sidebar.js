@@ -64,7 +64,7 @@ export default function Sidebar() {
 	};
 
 	useEffect(() => {
-		setOpen(false);
+		!web && setOpen(false);
 	}, [location])
 
 	return (
