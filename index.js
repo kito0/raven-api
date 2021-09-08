@@ -32,7 +32,7 @@ mongoose
 	.then(() =>
 		app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
 	)
-	.catch((error) => console.log(error.message));
+	.catch((err) => console.log(err.message));
 
 const db = mongoose.connection;
 
@@ -59,10 +59,6 @@ var corsOptions = {
 	origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://ravenx.vercel.app',
 	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
-
-app.get('/env', function(req, res) {
-	res.send(process.env.NODE_ENV);
-});
 
 app.use(express.json());
 app.use(cors(corsOptions));
