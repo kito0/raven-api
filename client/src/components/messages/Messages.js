@@ -15,41 +15,20 @@ export default function Messages() {
 
 	//Pusher.logToConsole = true;
 
-	useEffect(
-		() => {
-			axios.get(`${api}/conversations/${user.handle}`).then((res) => {
-				setMessages(res.data);
-			});
-		},
-		// eslint-disable-next-line
-		[]
-		//[user.handle, messages]
-	);
-
-	// const pusher = new Pusher('9a411b2a0ee16e4825af', { cluster: 'us3' });
-	// const channel = pusher.subscribe('rvn-messenger');
-	// console.log(channel);
-	// channel.bind('my-event', (newMessage) => {
-	// 	console.log(`NEW MESSAGE: ${newMessage}`);
-	// 	setMessages([...messages, newMessage]);
-	// });
-
 	useEffect(() => {
-		const pusher = new Pusher('9a411b2a0ee16e4825af', {
-			cluster: 'us3',
+		axios.get(`${api}/conversations/${user.handle}`).then((res) => {
+			setMessages(res.data);
 		});
 
-		const channel = pusher.subscribe('messages');
-		channel.bind('my-event', (newMessage) => {
-			alert(JSON.stringify(newMessage));
+		const pusher = new Pusher('9a411b2a0ee16e4825af', { cluster: 'us3' });
+		const channel = pusher.subscribe('rvn-messenger');
+		console.log(channel);
+		channel.bind('updated', (newMessage) => {
+			console.log(`NEW MESSAGE: ${newMessage}`);
 			setMessages([...messages, newMessage]);
 		});
-
-		return () => {
-			channel.unbind_all();
-			channel.unsubscribe();
-		};
-	}, [messages]);
+	// eslint-disable-next-line
+	}, []);
 
 	return (
 		<div className="messages">

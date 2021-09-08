@@ -13,8 +13,6 @@ const userRoute = require('./routes/user.route');
 const postRoute = require('./routes/post.route');
 const conversationRoute = require('./routes/conversation.route');
 
-const pusher = new Pusher(process.env.PUSHER_CONFIG);
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 const limiter = rateLimit({
@@ -23,34 +21,42 @@ const limiter = rateLimit({
 });
 
 mongoose
-	.connect(process.env.CONNECTION_URL, {
-		useNewUrlParser: true,
-		useFindAndModify: false,
-		useCreateIndex: true,
-		useUnifiedTopology: true,
-	})
-	.then(() =>
-		app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
-	)
-	.catch((err) => console.log(err.message));
+.connect(process.env.CONNECTION_URL, {
+	useNewUrlParser: true,
+	useFindAndModify: false,
+	useCreateIndex: true,
+	useUnifiedTopology: true,
+})
+.then(() =>
+app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
+)
+.catch((err) => console.log(err.message));
 
 const db = mongoose.connection;
+const pusher = new Pusher({
+	app_id: process.env.PUSHER_ID,
+	key: process.env.PUSHER_KEY,
+	secret: process.env.PUSHER_SECRET,
+	cluster: process.env.PUSHER_CLUSTER
+});
 
 db.once('open', () => {
 	const msgCollection = db.collection('conversations');
 	const changeStream = msgCollection.watch();
-	changeStream.on('change', (change) => {
-		console.log('change');
+	
+	changeStream.on('change', async (change) => {
 		if (change.operationType === 'update') {
-			const messageDetails = change.fullDocument;
-
-			pusher.trigger('rvn-messenger', 'my-event', {
-				title: messageDetails.title,
-				handle1: messageDetails.handle1,
-				handle2: messageDetails.handle2,
-				messages: messageDetails.messages,
-				_id: messageDetails._id,
-			});
+			const k = change.updateDescription;
+			var v = '';
+			for (x in k)
+				v = k[x];
+			
+			pusher
+				.trigger('rvn-messenger', 'updated', {
+					id: k._id,
+					k: k
+				})
+				.catch((err) => console.log(err));
 		}
 	});
 });
