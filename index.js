@@ -60,6 +60,8 @@ var corsOptions = {
 	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
+console.log(process.env.NODE_ENV);
+
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(sanitize());
