@@ -6,18 +6,18 @@ import env from "react-dotenv";
 import MessageSidebar from './MessageSidebar';
 import MessageView from './MessageView';
 
+const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api' : 'https://raven-x.herokuapp.com/api';
+
 export default function Messages() {
 	const user = useSelector((state) => state.userSlice.user);
 	const [messages, setMessages] = useState([]);
 	const [current, setCurrent] = useState(0);
 
-	const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000' : 'https://raven-x.herokuapp.com';
-
 	//Pusher.logToConsole = true;
 
 	useEffect(
 		() => {
-			axios.get(`${api}/api/conversations/${user.handle}`).then((res) => {
+			axios.get(`${api}/conversations/${user.handle}`).then((res) => {
 				setMessages(res.data);
 			});
 		},

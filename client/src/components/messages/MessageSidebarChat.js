@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Avatar } from '@material-ui/core';
 import axios from 'axios';
+import env from "react-dotenv";
+import { Avatar } from '@material-ui/core';
+
+const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api' : 'https://raven-x.herokuapp.com/api';
 
 export default function MessageSidebarChat({
 	messages,
@@ -11,8 +14,6 @@ export default function MessageSidebarChat({
 }) {
 	const user = useSelector((state) => state.userSlice.user);
 	const [user2, setUser2] = useState({});
-	//const api = "http://localhost:5000/api";
-	const api = 'https://raven-x.herokuapp.com/api';
 
 	useEffect(() => {
 		axios

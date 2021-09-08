@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+import moment from 'moment';
+import env from "react-dotenv";
 import { Avatar, IconButton } from '@material-ui/core';
 import {
 	InsertEmoticon,
@@ -8,18 +11,15 @@ import {
 	MicOutlined,
 	ChevronLeft
 } from '@material-ui/icons';
-import axios from 'axios';
-import moment from 'moment';
 import Message from './Message';
+
+const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api' : 'https://raven-x.herokuapp.com/api';
 
 export default function Chat({ conversation }) {
 	const user = useSelector((state) => state.userSlice.user);
 	const [text, setText] = useState('');
 	const [user2, setUser2] = useState({});
 	const bottomRef = useRef(null);
-
-	//const api = 'http://localhost:5000/api';
-	const api = 'https://raven-x.herokuapp.com/api';
 
 	useEffect(() => {
 		conversation &&

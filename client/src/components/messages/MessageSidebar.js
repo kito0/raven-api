@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import MessageSidebarChat from './MessageSidebarChat';
-import { SearchOutlined } from '@material-ui/icons';
+import env from "react-dotenv";
 import moment from 'moment';
 import axios from 'axios';
+import { SearchOutlined } from '@material-ui/icons';
+import MessageSidebarChat from './MessageSidebarChat';
+
+const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api' : 'https://raven-x.herokuapp.com/api';
 
 export default function MessageSidebar({ messages, current, setCurrent }) {
 	const user = useSelector((state) => state.userSlice.user);
 	const [search, setSearch] = useState('');
 	const [filteredMessages, setFilteredMessages] = useState([]);
-
-	//const api = 'http://localhost:5000/api';
-	const api = 'https://raven-x.herokuapp.com/api';
 
 	useEffect(() => {
 		setFilteredMessages(

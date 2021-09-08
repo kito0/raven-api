@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { Button, Drawer, IconButton, makeStyles } from '@material-ui/core';
@@ -18,7 +19,8 @@ import {
 import SidebarOption from './SidebarOption';
 import { LogoutUser } from '../../redux/user';
 
-const drawerWidth = '40vh';
+const web = window.screen.width >= 768;
+const drawerWidth = web ? '40vh' : '100vw';
 const useStyles = makeStyles((theme) => ({
 	drawer: {
 		width: drawerWidth,
@@ -49,19 +51,21 @@ export default function Sidebar() {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
-	const [open, setOpen] = useState(window.screen.width >= 768 ? true : false);
+	const [open, setOpen] = useState(web ? true : false);
+
+	const location = useLocation();
 
 	useEffect(() => {
-		window.screen.width >= 768 ? setOpen(true) : setOpen(false);
+		web ? setOpen(true) : setOpen(false);
 	}, []);
-
-	const toggleDrawer = () => {
-		open ? setOpen(false) : setOpen(true);
-	};
 
 	const handleLogout = () => {
 		if (authenticated) LogoutUser(dispatch);
 	};
+
+	useEffect(() => {
+		setOpen(false);
+	}, [location])
 
 	return (
 		<div className={`sidebar ${!open && 'closed'}`}>
@@ -79,13 +83,13 @@ export default function Sidebar() {
 				}}
 			>
 				<div className="sidebar__drawer">
-					{window.screen.width <= 768 ? (
+					{!web ? (
 						!open ? (
-							<IconButton onClick={toggleDrawer}>
+							<IconButton onClick={() => setOpen(!open)}>
 								<Menu />
 							</IconButton>
 						) : (
-							<IconButton onClick={toggleDrawer}>
+							<IconButton onClick={() => setOpen(!open)}>
 								<ChevronLeft />
 							</IconButton>
 						)
