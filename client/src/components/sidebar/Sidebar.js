@@ -19,8 +19,8 @@ import {
 import SidebarOption from './SidebarOption';
 import { LogoutUser } from '../../redux/user';
 
-const web = window.screen.width >= 768;
-const drawerWidth = web ? '40vh' : '100vw';
+const mobile = window.screen.width <= 768;
+const drawerWidth = !mobile ? '40vh' : '100vw';
 const useStyles = makeStyles((theme) => ({
 	drawer: {
 		width: drawerWidth,
@@ -51,12 +51,12 @@ export default function Sidebar() {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const authenticated = useSelector((state) => state.userSlice.authenticated);
-	const [open, setOpen] = useState(web ? true : false);
+	const [open, setOpen] = useState(!mobile ? true : false);
 
 	const location = useLocation();
 
 	useEffect(() => {
-		web ? setOpen(true) : setOpen(false);
+		!mobile ? setOpen(true) : setOpen(false);
 	}, []);
 
 	const handleLogout = () => {
@@ -64,11 +64,11 @@ export default function Sidebar() {
 	};
 
 	useEffect(() => {
-		!web && setOpen(false);
+		mobile && setOpen(false);
 	}, [location])
 
 	return (
-		<div className={`sidebar ${!open && 'closed'}`}>
+		<div className={`sidebar ${!open ? 'closed' : ''}`}>
 			<Drawer
 				variant="permanent"
 				className={clsx(classes.drawer, {
@@ -83,7 +83,7 @@ export default function Sidebar() {
 				}}
 			>
 				<div className="sidebar__drawer">
-					{!web ? (
+					{mobile ? (
 						!open ? (
 							<IconButton onClick={() => setOpen(!open)}>
 								<Menu />

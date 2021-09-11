@@ -8,7 +8,7 @@ import MessageSidebarChat from './MessageSidebarChat';
 
 const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api' : 'https://raven-x.herokuapp.com/api';
 
-export default function MessageSidebar({ messages, current, setCurrent }) {
+export default function MessageSidebar({ messages, current, setCurrent, setOpen }) {
 	const user = useSelector((state) => state.userSlice.user);
 	const [search, setSearch] = useState('');
 	const [filteredMessages, setFilteredMessages] = useState([]);
@@ -63,6 +63,7 @@ export default function MessageSidebar({ messages, current, setCurrent }) {
 								conversation={conversation}
 								current={current}
 								setCurrent={setCurrent}
+								setOpen={setOpen}
 								key={conversation._id}
 							/>
 						))}

@@ -15,7 +15,7 @@ import Message from './Message';
 
 const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api' : 'https://raven-x.herokuapp.com/api';
 
-export default function Chat({ conversation }) {
+export default function Chat({ conversation, setOpen }) {
 	const user = useSelector((state) => state.userSlice.user);
 	const [text, setText] = useState('');
 	const [user2, setUser2] = useState({});
@@ -65,7 +65,7 @@ export default function Chat({ conversation }) {
 	return (
 		<div className="chat">
 			<div className="chat-header">
-				{window.screen.width <= 768 && <IconButton className='chat-header__back-btn'>
+				{window.screen.width <= 768 && <IconButton className='chat-header__back-btn' onClick={() => setOpen(false)}>
 					<ChevronLeft />
 				</IconButton>}
 				<Avatar src={user2.avatar} />

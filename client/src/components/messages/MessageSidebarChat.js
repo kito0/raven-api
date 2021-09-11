@@ -11,6 +11,7 @@ export default function MessageSidebarChat({
 	conversation,
 	current,
 	setCurrent,
+	setOpen
 }) {
 	const user = useSelector((state) => state.userSlice.user);
 	const [user2, setUser2] = useState({});
@@ -36,9 +37,10 @@ export default function MessageSidebarChat({
 				messages.findIndex((x) => x._id === conversation._id) === current &&
 				'active'
 			}`}
-			onClick={() =>
-				setCurrent(messages.findIndex((x) => x._id === conversation._id))
-			}
+			onClick={() => {
+					setCurrent(messages.findIndex((x) => x._id === conversation._id));
+					setOpen(true);
+			}}
 		>
 			<Avatar className="avatar" src={user2.avatar} />
 			<div className="message-sidebar-chat__info">

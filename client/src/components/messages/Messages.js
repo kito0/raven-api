@@ -12,6 +12,7 @@ export default function Messages() {
 	const user = useSelector((state) => state.userSlice.user);
 	const [messages, setMessages] = useState([]);
 	const [current, setCurrent] = useState(0);
+	const [open, setOpen] = useState(false);
 
 	//Pusher.logToConsole = true;
 
@@ -30,13 +31,14 @@ export default function Messages() {
 	}, []);
 
 	return (
-		<div className="messages">
+		<div className={`messages ${open ? 'dark' : ''}`}>
 			<MessageSidebar
 				messages={messages}
 				current={current}
 				setCurrent={setCurrent}
+				setOpen={setOpen}
 			/>
-			<MessageView conversation={messages[current]} />
+			<MessageView conversation={messages[current]} setOpen={setOpen} />
 		</div>
 	);
 }
