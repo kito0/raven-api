@@ -22,7 +22,6 @@ export default function Messages() {
 
 		const pusher = new Pusher('9a411b2a0ee16e4825af', { cluster: 'us3' });
 		const channel = pusher.subscribe('rvn-messenger');
-		console.log(channel);
 		channel.bind('updated', (newMessage) => {
 			console.log(`NEW MESSAGE: ${newMessage}`);
 			setMessages([...messages, newMessage]);
