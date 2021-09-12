@@ -9,25 +9,34 @@
 		color: $text;
 	}
 }
-.messages.open {
-	.message-sidebar {
-		width: 0 !important;
-	}
 
-	.chat {
-		width: 100% !important;
+@include respond-to(tablet){
+	.messages.open {
+		.message-sidebar {
+			width: 0% !important;
+		}
+
+		.chat {
+			width: 100% !important;
+		}
+	}
+	.messages.closed {
+		.message-sidebar {
+			width: 100% !important;
+		}
+
+		.chat {
+			width: 0% !important;
+		}
 	}
 }
 
 .message-sidebar {
 	display: flex;
 	flex-direction: column;
-	flex: 0.35;
-	transition: width 100ms ease;
-
-	@include respond-to(tablet) {
-		flex: 0;
-	}
+	width: 35%;
+	overflow-x: hidden;
+	transition: width 300ms ease;
 
 	.message-sidebar__header {
 		display: flex;
@@ -68,9 +77,11 @@
 			cursor: pointer;
 			transition: box-shadow 300ms ease;
 
-			&:hover {
-				box-shadow: 0 -0.6vh 1vh $primary !important;
-				transition: box-shadow 0ms ease;
+			@include respond-to(laptop) {
+				&:hover {
+					box-shadow: 0 -0.6vh 1vh $primary !important;
+					transition: box-shadow 0ms ease;
+				}
 			}
 
 			.message-sidebar-chat__info {
@@ -84,9 +95,10 @@
 				}
 			}
 		}
-
-		.active {
-			box-shadow: 0 -0.6vh 1vh $primary !important;
+		@include respond-to(laptop) {
+			.active {
+				box-shadow: 0 -0.6vh 1vh $primary !important;
+			}
 		}
 	}
 }
@@ -94,8 +106,9 @@
 .chat {
 	display: flex;
 	flex-direction: column;
-	flex: 0.65;
-	transition: width 100ms ease;
+	width: 65%;
+	overflow-x: hidden;
+	transition: width 300ms ease;
 
 	.chat-header {
 		padding: 20px;
