@@ -7,7 +7,11 @@
 	align-items: flex-start;
 	padding: 1.5vh 1.5vh 0 1.5vh;
 	overflow: hidden;
+	position: relative;
 
+	@include respond-to(mobile) {
+		font-size: .85em;
+	}
 	.post__avatar {
 		padding: 10px;
 	}
@@ -16,7 +20,7 @@
 	}
 
 	.post__body {
-		flex: 1;
+		width: 100%;
 		padding: 10px;
 
 		.post__header {
@@ -78,11 +82,11 @@
 			}
 
 			.post__header__timestamp {
-				font-size: 8px;
+				font-size: .5em;
 				margin: 0 0 10px 1px;
 			}
 			.post__header__description {
-				font-size: 15px;
+				font-size: 0.9em;
 				margin: 4px 0 12px 1px;
 			}
 		}

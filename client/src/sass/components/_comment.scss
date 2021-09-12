@@ -5,6 +5,9 @@
 	padding: calc(var(--vh, 1vh) * 1.5);
 	border-top: 1px solid black;
 
+	@include respond-to(mobile) {
+		font-size: 0.8em;
+	}
 	.comment__avatar {
 		padding: 10px;
 	}
