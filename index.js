@@ -32,38 +32,38 @@ app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
 )
 .catch((err) => console.log(err.message));
 
-const db = mongoose.connection;
-const pusher = new Pusher({
-	app_id: process.env.PUSHER_ID,
-	key: process.env.PUSHER_KEY,
-	secret: process.env.PUSHER_SECRET,
-	cluster: process.env.PUSHER_CLUSTER
-});
+// const db = mongoose.connection;
+// const pusher = new Pusher({
+// 	app_id: process.env.PUSHER_ID,
+// 	key: process.env.PUSHER_KEY,
+// 	secret: process.env.PUSHER_SECRET,
+// 	cluster: process.env.PUSHER_CLUSTER
+// });
 
-db.once('open', () => {
-	const msgCollection = db.collection('conversations');
-	const changeStream = msgCollection.watch();
+// db.once('open', () => {
+// 	const msgCollection = db.collection('conversations');
+// 	const changeStream = msgCollection.watch();
 	
-	changeStream.on('change', async (change) => {
-		if (change.operationType === 'update') {
-			const k = change.updateDescription;
-			var v = '';
-			for (x in k)
-				v = k[x];
+// 	changeStream.on('change', async (change) => {
+// 		if (change.operationType === 'update') {
+// 			const k = change.updateDescription;
+// 			var v = '';
+// 			for (x in k)
+// 				v = k[x];
 			
-			pusher
-				.trigger('rvn-messenger', 'updated', {
-					id: k._id,
-					k: k
-				})
-				.catch((err) => console.log(err));
-		}
-	});
-});
+// 			pusher
+// 				.trigger('rvn-messenger', 'updated', {
+// 					id: k._id,
+// 					k: k
+// 				})
+// 				.catch((err) => console.log(err));
+// 		}
+// 	});
+// });
 
 var corsOptions = {
 	origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://ravenx.vercel.app',
-	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+	optionsSuccessStatus: 200
 }
 
 app.use(express.json());

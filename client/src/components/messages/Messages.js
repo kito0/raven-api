@@ -17,16 +17,21 @@ export default function Messages() {
 	//Pusher.logToConsole = true;
 
 	useEffect(() => {
-		axios.get(`${api}/conversations/${user.handle}`).then((res) => {
-			setMessages(res.data);
-		});
-
-		const pusher = new Pusher('9a411b2a0ee16e4825af', { cluster: 'us3' });
-		const channel = pusher.subscribe('rvn-messenger');
-		channel.bind('updated', (newMessage) => {
-			console.log(`NEW MESSAGE: ${newMessage}`);
-			setMessages([...messages, newMessage]);
-		});
+		// axios.get(`${api}/conversations/${user.handle}`).then((res) => {
+		// 	setMessages(res.data);
+		// });
+		const interval = setInterval(() => {
+			axios.get(`${api}/conversations/${user.handle}`).then((res) => {
+				setMessages(res.data);
+			});
+		}, 1000);
+		return () => clearInterval(interval);
+		// const pusher = new Pusher('9a411b2a0ee16e4825af', { cluster: 'us3' });
+		// const channel = pusher.subscribe('rvn-messenger');
+		// channel.bind('updated', (newMessage) => {
+		// 	console.log(`NEW MESSAGE: ${newMessage}`);
+		// 	setMessages([...messages, newMessage]);
+		// });
 	// eslint-disable-next-line
 	}, []);
 
