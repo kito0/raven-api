@@ -12,6 +12,7 @@ const Pusher = require('pusher');
 const userRoute = require('./routes/user.route');
 const postRoute = require('./routes/post.route');
 const conversationRoute = require('./routes/conversation.route');
+const messageRoute = require('./routes/message.route');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,16 +22,16 @@ const limiter = rateLimit({
 });
 
 mongoose
-.connect(process.env.CONNECTION_URL, {
-	useNewUrlParser: true,
-	useFindAndModify: false,
-	useCreateIndex: true,
-	useUnifiedTopology: true,
-})
-.then(() =>
-app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
-)
-.catch((err) => console.log(err.message));
+	.connect(process.env.CONNECTION_URL, {
+		useNewUrlParser: true,
+		useFindAndModify: false,
+		useCreateIndex: true,
+		useUnifiedTopology: true,
+	})
+	.then(() =>
+		app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
+	)
+	.catch((err) => console.log(err.message));
 
 // const db = mongoose.connection;
 // const pusher = new Pusher({
@@ -43,14 +44,14 @@ app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
 // db.once('open', () => {
 // 	const msgCollection = db.collection('conversations');
 // 	const changeStream = msgCollection.watch();
-	
+
 // 	changeStream.on('change', async (change) => {
 // 		if (change.operationType === 'update') {
 // 			const k = change.updateDescription;
 // 			var v = '';
 // 			for (x in k)
 // 				v = k[x];
-			
+
 // 			pusher
 // 				.trigger('rvn-messenger', 'updated', {
 // 					id: k._id,
@@ -62,9 +63,12 @@ app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
 // });
 
 var corsOptions = {
-	origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://ravenx.vercel.app',
-	optionsSuccessStatus: 200
-}
+	origin:
+		process.env.NODE_ENV === 'development'
+			? 'http://localhost:3000'
+			: 'https://ravenx.vercel.app',
+	optionsSuccessStatus: 200,
+};
 
 app.use(express.json());
 app.use(cors(corsOptions));
@@ -77,5 +81,6 @@ app.use(limiter);
 app.use('/api/user', userRoute);
 app.use('/api/posts', postRoute);
 app.use('/api/conversations', conversationRoute);
+app.use('/api/messages', messageRoute);
 
 module.exports = app;
