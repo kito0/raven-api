@@ -3,7 +3,8 @@ const {
 	register,
 	login,
 	getUser,
-	getUserByHandle,
+	// getUserByHandle,
+	getUserHandle,
 	updateUser,
 	addRemoveFollower,
 	toggleFollow,
@@ -11,7 +12,8 @@ const {
 const verify = require('../util/verify.token');
 
 router.get('/:id', getUser);
-router.get('/handle/:handle', getUserByHandle);
+// router.get('/handle/:handle', getUserByHandle);
+router.get('/handle/:id', getUserHandle);
 
 router.post('/register', register);
 router.post('/login', login);
