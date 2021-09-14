@@ -8,16 +8,17 @@ exports.getAllConversations = async (req, res) => {
 				.then((conversations) => {
 					res.status(200).json(conversations);
 				})
-				.catch((err) => res.status(500).send(err))
-		: res.status(403).send('ERROR: ACCESS DENIED');
+				.catch((err) => res.status(500).json(err))
+		: res.status(403).json('ERROR: ACCESS DENIED');
 };
 
+// GET http://localhost:5000/api/conversations/:userId
 exports.getConversations = async (req, res) => {
 	Conversation.find({
 		members: { $in: req.params.userId },
 	})
-		.then((conversation) => res.status(200).json(conversation))
-		.catch((err) => res.status(404).send(err));
+		.then((conversations) => res.status(200).json(conversations))
+		.catch((err) => res.status(404).json(err));
 };
 
 // // GET http://localhost:5000/api/conversations/:handle
@@ -31,6 +32,21 @@ exports.getConversations = async (req, res) => {
 // 		.catch((err) => res.status(500).send(err));
 // };
 
+// GET http://localhost:5000/api/conversations/:userId1/:userId12
+exports.getConversation = async (req, res) => {
+	Conversation.findOne({
+		members: { $all: [req.params.userId1, req.params.userId2] },
+	})
+		.then((data) => {
+			data
+				? res.status(200).json(data)
+				: res.status(404).json('ERROR: Conversation does not exist.');
+		})
+		.catch((err) => {
+			res.status(500).json(err);
+		});
+};
+
 // // GET http://localhost:5000/api/conversations/:handle1/:handle2
 // exports.getConversation = async (req, res) => {
 // 	Conversation.find({
@@ -43,20 +59,21 @@ exports.getConversations = async (req, res) => {
 // 		.catch((err) => res.status(500).send(err));
 // };
 
+// POST http://localhost:5000/api/conversations/create/userId1/userId2
 exports.createConversation = async (req, res) => {
 	const conversationExists = await Conversation.findOne({
-		members: { $all: [req.params.firstUserId, req.params.secondUserId] },
+		members: { $all: [req.params.userId1, req.params.userId2] },
 	});
 	conversationExists
 		? res.status(400).send('ERROR: Conversation already exists.')
 		: Conversation.create({
 				title: req.body.title,
-				members: [req.params.firstUserId, req.params.secondUserId],
+				members: [req.params.userId1, req.params.userId2],
 		  })
 				.then((conversation) => {
 					res.status(201).json(conversation);
 				})
-				.catch((err) => res.status(500).send(err));
+				.catch((err) => res.status(500).json(err));
 };
 
 // // POST http://localhost:5000/api/conversations/create/:handle1/:handle2
