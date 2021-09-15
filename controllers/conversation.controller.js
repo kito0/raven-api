@@ -14,9 +14,7 @@ exports.getAllConversations = async (req, res) => {
 
 // GET http://localhost:5000/api/conversations/:userId
 exports.getConversations = async (req, res) => {
-	Conversation.find({
-		members: { $in: req.params.userId },
-	})
+	Conversation.find({ members: { $in: req.params.userId } })
 		.then((conversations) => res.status(200).json(conversations))
 		.catch((err) => res.status(404).json(err));
 };
