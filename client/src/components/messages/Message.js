@@ -2,19 +2,19 @@ import React from 'react';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 
-export default function Message({ message }) {
+export default function Message({ message, details }) {
 	const user = useSelector((state) => state.userSlice.user);
 
 	return (
 		<div
 			className={`message ${
-				message.sender === user.handle && 'message__receiver'
+				message.senderId === user._id && 'message__receiver'
 			}`}
 		>
-			<span className="message__name">{message.sender}</span>
+			<span className="message__name">{details.name}</span>
 			{message.text}
 			<span className="message__timestamp">
-				{moment(message.timestamp).fromNow()}
+				{moment(message.createdAt).fromNow()}
 			</span>
 		</div>
 	);

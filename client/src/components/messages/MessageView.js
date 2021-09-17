@@ -1,53 +1,45 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { SetOpen } from '../../redux/conversation';
 import axios from 'axios';
 import moment from 'moment';
-import env from "react-dotenv";
+import env from 'react-dotenv';
 import { Avatar, IconButton } from '@material-ui/core';
 import {
 	InsertEmoticon,
 	MoreVert,
 	SearchOutlined,
 	MicOutlined,
-	ChevronLeft
+	ChevronLeft,
 } from '@material-ui/icons';
 import Message from './Message';
 
-const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api' : 'https://raven-x.herokuapp.com/api';
+const api =
+	env.REACT_APP_ENV === 'development'
+		? 'http://localhost:5000/api'
+		: 'https://raven-x.herokuapp.com/api';
 
-export default function Chat({ conversation, setOpen }) {
+export default function Chat({ conversation }) {
+	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userSlice.user);
+	const [messages, setMessages] = useState([]);
+	const [details, setDetails] = useState({});
 	const [text, setText] = useState('');
-	const [user2, setUser2] = useState({});
+	const [name, setName] = useState('');
+	const [avatar, setAvatar] = useState('');
+	const [lastSeen, setLastSeen] = useState('');
 	const bottomRef = useRef(null);
-
-	useEffect(() => {
-		conversation &&
-			axios
-				.get(
-					`${api}/user/handle/${
-						conversation.handle1 === user.handle
-							? conversation.handle2
-							: conversation.handle1
-					}`
-				)
-				.then((res) => {
-					setUser2(res.data);
-				});
-	}, [conversation, user.handle]);
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
 		conversation &&
 			text !== '' &&
-			(await axios.post(
-				`${api}/conversations/${conversation.handle1}/${conversation.handle2}`,
-				{
-					sender: user.handle,
-					text: text,
-				}
-			));
+			(await axios.post(`${api}/messages`, {
+				conversationId: conversation._id,
+				senderId: user._id,
+				text: text,
+			}));
 
 		scrollToBottom();
 		setText('');
@@ -60,28 +52,45 @@ export default function Chat({ conversation, setOpen }) {
 		});
 	};
 
+	// eslint-disable-next-line
+	useEffect(async () => {
+		if (!conversation) return;
+		const userId = conversation.members.find((member) => member !== user._id);
+
+		axios.get(`${api}/messages/${conversation._id}`).then((res) => {
+			setMessages(res.data);
+		});
+		axios.get(`${api}/user/${userId}`).then((res) => {
+			setName(res.data.name);
+			setAvatar(res.data.avatar);
+		});
+		axios.get(`${api}/messages/last/${conversation._id}`).then((res) => {
+			setLastSeen(moment(res.data.createdAt).fromNow());
+		});
+		setDetails({
+			name: name,
+			avatar: avatar,
+		});
+
+		// eslint-disable-next-line
+	}, []);
 	useEffect(scrollToBottom, []);
 
 	return (
 		<div className="chat">
 			<div className="chat-header">
-				{window.screen.width <= 768 && <IconButton className='chat-header__back-btn' onClick={() => setOpen(false)}>
-					<ChevronLeft />
-				</IconButton>}
-				<Avatar src={user2.avatar} />
+				{window.screen.width <= 768 && (
+					<IconButton
+						className="chat-header__back-btn"
+						onClick={() => SetOpen(dispatch, false)}
+					>
+						<ChevronLeft />
+					</IconButton>
+				)}
+				<Avatar src={avatar} />
 				<div className="chat-header__info">
-					<h3>
-						{conversation
-							? conversation.handle1 === user.handle
-								? conversation.handle2
-								: conversation.handle1
-							: 'new chat'}
-					</h3>
-					<p>
-						last seen{' '}
-						{conversation &&
-							moment(conversation.messages.slice(-1)[0].timestamp).fromNow()}
-					</p>
+					<h3>{messages ? name : 'new chat'}</h3>
+					<p>last seen {lastSeen}</p>
 				</div>
 
 				<div className="chat-header__r">
@@ -94,16 +103,18 @@ export default function Chat({ conversation, setOpen }) {
 				</div>
 			</div>
 			<div className="chat-body">
-				{conversation ? (
-					conversation.messages
+				{messages ? (
+					messages
 						.slice()
-						.map((message) => <Message message={message} key={message._id} />)
+						.map((message) => (
+							<Message message={message} details={details} key={message._id} />
+						))
 				) : (
 					<p>No messages available.</p>
 				)}
 				<div
 					ref={bottomRef}
-					style={{ float: 'left', clear: 'both', height: '20px' }}
+					style={{ float: 'left', clear: 'both', height: '10vh' }}
 				/>
 			</div>
 			<div className="chat-footer">

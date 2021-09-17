@@ -1,18 +1,17 @@
 import { setConversations, setCurrent, setOpen } from './conversationSlice';
 import axios from 'axios';
 import env from 'react-dotenv';
-import { setPosts } from './postsSlice';
 
 const api =
 	env.REACT_APP_ENV === 'development'
 		? 'http://localhost:5000/api/conversations'
 		: 'https://raven-x.herokuapp.com/api/conversations';
 
-export const FetchConversations = async (dispatch, userId) => {
-	await axios
+export const FetchConversations = (dispatch, userId) => {
+	axios
 		.get(`${api}/${userId}`)
 		.then((res) => {
-			dispatch(setPosts(res.data));
+			dispatch(setConversations(res.data));
 		})
 		.catch((err) => console.error(err));
 };

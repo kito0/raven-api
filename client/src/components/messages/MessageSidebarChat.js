@@ -1,55 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { SetCurrent, SetOpen } from '../../redux/conversation';
 import axios from 'axios';
-import env from "react-dotenv";
+import env from 'react-dotenv';
 import { Avatar } from '@material-ui/core';
 
-const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api' : 'https://raven-x.herokuapp.com/api';
+const api =
+	env.REACT_APP_ENV === 'development'
+		? 'http://localhost:5000/api'
+		: 'https://raven-x.herokuapp.com/api';
 
-export default function MessageSidebarChat({
-	messages,
-	conversation,
-	current,
-	setCurrent,
-	setOpen
-}) {
+export default function MessageSidebarChat({ conversation }) {
+	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userSlice.user);
-	const [user2, setUser2] = useState({});
+	const conversations = useSelector(
+		(state) => state.conversationSlice.conversations
+	);
+	const current = useSelector((state) => state.conversationSlice.current);
+	const open = useSelector((state) => state.conversationSlice.open);
+	const [name, setName] = useState('');
+	const [avatar, setAvatar] = useState('');
+	const [lastMessage, setLastMessage] = useState('');
 
 	useEffect(() => {
-		axios
-			.get(
-				`${api}/user/handle/${
-					conversation.handle1 === user.handle
-						? conversation.handle2
-						: conversation.handle1
-				}`
-			)
-			.then((res) => {
-				setUser2(res.data);
-			});
-		// eslint-disable-next-line
+		const userId = conversation.members.find((member) => member !== user._id);
+
+		axios.get(`${api}/user/${userId}`).then((res) => {
+			setName(res.data.name);
+			setAvatar(res.data.avatar);
+		});
+		axios.get(`${api}/messages/last/${conversation._id}`).then((res) => {
+			setLastMessage(res.data.text);
+		});
 	}, []);
 
 	return (
 		<div
 			className={`message-sidebar-chat ${
-				messages.findIndex((x) => x._id === conversation._id) === current &&
-				'active'
+				conversations.findIndex((x) => x._id === conversation._id) ===
+					current && 'active'
 			}`}
 			onClick={() => {
-					setCurrent(messages.findIndex((x) => x._id === conversation._id));
-					setOpen(true);
+				SetCurrent(
+					dispatch,
+					conversations.findIndex((x) => x._id === conversation._id)
+				);
+				SetOpen(dispatch, true);
 			}}
+			key={conversation._id}
 		>
-			<Avatar className="avatar" src={user2.avatar} />
+			<Avatar className="avatar" src={avatar} />
 			<div className="message-sidebar-chat__info">
-				<h2>
-					{conversation.handle1 === user.handle
-						? conversation.handle2
-						: conversation.handle1}
-				</h2>
-				<p>{conversation.messages.slice(-1)[0].text}</p>
+				<h2>{name}</h2>
+				<p>{lastMessage}</p>
 			</div>
 		</div>
 	);
