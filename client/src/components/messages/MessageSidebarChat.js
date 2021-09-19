@@ -17,28 +17,29 @@ export default function MessageSidebarChat({ conversation }) {
 		(state) => state.conversationSlice.conversations
 	);
 	const current = useSelector((state) => state.conversationSlice.current);
-	const open = useSelector((state) => state.conversationSlice.open);
 	const [name, setName] = useState('');
 	const [avatar, setAvatar] = useState('');
 	const [lastMessage, setLastMessage] = useState('');
 
-	useEffect(() => {
-		const userId = conversation.members.find((member) => member !== user._id);
+	// eslint-disable-next-line
+	useEffect(async () => {
+		const friendId = conversation.members.find((member) => member !== user._id);
 
-		axios.get(`${api}/user/${userId}`).then((res) => {
+		axios.get(`${api}/user/${friendId}`).then((res) => {
 			setName(res.data.name);
 			setAvatar(res.data.avatar);
 		});
 		axios.get(`${api}/messages/last/${conversation._id}`).then((res) => {
 			setLastMessage(res.data.text);
 		});
-	}, []);
+	}, [conversation._id, conversation.members, user._id]);
 
 	return (
 		<div
 			className={`message-sidebar-chat ${
-				conversations.findIndex((x) => x._id === conversation._id) ===
-					current && 'active'
+				conversations.findIndex((x) => x._id === conversation._id) === current
+					? 'active'
+					: ''
 			}`}
 			onClick={() => {
 				SetCurrent(

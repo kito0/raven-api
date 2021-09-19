@@ -23,19 +23,29 @@ export default function MessageSidebar() {
 		await axios.post(`${api}/conversations/create/${user._id}/${search}`);
 	};
 
-	const filterConversations = () => {
+	function waitForElement(props) {
+		if (typeof props !== 'undefined') {
+		} else {
+			setTimeout(waitForElement, 100);
+		}
+	}
+
+	const filterConversations = async () => {
+		waitForElement(conversations);
+		const filtered = await conversations.reduce(async (acc, conversation) => {
+			const friendId = conversation.members.find(
+				(member) => member !== user._id
+			);
+			const res = await axios.get(`${api}/user/${friendId}`);
+			const result = res.data.name.toLowerCase().includes(search.toLowerCase());
+
+			if (!result) return acc;
+			return (await acc).concat(conversation);
+		}, []);
 		setFilteredConversations(
-			// search !== '' && search !== null && search !== undefined
-			// 	? conversations.filter((conversation) => {
-			// 			const userId = conversation.members.find(
-			// 				(member) => member !== user._id
-			// 			);
-			// 			const target = axios.get(`${api}/user/${userId}`).data.name;
-			// 			console.log(target);
-			// 			return target.includes(search.toLowerCase());
-			// 	  })
-			// 	: conversations
-			conversations
+			search !== '' && search !== null && search !== undefined
+				? filtered
+				: conversations
 		);
 	};
 
