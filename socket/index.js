@@ -6,10 +6,8 @@ const io = require('socket.io')(PORT, {
 			process.env.NODE_ENV === 'development'
 				? 'http://localhost:3000'
 				: 'https://ravenx.vercel.app',
-		methods: ['GET', 'POST'],
 	},
 });
-console.log(process.env.NODE_ENV);
 
 let users = [];
 
