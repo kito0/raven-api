@@ -5,9 +5,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const sanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
-const rateLimit = require('express-rate-limit');
+// const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
-const Pusher = require('pusher');
 
 const userRoute = require('./routes/user.route');
 const postRoute = require('./routes/post.route');
@@ -16,10 +15,10 @@ const messageRoute = require('./routes/message.route');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const limiter = rateLimit({
-	windowMs: 1000 * 1000,
-	max: 60,
-});
+// const limiter = rateLimit({
+// 	windowMs: 1000 * 1000,
+// 	max: 60,
+// });
 
 mongoose
 	.connect(process.env.CONNECTION_URL, {
@@ -76,7 +75,7 @@ app.use(sanitize());
 app.use(helmet());
 app.use(xss());
 app.use(hpp());
-app.use(limiter);
+// app.use(limiter);
 
 app.use('/api/user', userRoute);
 app.use('/api/posts', postRoute);
