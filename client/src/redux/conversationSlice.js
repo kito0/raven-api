@@ -6,12 +6,14 @@ export const conversationSlice = createSlice({
 		conversations: [],
 		current: 0,
 		open: true,
+		loading: false,
 	},
 	reducers: {
 		setConversations: (state, action) => {
 			return {
 				...state,
 				conversations: [...action.payload],
+				loading: false,
 			};
 		},
 		setCurrent: (state, action) => {
@@ -24,6 +26,12 @@ export const conversationSlice = createSlice({
 			return {
 				...state,
 				open: action.payload,
+			};
+		},
+		loadingConversation: (state) => {
+			return {
+				...state,
+				loading: true,
 			};
 		},
 	},
