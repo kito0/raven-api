@@ -22,7 +22,7 @@ const api =
 const socket_api =
 	env.REACT_APP_ENV === 'development'
 		? 'ws://localhost:8900'
-		: 'ws://raven-socket.herokuapp.com';
+		: 'https://raven-socket.herokuapp.com';
 
 export default function Chat({ conversation }) {
 	const dispatch = useDispatch();
