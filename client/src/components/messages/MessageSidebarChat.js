@@ -45,7 +45,7 @@ export default function MessageSidebarChat({ conversation }) {
 
 		fetchFriendDetails();
 		fecthLastMessage();
-	}, [conversation, conversation?._id, conversation?.members, user?._id]);
+	}, [conversation, user]);
 
 	return (
 		<div

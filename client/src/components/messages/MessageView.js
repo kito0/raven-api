@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SetOpen } from '../../redux/conversation';
+import { io } from 'socket.io-client';
 import axios from 'axios';
 import moment from 'moment';
 import env from 'react-dotenv';
@@ -23,26 +24,13 @@ export default function Chat({ conversation }) {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userSlice.user);
 	const current = useSelector((state) => state.conversationSlice.current);
+	const bottomRef = useRef(null);
+	const socket = useRef();
 	const [messages, setMessages] = useState([]);
 	const [friendDetails, setFriendDetails] = useState({});
 	const [text, setText] = useState('');
 	const [lastSeen, setLastSeen] = useState('');
-	const bottomRef = useRef(null);
-
-	const onSubmit = async (e) => {
-		e.preventDefault();
-
-		conversation &&
-			text !== '' &&
-			(await axios.post(`${api}/messages`, {
-				conversationId: conversation._id,
-				senderId: user._id,
-				text: text,
-			}));
-
-		scrollToBottom();
-		setText('');
-	};
+	const [arrivalMessage, setArrivalMessage] = useState(null);
 
 	const scrollToBottom = () => {
 		bottomRef.current?.scrollIntoView({
@@ -51,12 +39,36 @@ export default function Chat({ conversation }) {
 		});
 	};
 
-	// eslint-disable-next-line
+	const onSubmit = async (e) => {
+		e.preventDefault();
+		if (!conversation || text === '') return;
+
+		socket.current?.emit('sendMessage', {
+			senderId: user._id,
+			receiverId: conversation?.members.find((member) => member !== user?._id),
+			text: text,
+		});
+
+		try {
+			const res = await axios.post(`${api}/messages`, {
+				conversationId: conversation._id,
+				senderId: user?._id,
+				text: text,
+			});
+			setMessages([...messages, res.data]);
+		} catch (err) {
+			console.log(err);
+		}
+
+		scrollToBottom();
+		setText('');
+	};
+
 	useEffect(() => {
 		if (!conversation) return;
 
 		const friendId = conversation?.members.find(
-			(member) => member !== user._id
+			(member) => member !== user?._id
 		);
 
 		const fetchMessages = async () => {
@@ -72,7 +84,7 @@ export default function Chat({ conversation }) {
 				});
 			});
 		};
-		const fecthLastSeen = async () => {
+		const fetchLastSeen = async () => {
 			await axios
 				.get(`${api}/messages/last/${conversation?._id}`)
 				.then((res) => {
@@ -82,10 +94,36 @@ export default function Chat({ conversation }) {
 
 		fetchMessages();
 		fetchFriendDetails();
-		fecthLastSeen();
+		fetchLastSeen();
+	}, [current, conversation, user]);
+
+	useEffect(() => {
+		socket.current = io('ws://localhost:8900');
+		socket.current?.on('getMessage', (data) => {
+			setArrivalMessage({
+				sender: data.senderId,
+				text: data.text,
+				createdAt: Date.now(),
+			});
+		});
+	}, []);
+
+	useEffect(() => {
+		socket.current.emit('addUser', user?._id);
+		socket.current.on('getUsers', (users) => {
+			console.log(users);
+		});
+	}, [user]);
+
+	useEffect(() => {
+		arrivalMessage &&
+			conversation?.members.includes(arrivalMessage.sender) &&
+			setMessages((prev) => [...prev, arrivalMessage]);
+	}, [arrivalMessage, conversation]);
+
+	useEffect(() => {
 		scrollToBottom();
-		// eslint-disable-next-line
-	}, [current, conversation]);
+	}, [messages]);
 
 	return (
 		<div className="chat">
