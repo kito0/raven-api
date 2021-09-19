@@ -32,13 +32,4 @@ describe('Endpoint testing [user]', () => {
 				done();
 			});
 	});
-	it('GET user by handle', (done) => {
-		chai
-			.request(server)
-			.get('/api/user/handle/tester')
-			.end((err, res) => {
-				res.should.have.status(200);
-				done();
-			});
-	});
 });
