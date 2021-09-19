@@ -11,7 +11,9 @@ export default function Message({ message, details }) {
 				message.senderId === user._id && 'message__receiver'
 			}`}
 		>
-			<span className="message__name">{details.name}</span>
+			<span className="message__name">
+				{message.senderId === user._id ? user.name : details.name}
+			</span>
 			{message.text}
 			<span className="message__timestamp">
 				{moment(message.createdAt).fromNow()}
