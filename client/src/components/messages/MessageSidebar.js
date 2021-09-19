@@ -20,20 +20,12 @@ export default function MessageSidebar() {
 
 	const createNewConversation = async (e) => {
 		e.preventDefault();
-		await axios.post(`${api}/conversations/create/${user._id}/${search}`);
+		await axios.post(`${api}/conversations/create/${user?._id}/${search}`);
 	};
 
-	function waitForElement(props) {
-		if (typeof props !== 'undefined') {
-		} else {
-			setTimeout(waitForElement, 100);
-		}
-	}
-
 	const filterConversations = async () => {
-		waitForElement(conversations);
-		const filtered = await conversations.reduce(async (acc, conversation) => {
-			const friendId = conversation.members.find(
+		const filtered = await conversations?.reduce(async (acc, conversation) => {
+			const friendId = conversation?.members.find(
 				(member) => member !== user._id
 			);
 			const res = await axios.get(`${api}/user/${friendId}`);
@@ -52,7 +44,7 @@ export default function MessageSidebar() {
 	useEffect(() => {
 		filterConversations();
 		// eslint-disable-next-line
-	}, [search]);
+	}, [search, conversations]);
 
 	return (
 		<div className="message-sidebar">
@@ -72,19 +64,20 @@ export default function MessageSidebar() {
 			<div className="message-sidebar__chats">
 				{
 					//conversations &&
-					filteredConversations
-						// .slice(0)
-						// .sort(
-						// 	(a, b) =>
-						// 		moment(fetchLastMessage(b._id).createdAt).milliseconds() -
-						// 		moment(fetchLastMessage(a._id).createdAt).milliseconds()
-						// )
-						.map((conversation) => (
-							<MessageSidebarChat
-								conversation={conversation}
-								key={conversation._id}
-							/>
-						))
+					filteredConversations &&
+						filteredConversations
+							// .slice(0)
+							// .sort(
+							// 	(a, b) =>
+							// 		moment(fetchLastMessage(b._id).createdAt).milliseconds() -
+							// 		moment(fetchLastMessage(a._id).createdAt).milliseconds()
+							// )
+							.map((conversation) => (
+								<MessageSidebarChat
+									conversation={conversation}
+									key={conversation._id}
+								/>
+							))
 				}
 			</div>
 		</div>
