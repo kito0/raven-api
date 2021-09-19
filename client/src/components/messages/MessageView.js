@@ -19,24 +19,29 @@ const api =
 		? 'http://localhost:5000/api'
 		: 'https://raven-x.herokuapp.com/api';
 
-export default function Chat({ conversation }) {
+export default function Chat() {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userSlice.user);
+	const conversations = useSelector(
+		(state) => state.conversationSlice.conversations
+	);
+	const current = useSelector((state) => state.conversationSlice.current);
+	const [currentConversation, setCurrentConversation] = useState(
+		conversations[current]
+	);
 	const [messages, setMessages] = useState([]);
-	const [details, setDetails] = useState({});
+	const [friendDetails, setFriendDetails] = useState({});
 	const [text, setText] = useState('');
-	const [name, setName] = useState('');
-	const [avatar, setAvatar] = useState('');
 	const [lastSeen, setLastSeen] = useState('');
 	const bottomRef = useRef(null);
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
-		conversation &&
+		currentConversation &&
 			text !== '' &&
 			(await axios.post(`${api}/messages`, {
-				conversationId: conversation._id,
+				conversationId: currentConversation._id,
 				senderId: user._id,
 				text: text,
 			}));
@@ -52,29 +57,39 @@ export default function Chat({ conversation }) {
 		});
 	};
 
+	function waitForElement(props) {
+		if (typeof props !== 'undefined') {
+		} else {
+			setTimeout(waitForElement, 100);
+		}
+	}
+
 	// eslint-disable-next-line
 	useEffect(async () => {
-		if (!conversation) return;
-		const userId = conversation.members.find((member) => member !== user._id);
+		waitForElement(conversations);
+		setCurrentConversation(conversations[current]);
+		const friendId = conversations[current].members.find(
+			(member) => member !== user._id
+		);
 
-		axios.get(`${api}/messages/${conversation._id}`).then((res) => {
+		axios.get(`${api}/messages/${conversations[current]._id}`).then((res) => {
 			setMessages(res.data);
 		});
-		axios.get(`${api}/user/${userId}`).then((res) => {
-			setName(res.data.name);
-			setAvatar(res.data.avatar);
+		axios.get(`${api}/user/${friendId}`).then((res) => {
+			setFriendDetails({
+				name: res.data.name,
+				avatar: res.data.avatar,
+			});
 		});
-		axios.get(`${api}/messages/last/${conversation._id}`).then((res) => {
-			setLastSeen(moment(res.data.createdAt).fromNow());
-		});
-		setDetails({
-			name: name,
-			avatar: avatar,
-		});
+		axios
+			.get(`${api}/messages/last/${conversations[current]._id}`)
+			.then((res) => {
+				setLastSeen(moment(res.data.createdAt).fromNow());
+			});
 
+		scrollToBottom();
 		// eslint-disable-next-line
-	}, []);
-	useEffect(scrollToBottom, []);
+	}, [current]);
 
 	return (
 		<div className="chat">
@@ -87,9 +102,9 @@ export default function Chat({ conversation }) {
 						<ChevronLeft />
 					</IconButton>
 				)}
-				<Avatar src={avatar} />
+				<Avatar src={friendDetails.avatar} />
 				<div className="chat-header__info">
-					<h3>{messages ? name : 'new chat'}</h3>
+					<h3>{messages ? friendDetails.name : 'new chat'}</h3>
 					<p>last seen {lastSeen}</p>
 				</div>
 
@@ -107,7 +122,11 @@ export default function Chat({ conversation }) {
 					messages
 						.slice()
 						.map((message) => (
-							<Message message={message} details={details} key={message._id} />
+							<Message
+								message={message}
+								details={friendDetails}
+								key={message._id}
+							/>
 						))
 				) : (
 					<p>No messages available.</p>
