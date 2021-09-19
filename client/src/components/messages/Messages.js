@@ -1,49 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
-import Pusher from 'pusher-js';
-import env from "react-dotenv";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { FetchConversations } from '../../redux/conversation';
 import MessageSidebar from './MessageSidebar';
 import MessageView from './MessageView';
 
-const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api' : 'https://raven-x.herokuapp.com/api';
-
 export default function Messages() {
+	const dispatch = useDispatch();
+	const conversations = useSelector(
+		(state) => state.conversationSlice.conversations
+	);
 	const user = useSelector((state) => state.userSlice.user);
-	const [messages, setMessages] = useState([]);
-	const [current, setCurrent] = useState(0);
-	const [open, setOpen] = useState(true);
-
-	//Pusher.logToConsole = true;
+	const current = useSelector((state) => state.conversationSlice.current);
+	const open = useSelector((state) => state.conversationSlice.open);
 
 	useEffect(() => {
-		// axios.get(`${api}/conversations/${user.handle}`).then((res) => {
-		// 	setMessages(res.data);
-		// });
-		const interval = setInterval(() => {
-			axios.get(`${api}/conversations/${user.handle}`).then((res) => {
-				setMessages(res.data);
-			});
-		}, 1000);
-		return () => clearInterval(interval);
-		// const pusher = new Pusher('9a411b2a0ee16e4825af', { cluster: 'us3' });
-		// const channel = pusher.subscribe('rvn-messenger');
-		// channel.bind('updated', (newMessage) => {
-		// 	console.log(`NEW MESSAGE: ${newMessage}`);
-		// 	setMessages([...messages, newMessage]);
-		// });
-	// eslint-disable-next-line
-	}, []);
+		FetchConversations(dispatch, user._id);
+	}, [dispatch, user._id]);
 
 	return (
-		<div className={`messages ${open ? 'open' : 'closed'}`}>
-			<MessageSidebar
-				messages={messages}
-				current={current}
-				setCurrent={setCurrent}
-				setOpen={setOpen}
-			/>
-			<MessageView conversation={messages[current]} setOpen={setOpen} />
+		<div className={`messages ${open ? 'open' : ''}`}>
+			<MessageSidebar />
+			<MessageView conversation={conversations[current]} />
 		</div>
 	);
 }

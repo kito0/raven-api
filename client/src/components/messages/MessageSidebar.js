@@ -1,35 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import env from "react-dotenv";
-import moment from 'moment';
+import env from 'react-dotenv';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { SearchOutlined } from '@material-ui/icons';
 import MessageSidebarChat from './MessageSidebarChat';
 
-const api = env.REACT_APP_ENV === 'development' ? 'http://localhost:5000/api' : 'https://raven-x.herokuapp.com/api';
+const api =
+	env.REACT_APP_ENV === 'development'
+		? 'http://localhost:5000/api'
+		: 'https://raven-x.herokuapp.com/api';
 
-export default function MessageSidebar({ messages, current, setCurrent, setOpen }) {
+export default function MessageSidebar() {
 	const user = useSelector((state) => state.userSlice.user);
+	const conversations = useSelector(
+		(state) => state.conversationSlice.conversations
+	);
+	const [filteredConversations, setFilteredConversations] = useState([]);
 	const [search, setSearch] = useState('');
-	const [filteredMessages, setFilteredMessages] = useState([]);
+
+	const createNewConversation = async (e) => {
+		e.preventDefault();
+		await axios.post(`${api}/conversations/create/${user?._id}/${search}`);
+	};
+
+	const filterConversations = async () => {
+		const filtered = await conversations?.reduce(async (acc, conversation) => {
+			const friendId = conversation?.members.find(
+				(member) => member !== user._id
+			);
+			const res = await axios.get(`${api}/user/${friendId}`);
+			const result = res.data.name.toLowerCase().includes(search.toLowerCase());
+
+			if (!result) return acc;
+			return (await acc).concat(conversation);
+		}, []);
+		setFilteredConversations(
+			search !== '' && search !== null && search !== undefined
+				? filtered
+				: conversations
+		);
+	};
 
 	useEffect(() => {
-		setFilteredMessages(
-			search !== ''
-				? messages.filter((message) => {
-						return message.handle1 === user.handle
-							? message.handle2.toLowerCase().includes(search.toLowerCase())
-							: message.handle1.toLowerCase().includes(search.toLowerCase());
-				  })
-				: messages
-		);
-	}, [search, user.handle, messages]);
-
-	const handleSearch = (e) => {
-		e.preventDefault();
-
-		axios.post(`${api}/conversations/create/${user.handle}/${search}`);
-	};
+		filterConversations();
+		// eslint-disable-next-line
+	}, [search, conversations]);
 
 	return (
 		<div className="message-sidebar">
@@ -38,7 +53,7 @@ export default function MessageSidebar({ messages, current, setCurrent, setOpen 
 			</div>
 			<div className="message-sidebar__search">
 				<SearchOutlined />
-				<form onSubmit={handleSearch}>
+				<form onSubmit={createNewConversation}>
 					<input
 						placeholder="Search or start new chat"
 						type="text"
@@ -47,26 +62,23 @@ export default function MessageSidebar({ messages, current, setCurrent, setOpen 
 				</form>
 			</div>
 			<div className="message-sidebar__chats">
-				{messages &&
-					filteredMessages
-						.slice()
-						.sort(
-							(a, b) =>
-								b.messages.slice(-1)[0].timestamp &&
-								a.messages.slice(-1)[0].timestamp &&
-								moment(b.messages.slice(-1)[0].timestamp).milliseconds() -
-									moment(a.messages.slice(-1)[0].timestamp).milliseconds()
-						)
-						.map((conversation) => (
-							<MessageSidebarChat
-								messages={messages}
-								conversation={conversation}
-								current={current}
-								setCurrent={setCurrent}
-								setOpen={setOpen}
-								key={conversation._id}
-							/>
-						))}
+				{
+					//conversations &&
+					filteredConversations &&
+						filteredConversations
+							// .slice(0)
+							// .sort(
+							// 	(a, b) =>
+							// 		moment(fetchLastMessage(b._id).createdAt).milliseconds() -
+							// 		moment(fetchLastMessage(a._id).createdAt).milliseconds()
+							// )
+							.map((conversation) => (
+								<MessageSidebarChat
+									conversation={conversation}
+									key={conversation._id}
+								/>
+							))
+				}
 			</div>
 		</div>
 	);

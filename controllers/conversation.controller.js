@@ -3,90 +3,131 @@ const User = require('../models/user.model');
 
 // GET http://localhost:5000/api/conversations
 exports.getAllConversations = async (req, res) => {
-	Conversation.find()
-		.then((conversations) => {
-			res.status(200).json(conversations);
-		})
-		.catch((err) => res.status(500).send(err));
+	req.body.secret === process.env.ADMIN_SECRET
+		? Conversation.find()
+				.then((conversations) => {
+					res.status(200).json(conversations);
+				})
+				.catch((err) => res.status(500).json(err))
+		: res.status(403).json('ERROR: ACCESS DENIED');
 };
 
-// GET http://localhost:5000/api/conversations/:handle
+// GET http://localhost:5000/api/conversations/:userId
 exports.getConversations = async (req, res) => {
-	Conversation.find({
-		$or: [{ handle1: req.params.handle }, { handle2: req.params.handle }],
-	})
-		.then((conversations) => {
-			res.status(200).json(conversations);
-		})
-		.catch((err) => res.status(500).send(err));
+	Conversation.find({ members: { $in: req.params.userId } })
+		.then((conversations) => res.status(200).json(conversations))
+		.catch((err) => res.status(404).json(err));
 };
 
-// GET http://localhost:5000/api/conversations/:handle1/:handle2
+// // GET http://localhost:5000/api/conversations/:handle
+// exports.getConversations = async (req, res) => {
+// 	Conversation.find({
+// 		$or: [{ handle1: req.params.handle }, { handle2: req.params.handle }],
+// 	})
+// 		.then((conversations) => {
+// 			res.status(200).json(conversations);
+// 		})
+// 		.catch((err) => res.status(500).send(err));
+// };
+
+// GET http://localhost:5000/api/conversations/:userId1/:userId12
 exports.getConversation = async (req, res) => {
-	Conversation.find({
-		$or: [
-			{ handle1: req.params.handle1, handle2: req.params.handle2 },
-			{ handle1: req.params.handle2, handle2: req.params.handle1 },
-		],
+	Conversation.findOne({
+		members: { $all: [req.params.userId1, req.params.userId2] },
 	})
-		.then((conversation) => res.status(200).json(conversation))
-		.catch((err) => res.status(500).send(err));
+		.then((data) => {
+			data
+				? res.status(200).json(data)
+				: res.status(404).json('ERROR: Conversation does not exist.');
+		})
+		.catch((err) => {
+			res.status(500).json(err);
+		});
 };
 
-// POST http://localhost:5000/api/conversations/create/:handle1/:handle2
+// // GET http://localhost:5000/api/conversations/:handle1/:handle2
+// exports.getConversation = async (req, res) => {
+// 	Conversation.find({
+// 		$or: [
+// 			{ handle1: req.params.handle1, handle2: req.params.handle2 },
+// 			{ handle1: req.params.handle2, handle2: req.params.handle1 },
+// 		],
+// 	})
+// 		.then((conversation) => res.status(200).json(conversation))
+// 		.catch((err) => res.status(500).send(err));
+// };
+
+// POST http://localhost:5000/api/conversations/create/userId1/userId2
 exports.createConversation = async (req, res) => {
-	const userSearch = await User.findOne({ handle: req.params.handle2 });
-	const conv = await Conversation.findOne({
-		$or: [
-			{ handle1: req.params.handle1, handle2: req.params.handle2 },
-			{ handle1: req.params.handle2, handle2: req.params.handle1 },
-		],
+	const conversationExists = await Conversation.findOne({
+		members: { $all: [req.params.userId1, req.params.userId2] },
 	});
-	if (userSearch && !conv)
-		Conversation.findOneAndUpdate(
-			{
-				$or: [
-					{ handle1: req.params.handle1, handle2: req.params.handle2 },
-					{ handle1: req.params.handle2, handle2: req.params.handle1 },
-				],
-			},
-			{
-				$setOnInsert: {
-					title: req.params.handle1 + ', ' + req.params.handle2,
-					handle1: req.params.handle1,
-					handle2: req.params.handle2,
-				},
-				$push: {
-					messages: { sender: 'raven', text: 'new conversation' },
-				},
-			},
-			{ upsert: true, new: true }
-		)
-			.then((conversation) => res.status(200).json(conversation))
-			.catch((err) => res.status(500).send(err));
+	conversationExists
+		? res.status(400).send('ERROR: Conversation already exists.')
+		: Conversation.create({
+				title: req.body.title,
+				members: [req.params.userId1, req.params.userId2],
+		  })
+				.then((conversation) => {
+					res.status(201).json(conversation);
+				})
+				.catch((err) => res.status(500).json(err));
 };
 
-// POST http://localhost:5000/api/conversations/:handle1/:handle2
-exports.sendMessage = async (req, res) => {
-	Conversation.findOneAndUpdate(
-		{
-			$or: [
-				{ handle1: req.params.handle1, handle2: req.params.handle2 },
-				{ handle1: req.params.handle2, handle2: req.params.handle1 },
-			],
-		},
-		{
-			$setOnInsert: {
-				title: req.params.handle1 + ', ' + req.params.handle2,
-				handle1: req.params.handle1,
-				handle2: req.params.handle2,
-			},
-			$push: {
-				messages: { sender: req.body.sender, text: req.body.text },
-			},
-		},
-		{ upsert: true, new: true }
-	)
-		.then((conversation) => res.status(200).json(conversation))
-		.catch((err) => res.status(500).send(err));
-};
+// // POST http://localhost:5000/api/conversations/create/:handle1/:handle2
+// exports.createConversation = async (req, res) => {
+// 	const userSearch = await User.findOne({ handle: req.params.handle2 });
+// 	const conv = await Conversation.findOne({
+// 		$or: [
+// 			{ handle1: req.params.handle1, handle2: req.params.handle2 },
+// 			{ handle1: req.params.handle2, handle2: req.params.handle1 },
+// 		],
+// 	});
+// 	if (userSearch && !conv)
+// 		Conversation.findOneAndUpdate(
+// 			{
+// 				$or: [
+// 					{ handle1: req.params.handle1, handle2: req.params.handle2 },
+// 					{ handle1: req.params.handle2, handle2: req.params.handle1 },
+// 				],
+// 			},
+// 			{
+// 				$setOnInsert: {
+// 					title: req.params.handle1 + ', ' + req.params.handle2,
+// 					handle1: req.params.handle1,
+// 					handle2: req.params.handle2,
+// 				},
+// 				$push: {
+// 					messages: { sender: 'raven', text: 'new conversation' },
+// 				},
+// 			},
+// 			{ upsert: true, new: true }
+// 		)
+// 			.then((conversation) => res.status(200).json(conversation))
+// 			.catch((err) => res.status(500).send(err));
+// };
+
+// // POST http://localhost:5000/api/conversations/:handle1/:handle2
+// exports.sendMessage = async (req, res) => {
+// 	Conversation.findOneAndUpdate(
+// 		{
+// 			$or: [
+// 				{ handle1: req.params.handle1, handle2: req.params.handle2 },
+// 				{ handle1: req.params.handle2, handle2: req.params.handle1 },
+// 			],
+// 		},
+// 		{
+// 			$setOnInsert: {
+// 				title: req.params.handle1 + ', ' + req.params.handle2,
+// 				handle1: req.params.handle1,
+// 				handle2: req.params.handle2,
+// 			},
+// 			$push: {
+// 				messages: { sender: req.body.sender, text: req.body.text },
+// 			},
+// 		},
+// 		{ upsert: true, new: true }
+// 	)
+// 		.then((conversation) => res.status(200).json(conversation))
+// 		.catch((err) => res.status(500).send(err));
+// };

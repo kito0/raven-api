@@ -67,6 +67,16 @@ exports.getUserByHandle = async (req, res) => {
 		.catch((err) => res.status(404).send(err));
 };
 
+// GET http://localhost:5000/api/user/handle/:id
+exports.getUserHandle = async (req, res) => {
+	User.findById(req.params.id)
+		.then((user) => {
+			if (!user) throw 'Error: User ID does not exist';
+			res.status(200).json(user.handle);
+		})
+		.catch((err) => res.status(404).send(err));
+};
+
 // PUT http://localhost:5000/api/user/:handle
 exports.updateUser = async (req, res) => {
 	const { error } = registerValidation(req.body);
