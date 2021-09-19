@@ -17,13 +17,13 @@ export const conversationSlice = createSlice({
 		setCurrent: (state, action) => {
 			return {
 				...state,
-				current: action,
+				current: action.payload,
 			};
 		},
 		setOpen: (state, action) => {
 			return {
 				...state,
-				open: action,
+				open: action.payload,
 			};
 		},
 	},
