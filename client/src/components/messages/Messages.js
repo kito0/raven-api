@@ -18,7 +18,7 @@ export default function Messages() {
 	}, [dispatch, user._id]);
 
 	return (
-		<div className={`messages ${open ? 'open' : ''}`}>
+		<div className={`messages ${open ? 'open' : 'closed'}`}>
 			<MessageSidebar />
 			<MessageView conversation={conversations[current]} />
 		</div>
