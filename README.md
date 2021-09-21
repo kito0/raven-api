@@ -48,7 +48,7 @@ npm install
 cd client
 npm install
 ```
-``````sh
+```sh
 cd socket
 npm install
 ```
