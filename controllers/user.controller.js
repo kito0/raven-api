@@ -49,11 +49,14 @@ exports.login = async (req, res) => {
 
 // GET http://localhost:5000/api/user/:search
 exports.getUsers = async (req, res) => {
-	User.find(handle.includes(req.params.search), {
-		_id: 1,
-		handle: 1,
-		avatar: 1,
-	})
+	User.find(
+		{ handle: { $regex: req.params.search } },
+		{
+			_id: 1,
+			handle: 1,
+			avatar: 1,
+		}
+	)
 		.then((data) => {
 			if (!data) throw 'Error: User ID does not exist';
 			res.status(200).json(data);
