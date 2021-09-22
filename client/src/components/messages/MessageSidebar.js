@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import env from 'react-dotenv';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import moment from 'moment';
 import { SearchOutlined } from '@material-ui/icons';
 import MessageSidebarChat from './MessageSidebarChat';
 
@@ -16,6 +17,7 @@ export default function MessageSidebar() {
 		(state) => state.conversationSlice.conversations
 	);
 	const [filteredConversations, setFilteredConversations] = useState([]);
+	const [newConversations, setNewConversations] = useState([]);
 	const [search, setSearch] = useState('');
 
 	const createNewConversation = async (e) => {
@@ -23,8 +25,14 @@ export default function MessageSidebar() {
 		await axios.post(`${api}/conversations/create/${user?._id}/${search}`);
 	};
 
+	const fetchLastSeen = async (conversationId) => {
+		await axios.get(`${api}/messages/last/${conversationId}`).then((res) => {
+			return moment(res.data.createdAt).milliseconds();
+		});
+	};
+
 	const filterConversations = async () => {
-		const filtered = await conversations?.reduce(async (acc, conversation) => {
+		var filtered = await conversations?.reduce(async (acc, conversation) => {
 			const friendId = conversation?.members.find(
 				(member) => member !== user._id
 			);
@@ -34,6 +42,11 @@ export default function MessageSidebar() {
 			if (!result) return acc;
 			return (await acc).concat(conversation);
 		}, []);
+
+		filtered = filtered
+			.slice(0)
+			.sort((x, y) => fetchLastSeen(x._id) - fetchLastSeen(y._id));
+
 		setFilteredConversations(
 			search !== '' && search !== null && search !== undefined
 				? filtered
@@ -62,23 +75,13 @@ export default function MessageSidebar() {
 				</form>
 			</div>
 			<div className="message-sidebar__chats">
-				{
-					//conversations &&
-					filteredConversations &&
-						filteredConversations
-							// .slice(0)
-							// .sort(
-							// 	(a, b) =>
-							// 		moment(fetchLastMessage(b._id).createdAt).milliseconds() -
-							// 		moment(fetchLastMessage(a._id).createdAt).milliseconds()
-							// )
-							.map((conversation) => (
-								<MessageSidebarChat
-									conversation={conversation}
-									key={conversation._id}
-								/>
-							))
-				}
+				{filteredConversations &&
+					filteredConversations.map((conversation) => (
+						<MessageSidebarChat
+							conversation={conversation}
+							key={conversation._id}
+						/>
+					))}
 			</div>
 		</div>
 	);
