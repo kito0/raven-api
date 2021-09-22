@@ -47,6 +47,20 @@ exports.login = async (req, res) => {
 	return res.status(200).json({ user, token });
 };
 
+// GET http://localhost:5000/api/user/:search
+exports.getUsers = async (req, res) => {
+	User.find(handle.includes(req.params.search), {
+		_id: 1,
+		handle: 1,
+		avatar: 1,
+	})
+		.then((data) => {
+			if (!data) throw 'Error: User ID does not exist';
+			res.status(200).json(data);
+		})
+		.catch((err) => res.status(404).send(err));
+};
+
 // GET http://localhost:5000/api/user/:id
 exports.getUser = async (req, res) => {
 	User.findById(req.params.id)

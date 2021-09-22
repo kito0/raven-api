@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {
 	register,
 	login,
+	getUsers,
 	getUser,
 	// getUserByHandle,
 	getUserHandle,
@@ -11,6 +12,7 @@ const {
 } = require('../controllers/user.controller');
 const verify = require('../util/verify.token');
 
+router.get('/search/:search', getUsers);
 router.get('/:id', getUser);
 // router.get('/handle/:handle', getUserByHandle);
 router.get('/handle/:id', getUserHandle);
