@@ -43,7 +43,13 @@ Install dependencies
 
 ```sh
 npm install
+```
+```sh
 cd client
+npm install
+```
+```sh
+cd socket
 npm install
 ```
 
@@ -55,10 +61,16 @@ To run the server, run any of the following:
 npm start
 ```
 ```sh
-node index.js
+npm run dev
+```
+
+To run the socket server, cd into socket folder and run any of the following:
+
+```sh
+npm start
 ```
 ```sh
-nodemon index
+npm run dev
 ```
 
 To run the client:
