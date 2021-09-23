@@ -50,9 +50,15 @@ exports.login = async (req, res) => {
 // GET http://localhost:5000/api/user/:search
 exports.getUsers = async (req, res) => {
 	User.find(
-		{ handle: { $regex: req.params.search } },
+		{
+			$or: [
+				{ handle: { $regex: req.params.search } },
+				{ name: { $regex: req.params.search } },
+			],
+		},
 		{
 			_id: 1,
+			name: 1,
 			handle: 1,
 			avatar: 1,
 		}
