@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SetCurrent, SetOpen } from '../../redux/conversation';
 import axios from 'axios';
@@ -13,28 +13,36 @@ const api =
 export default function MessageSidebarChatNew({ details }) {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userSlice.user);
-	const current = useSelector((state) => state.conversationSlice.current);
+	const conversations = useSelector(
+		(state) => state.conversationSlice.conversations
+	);
+
+	const createNewConversation = async () => {
+		console.log(user, details);
+		await axios.post(
+			`${api}/conversations/create/${user?._id}/${details?._id}`,
+			{
+				title: `${user.name}, ${details.name}`,
+			}
+		);
+	};
 
 	return (
 		<div
-			className={`message-sidebar-chat ${
-				conversations?.findIndex((x) => x._id === conversation?._id) === current
-					? 'active'
-					: ''
-			}`}
+			className={`message-sidebar-chat`}
 			onClick={() => {
+				createNewConversation();
 				SetCurrent(
 					dispatch,
-					conversations?.findIndex((x) => x._id === conversation?._id)
+					conversations?.findIndex((x) => x._id === details?._id)
 				);
 				SetOpen(dispatch, true);
 			}}
-			key={conversation?._id}
+			key={details?._id}
 		>
-			<Avatar className="avatar" src={friendDetails?.avatar} />
+			<Avatar className="avatar" src={details?.avatar} />
 			<div className="message-sidebar-chat__info">
-				<h2>{friendDetails?.name}</h2>
-				<p>{lastMessage}</p>
+				<h2>{details?.name}</h2>
 			</div>
 		</div>
 	);

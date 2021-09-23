@@ -5,6 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { SearchOutlined } from '@material-ui/icons';
 import MessageSidebarChat from './MessageSidebarChat';
+import MessageSidebarChatNew from './MessageSidebarChatNew';
 
 const api =
 	env.REACT_APP_ENV === 'development'
@@ -20,11 +21,6 @@ export default function MessageSidebar() {
 	const [newConversations, setNewConversations] = useState([]);
 	const [search, setSearch] = useState('');
 
-	const createNewConversation = async (e) => {
-		e.preventDefault();
-		await axios.post(`${api}/conversations/create/${user?._id}/${search}`);
-	};
-
 	const fetchLastSeen = async (conversationId) => {
 		await axios.get(`${api}/messages/last/${conversationId}`).then((res) => {
 			return moment(res.data.createdAt).milliseconds();
@@ -32,6 +28,8 @@ export default function MessageSidebar() {
 	};
 
 	const filterConversations = async () => {
+		var searchOkay = search !== '' && search !== null && search !== undefined;
+
 		var filtered = await conversations?.reduce(async (acc, conversation) => {
 			const friendId = conversation?.members.find(
 				(member) => member !== user._id
@@ -47,11 +45,13 @@ export default function MessageSidebar() {
 			.slice(0)
 			.sort((x, y) => fetchLastSeen(x._id) - fetchLastSeen(y._id));
 
-		setFilteredConversations(
-			search !== '' && search !== null && search !== undefined
-				? filtered
-				: conversations
-		);
+		if (filtered.length === 0 && searchOkay) {
+			const res = await axios.get(`${api}/user/search/${search}`);
+			setNewConversations(res.data);
+			console.log(newConversations);
+		}
+
+		setFilteredConversations(searchOkay ? filtered : conversations);
 	};
 
 	useEffect(() => {
@@ -66,22 +66,23 @@ export default function MessageSidebar() {
 			</div>
 			<div className="message-sidebar__search">
 				<SearchOutlined />
-				<form onSubmit={createNewConversation}>
-					<input
-						placeholder="Search or start new chat"
-						type="text"
-						onChange={(e) => setSearch(e.target.value)}
-					/>
-				</form>
+				<input
+					placeholder="Search or start new chat"
+					type="text"
+					onChange={(e) => setSearch(e.target.value)}
+				/>
 			</div>
 			<div className="message-sidebar__chats">
-				{filteredConversations &&
-					filteredConversations.map((conversation) => (
-						<MessageSidebarChat
-							conversation={conversation}
-							key={conversation._id}
-						/>
-					))}
+				{filteredConversations.length > 0
+					? filteredConversations.map((conversation) => (
+							<MessageSidebarChat
+								conversation={conversation}
+								key={conversation._id}
+							/>
+					  ))
+					: newConversations.map((details) => (
+							<MessageSidebarChatNew details={details} key={details._id} />
+					  ))}
 			</div>
 		</div>
 	);
