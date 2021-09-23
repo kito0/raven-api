@@ -4,6 +4,7 @@ export const conversationSlice = createSlice({
 	name: 'messenger',
 	initialState: {
 		conversations: [],
+		searchedConversations: [],
 		current: 0,
 		open: true,
 		loading: false,
@@ -14,6 +15,12 @@ export const conversationSlice = createSlice({
 				...state,
 				conversations: [...action.payload],
 				loading: false,
+			};
+		},
+		setSearch: (state, action) => {
+			return {
+				...state,
+				searchedConversations: [...action.payload],
 			};
 		},
 		setCurrent: (state, action) => {
@@ -37,7 +44,7 @@ export const conversationSlice = createSlice({
 	},
 });
 
-export const { setConversations, setCurrent, setOpen } =
+export const { setConversations, setSearch, setCurrent, setOpen } =
 	conversationSlice.actions;
 
 export default conversationSlice.reducer;
