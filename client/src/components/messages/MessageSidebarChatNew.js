@@ -8,7 +8,8 @@ export default function MessageSidebarChatNew({ details, setSearch }) {
 	const user = useSelector((state) => state.userSlice.user);
 
 	const createNewConversation = async () => {
-		NewConversation(dispatch, user?.id, details?.id);
+		if (user._id && details._id)
+			NewConversation(dispatch, user._id, details._id);
 		setSearch('');
 	};
 
