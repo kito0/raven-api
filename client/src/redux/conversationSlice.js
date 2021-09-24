@@ -23,6 +23,14 @@ export const conversationSlice = createSlice({
 				searchedConversations: [...action.payload],
 			};
 		},
+		newConversation: (state, action) => {
+			state.conversations.push(action.payload);
+			state.open = true;
+			state.current = state.conversations?.findIndex(
+				(x) => x._id === action.payload._id
+			);
+			state.searchedConversations = [];
+		},
 		emptySearch: (state) => {
 			return {
 				...state,
@@ -50,7 +58,13 @@ export const conversationSlice = createSlice({
 	},
 });
 
-export const { setConversations, setSearch, emptySearch, setCurrent, setOpen } =
-	conversationSlice.actions;
+export const {
+	setConversations,
+	setSearch,
+	newConversation,
+	emptySearch,
+	setCurrent,
+	setOpen,
+} = conversationSlice.actions;
 
 export default conversationSlice.reducer;

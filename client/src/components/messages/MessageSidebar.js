@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import env from 'react-dotenv';
 import axios from 'axios';
-import moment from 'moment';
+//import moment from 'moment';
 import { SearchOutlined } from '@material-ui/icons';
 import MessageSidebarChat from './MessageSidebarChat';
 import MessageSidebarChatNew from './MessageSidebarChatNew';
+import { SetSearch } from '../../redux/conversation';
 
 const api =
 	env.REACT_APP_ENV === 'development'
@@ -13,42 +14,46 @@ const api =
 		: 'https://raven-x.herokuapp.com/api';
 
 export default function MessageSidebar() {
+	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userSlice.user);
 	const conversations = useSelector(
 		(state) => state.conversationSlice.conversations
 	);
+	const searchedConversations = useSelector(
+		(state) => state.conversationSlice.searchedConversations
+	);
 	const [filteredConversations, setFilteredConversations] = useState([]);
-	const [newConversations, setNewConversations] = useState([]);
 	const [search, setSearch] = useState('');
 
-	const fetchLastSeen = async (conversationId) => {
-		await axios.get(`${api}/messages/last/${conversationId}`).then((res) => {
-			return moment(res.data.createdAt).milliseconds();
-		});
-	};
+	// const fetchLastSeen = async (conversationId) => {
+	// 	await axios.get(`${api}/messages/last/${conversationId}`).then((res) => {
+	// 		return moment(res.data.createdAt).milliseconds();
+	// 	});
+	// };
 
 	const filterConversations = async () => {
-		var searchOkay = search !== '' && search !== null && search !== undefined;
+		var searchOkay =
+			search.trim() !== '' && search !== null && search !== undefined;
 
 		var filtered = await conversations?.reduce(async (acc, conversation) => {
 			const friendId = conversation?.members.find(
 				(member) => member !== user._id
 			);
 			const res = await axios.get(`${api}/user/${friendId}`);
-			const result = res.data.name.toLowerCase().includes(search.toLowerCase());
+			const result =
+				res.data.name.toLowerCase().includes(search.toLowerCase()) ||
+				res.data.handle.toLowerCase().includes(search.toLowerCase());
 
 			if (!result) return acc;
 			return (await acc).concat(conversation);
 		}, []);
 
-		filtered = filtered
-			.slice(0)
-			.sort((x, y) => fetchLastSeen(x._id) - fetchLastSeen(y._id));
+		// filtered = filtered
+		// 	.slice(0)
+		// 	.sort((x, y) => fetchLastSeen(x._id) - fetchLastSeen(y._id));
 
 		if (filtered.length === 0 && searchOkay) {
-			const res = await axios.get(`${api}/user/search/${search}`);
-			setNewConversations(res.data);
-			console.log(newConversations);
+			SetSearch(dispatch, search);
 		}
 
 		setFilteredConversations(searchOkay ? filtered : conversations);
@@ -69,6 +74,7 @@ export default function MessageSidebar() {
 				<input
 					placeholder="Search or start new chat"
 					type="text"
+					value={search}
 					onChange={(e) => setSearch(e.target.value)}
 				/>
 			</div>
@@ -80,8 +86,12 @@ export default function MessageSidebar() {
 								key={conversation._id}
 							/>
 					  ))
-					: newConversations.map((details) => (
-							<MessageSidebarChatNew details={details} key={details._id} />
+					: searchedConversations.map((details) => (
+							<MessageSidebarChatNew
+								details={details}
+								key={details._id}
+								setSearch={setSearch}
+							/>
 					  ))}
 			</div>
 		</div>

@@ -1,6 +1,7 @@
 import {
 	setConversations,
 	setSearch,
+	newConversation,
 	emptySearch,
 	setCurrent,
 	setOpen,
@@ -27,6 +28,15 @@ export const SetSearch = async (dispatch, search) => {
 		.get(`${api}/user/search/${search}`)
 		.then((res) => dispatch(setSearch(res.data)));
 	//.catch((err) => console.error(err));
+};
+
+export const NewConversation = async (dispatch, userId, friendId) => {
+	await axios
+		.post(`${api}/conversations/create/${userId}/${friendId}`, {
+			title: 'New Conversation',
+		})
+		.then((res) => dispatch(newConversation(res.data)))
+		.catch((err) => console.error(err));
 };
 
 export const EmptySearch = async (dispatch) => {
