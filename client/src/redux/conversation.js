@@ -1,6 +1,7 @@
 import {
 	setConversations,
 	setSearch,
+	emptySearch,
 	setCurrent,
 	setOpen,
 } from './conversationSlice';
@@ -9,12 +10,12 @@ import env from 'react-dotenv';
 
 const api =
 	env.REACT_APP_ENV === 'development'
-		? 'http://localhost:5000/api/conversations'
-		: 'https://raven-x.herokuapp.com/api/conversations';
+		? 'http://localhost:5000/api'
+		: 'https://raven-x.herokuapp.com/api';
 
 export const FetchConversations = async (dispatch, userId) => {
 	await axios
-		.get(`${api}/${userId}`)
+		.get(`${api}/conversations/${userId}`)
 		.then((res) => {
 			dispatch(setConversations(res.data));
 		})
@@ -24,8 +25,12 @@ export const FetchConversations = async (dispatch, userId) => {
 export const SetSearch = async (dispatch, search) => {
 	await axios
 		.get(`${api}/user/search/${search}`)
-		.then((res) => dispatch(setSearch(res.data)))
-		.catch((err) => console.error(err));
+		.then((res) => dispatch(setSearch(res.data)));
+	//.catch((err) => console.error(err));
+};
+
+export const EmptySearch = async (dispatch) => {
+	dispatch(emptySearch());
 };
 
 export const SetCurrent = async (dispatch, current) => {

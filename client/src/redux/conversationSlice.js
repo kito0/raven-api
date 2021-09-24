@@ -23,6 +23,12 @@ export const conversationSlice = createSlice({
 				searchedConversations: [...action.payload],
 			};
 		},
+		emptySearch: (state) => {
+			return {
+				...state,
+				searchedConversations: [],
+			};
+		},
 		setCurrent: (state, action) => {
 			return {
 				...state,
@@ -44,7 +50,7 @@ export const conversationSlice = createSlice({
 	},
 });
 
-export const { setConversations, setSearch, setCurrent, setOpen } =
+export const { setConversations, setSearch, emptySearch, setCurrent, setOpen } =
 	conversationSlice.actions;
 
 export default conversationSlice.reducer;
