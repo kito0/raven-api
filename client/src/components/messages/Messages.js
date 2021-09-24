@@ -6,11 +6,7 @@ import MessageView from './MessageView';
 
 export default function Messages() {
 	const dispatch = useDispatch();
-	const conversations = useSelector(
-		(state) => state.conversationSlice.conversations
-	);
 	const user = useSelector((state) => state.userSlice.user);
-	const current = useSelector((state) => state.conversationSlice.current);
 	const open = useSelector((state) => state.conversationSlice.open);
 
 	useEffect(() => {
@@ -20,7 +16,7 @@ export default function Messages() {
 	return (
 		<div className={`messages ${open ? 'open' : 'closed'}`}>
 			<MessageSidebar />
-			<MessageView conversation={conversations[current]} />
+			<MessageView />
 		</div>
 	);
 }

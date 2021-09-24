@@ -24,12 +24,16 @@ const socket_api =
 		? 'ws://localhost:8900'
 		: 'https://raven-socket.herokuapp.com';
 
-export default function Chat({ conversation }) {
+export default function Chat() {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userSlice.user);
 	const current = useSelector((state) => state.conversationSlice.current);
+	const conversations = useSelector(
+		(state) => state.conversationSlice.conversations
+	);
 	const bottomRef = useRef(null);
 	const socket = useRef();
+	const [conversation, setConversation] = useState(conversations[current]);
 	const [messages, setMessages] = useState([]);
 	const [friendDetails, setFriendDetails] = useState({});
 	const [text, setText] = useState('');
@@ -128,6 +132,11 @@ export default function Chat({ conversation }) {
 	useEffect(() => {
 		scrollToBottom();
 	}, [messages]);
+
+	useEffect(() => {
+		setConversation(conversations[current]);
+		//console.log(current);
+	}, [conversations, current]);
 
 	return (
 		<div className="chat">
