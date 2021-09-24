@@ -64,7 +64,7 @@ exports.getUsers = async (req, res) => {
 		}
 	)
 		.then((data) => {
-			if (!data) throw 'Error: User ID does not exist';
+			if (!data) throw 'Error: No users found';
 			res.status(200).json(data);
 		})
 		.catch((err) => res.status(404).send(err));
