@@ -48,12 +48,12 @@ exports.login = async (req, res) => {
 };
 
 // GET http://localhost:5000/api/user/:search
-exports.getUsers = async (req, res) => {
+exports.searchUsers = async (req, res) => {
 	User.find(
 		{
 			$or: [
-				{ handle: { $regex: req.params.search } },
-				{ name: { $regex: req.params.search } },
+				{ name: { $regex: req.params.search, $options: 'i' } },
+				{ handle: { $regex: req.params.search, $options: 'i' } },
 			],
 		},
 		{
